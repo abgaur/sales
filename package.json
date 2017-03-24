@@ -15,7 +15,10 @@
     "jsonwebtoken":"*",
     "body-parser":"*",
     "passport":"*",
-    "passport-jwt":"*"
+    "passport-jwt":"*",
+    "multer": "*",
+    "xls-to-json-lc": "*",
+    "xlsx-to-json-lc": "*"
   },
   "author": "Abhishek Gaur",
   "license": "ISC"

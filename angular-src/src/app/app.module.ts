@@ -14,9 +14,11 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 import { ValidateService} from './services/validate.service';
 import { AuthService } from './services/auth.service';
+import { UploadService } from './services/upload.service';
 import { FlashMessagesModule} from 'angular2-flash-messages';
 import { AuthGuard} from './guard/auth.guard';
 import { ClientdataComponent } from './components/clientdata/clientdata.component';
+import { UploadxlsComponent } from './components/uploadxls/uploadxls.component';
 
 
 const appRoutes: Routes = [
@@ -25,7 +27,8 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-  { path: 'clientdata', component: ClientdataComponent}
+  { path: 'clientdata', component: ClientdataComponent},
+  { path: 'upload', component: UploadxlsComponent}
 ]
 
 @NgModule({
@@ -37,7 +40,8 @@ const appRoutes: Routes = [
     HomeComponent,
     DashboardComponent,
     ProfileComponent,
-    ClientdataComponent
+    ClientdataComponent,
+    UploadxlsComponent
     
   ],
   imports: [
@@ -48,7 +52,7 @@ const appRoutes: Routes = [
     FlashMessagesModule
   
   ],
-  providers: [ValidateService, AuthService, AuthGuard],
+  providers: [ValidateService, AuthService, AuthGuard, UploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
