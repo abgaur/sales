@@ -16,9 +16,13 @@ import { ValidateService} from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { UploadService } from './services/upload.service';
 import { FlashMessagesModule} from 'angular2-flash-messages';
+import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
 import { AuthGuard} from './guard/auth.guard';
 import { ClientdataComponent } from './components/clientdata/clientdata.component';
 import { UploadxlsComponent } from './components/uploadxls/uploadxls.component';
+import { UploadComponent } from './components/upload/upload.component';
+
+
 
 
 const appRoutes: Routes = [
@@ -28,7 +32,7 @@ const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'clientdata', component: ClientdataComponent},
-  { path: 'upload', component: UploadxlsComponent}
+  { path: 'upload', component: UploadComponent, canActivate: [AuthGuard]}
 ]
 
 @NgModule({
@@ -41,7 +45,9 @@ const appRoutes: Routes = [
     DashboardComponent,
     ProfileComponent,
     ClientdataComponent,
-    UploadxlsComponent
+    UploadxlsComponent,
+    UploadComponent,
+    FileSelectDirective
     
   ],
   imports: [

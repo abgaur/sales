@@ -10,7 +10,7 @@ const Factory = require('../models/factory');
 
 const storage = multer.diskStorage({ //multers disk storage settings
     destination: function (req, file, cb) {
-        cb(null, './uploads/')
+        cb(null, './uploads/');
     },
     filename: function (req, file, cb) {
         const datetimestamp = Date.now();
@@ -31,7 +31,7 @@ const upload = multer({ //multer settings
 
 // Upload
 router.post('/upload', (req, res, next) => {
-
+  
   let exceltojson;
   console.log(req.file);
   console.log('vinayak');
@@ -65,10 +65,10 @@ router.post('/upload', (req, res, next) => {
               } 
               
               // extra code
-              //console.log(result);
+              console.log(result);
             
               for(let i=0; i<result.length; i++){
-                  let newClient = Client(factory.createDBObjFromExcel(result[i]));
+                  let newClient = Client(Factory.createDBObjFromExcel(result[i]));
                   let newId = newClient.save(function (err) {
                       if (err) {
                           console.log(err);
@@ -87,5 +87,7 @@ router.post('/upload', (req, res, next) => {
       }
   });
 });
+
+
 
 module.exports = router;  
