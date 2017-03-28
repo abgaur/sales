@@ -33,8 +33,6 @@ const upload = multer({ //multer settings
 router.post('/upload', (req, res, next) => {
   
   let exceltojson;
-  console.log(req.file);
-  console.log('vinayak');
   upload(req,res,function(err){
       if(err){
             res.json({error_code:1,err_desc:err});
@@ -65,7 +63,7 @@ router.post('/upload', (req, res, next) => {
               } 
               
               // extra code
-              console.log(result);
+              //console.log(result);
             
               for(let i=0; i<result.length; i++){
                   let newClient = Client(Factory.createDBObjFromExcel(result[i]));
@@ -77,13 +75,13 @@ router.post('/upload', (req, res, next) => {
                       }
                   });
               }
-              console.log(result.length+ ' records added');
+              console.log('===== SUCCESS ===== ' + result.length+ ' records added');
               //res.json({error_code:0,err_desc:null, data: result.length+ ' records added'});
               //res.send('<h1>' +result.length+ ' records added</h1>');
-              return res.json({success: true, msg: 'REcords Added'});
+              return res.json({success: true, msg: 'Records Added'});
           });
       } catch (e){
-          return res.json({success: false, msg: 'REcords not added Added'});
+          return res.json({success: false, msg: 'Records not Added'});
       }
   });
 });

@@ -35,7 +35,6 @@ const app = express();
 
 const users = require('./routes/users');
 const clients = require('./routes/clients');
-const uploadtest = require('./routes/uploadtest');
 
 const port = 3000;
 
@@ -56,7 +55,6 @@ require('./config/passport')(passport);
 
 app.use('/users', users);
 app.use('/clients', clients);
-app.use('/uploadtest', uploadtest);
 
 
 

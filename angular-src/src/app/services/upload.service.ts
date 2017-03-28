@@ -10,16 +10,7 @@ export class UploadService {
 
   uploadXls(file) {
     let headers =  new Headers();
-    
-   headers.append('Content-Type', 'multipart/form-data');
-  //headers.append('Content-type', 'application/json');
-    console.log('test service');
-    // let formData:FormData = new FormData();
-    //     formData.append('uploadFile', 'C:\Users\eTouch\Downloads\Company dump.xlsx');
-    //     let headers = new Headers();
-    //     headers.append('Content-Type', 'multipart/form-data');
-    //     headers.append('Accept', 'application/json');
-        //let options = new RequestOptions({ headers: headers });
+    headers.append('Content-Type', 'multipart/form-data');
 
     return this.http.post('http://localhost:3000/clients/upload', file, {headers: headers})
       .map(res => res.json());      

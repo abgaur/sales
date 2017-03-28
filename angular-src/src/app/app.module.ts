@@ -19,7 +19,6 @@ import { FlashMessagesModule} from 'angular2-flash-messages';
 import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
 import { AuthGuard} from './guard/auth.guard';
 import { ClientdataComponent } from './components/clientdata/clientdata.component';
-import { UploadxlsComponent } from './components/uploadxls/uploadxls.component';
 import { UploadComponent } from './components/upload/upload.component';
 
 
@@ -45,7 +44,6 @@ const appRoutes: Routes = [
     DashboardComponent,
     ProfileComponent,
     ClientdataComponent,
-    UploadxlsComponent,
     UploadComponent,
     FileSelectDirective
     
