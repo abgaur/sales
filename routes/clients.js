@@ -6,7 +6,7 @@ const multer = require('multer');
 const xlstojson = require("xls-to-json-lc");
 const xlsxtojson = require("xlsx-to-json-lc");
 const Client = require('../models/client');
-const Factory = require('../models/factory');
+const clientHelper = require('../helpers/client.helper');
 
 const storage = multer.diskStorage({ //multers disk storage settings
     destination: function (req, file, cb) {
@@ -30,8 +30,8 @@ const upload = multer({ //multer settings
 
 
 // Upload
-router.post('/upload', (req, res, next) => {
-  
+router.post('/upload:username', (req, res, next) => {
+  console.log(req.params.username);
   let exceltojson;
   upload(req,res,function(err){
       if(err){
@@ -66,7 +66,8 @@ router.post('/upload', (req, res, next) => {
               //console.log(result);
             
               for(let i=0; i<result.length; i++){
-                  let newClient = Client(Factory.createDBObjFromExcel(result[i]));
+                  result[i].uploadedBy = req.params.username;
+                  let newClient = Client(clientHelper.createDBObjFromExcel(result[i]));
                   let newId = newClient.save(function (err) {
                       if (err) {
                           console.log(err);
@@ -86,6 +87,13 @@ router.post('/upload', (req, res, next) => {
   });
 });
 
-
+// show
+router.get('/getdata', (req, res, next) => {
+     Client.find({}, function(err, client) {
+          if (err) return console.error(err);
+          console.log(client);
+            res.send(JSON.stringify(client));
+        });
+});
 
 module.exports = router;  
