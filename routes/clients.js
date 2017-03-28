@@ -87,9 +87,9 @@ router.post('/upload:username', (req, res, next) => {
   });
 });
 
-// show
-router.get('/data', (req, res, next) => {
-     Client.find({}, function(err, client) {
+// fetch data by uploader name
+router.get('/data/:uploadedBy', (req, res, next) => {
+     Client.find({uploadedBy: req.params.uploadedBy}, function(err, client) {
           if (err) return console.error(err);
           console.log(client);
             res.send(JSON.stringify(client));
