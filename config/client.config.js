@@ -1,5 +1,6 @@
 
 var obj ={
+'uploadedBy':'uploadedBy',
 'rainking contact id':'rainKingContactId',
 'salutation':'salutation',
 'first name':'firstName',
@@ -42,13 +43,4 @@ var obj ={
 'twitter url':'twitterUrl'
 };
 
-module.exports ={
-    createDBObjFromExcel: function(inputJSON){
-        var newObj={};
-        Object.keys(obj).forEach(function(key) {
-            var val = obj[key];
-            newObj[val] = inputJSON[key];
-        });
-        return newObj;
-    }
-};
+module.exports = obj;
