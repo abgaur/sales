@@ -1,1 +1,1 @@
-Don't delete uploads folder. Uploaded files are stored here.
+Don't delete uploads folder. Uploaded files are stored here. 
