@@ -31,7 +31,7 @@ const upload = multer({ //multer settings
 
 // Upload
 router.post('/upload:username', (req, res, next) => {
-  console.log(req.params.username);
+  let uploadedBy = req.params.username;
   let exceltojson;
   upload(req,res,function(err){
       if(err){
@@ -66,7 +66,7 @@ router.post('/upload:username', (req, res, next) => {
               //console.log(result);
             
               for(let i=0; i<result.length; i++){
-                  result[i].uploadedBy = req.params.username;
+                  result[i].uploadedBy = uploadedBy;
                   let newClient = Client(clientHelper.createDBObjFromExcel(result[i]));
                   let newId = newClient.save(function (err) {
                       if (err) {
@@ -88,7 +88,7 @@ router.post('/upload:username', (req, res, next) => {
 });
 
 // show
-router.get('/getdata', (req, res, next) => {
+router.get('/data', (req, res, next) => {
      Client.find({}, function(err, client) {
           if (err) return console.error(err);
           console.log(client);

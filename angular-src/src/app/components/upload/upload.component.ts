@@ -7,8 +7,6 @@ import { FileUploader } from 'ng2-file-upload';
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit {
-  user: any;
-
   public uploader:FileUploader = new FileUploader({url:'http://localhost:3000/clients/upload'+JSON.parse(localStorage.getItem('user')).username});
   constructor() { }
 
