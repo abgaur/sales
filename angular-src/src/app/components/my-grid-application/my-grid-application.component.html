@@ -1,0 +1,12 @@
+<div>
+  <div >
+    <input class="filter" placeholder="Filter..." type="text" (keyup)="onFilterChange($event)"/>
+    <!--<button style="margin-left: 20px;" onclick="onPrintQuickFilterTexts(this.value)">Print Quick Filter Texts</button>-->
+</div>
+    <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
+                 [gridOptions]="gridOptions">
+    </ag-grid-angular>
+</div>
+
+
+<button class="btn btn-primary" (click)="onFilterChanged()">Get Sales Data</button>
