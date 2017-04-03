@@ -76,7 +76,7 @@ router.post('/upload:username', (req, res, next) => {
                       }
                   });
               }
-              console.log('===== SUCCESS ===== ' + result.length+ ' records added');
+              //console.log('===== SUCCESS ===== ' + result.length+ ' records added');
               //res.json({error_code:0,err_desc:null, data: result.length+ ' records added'});
               //res.send('<h1>' +result.length+ ' records added</h1>');
               return res.json({success: true, msg: 'Records Added'});
@@ -91,7 +91,7 @@ router.post('/upload:username', (req, res, next) => {
 router.get('/data/:uploadedBy', (req, res, next) => {
      Client.find({uploadedBy: req.params.uploadedBy}, function(err, client) {
           if (err) return console.error(err);
-          console.log(client);
+          //console.log(client);
             res.send(JSON.stringify(client));
         });
 });
