@@ -26,6 +26,7 @@ import { ClientdataComponent } from './components/clientdata/clientdata.componen
 import { UploadComponent } from './components/upload/upload.component';
 import { MyGridApplicationComponent } from './components/my-grid-application/my-grid-application.component';
 import { RedComponentComponent } from './components/red-component/red-component.component';
+import { EditComponent } from './components/edit/edit.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -51,7 +52,8 @@ const appRoutes: Routes = [
     UploadComponent,
     FileSelectDirective,
     MyGridApplicationComponent,
-    RedComponentComponent
+    RedComponentComponent,
+    EditComponent
     
   ],
   imports: [

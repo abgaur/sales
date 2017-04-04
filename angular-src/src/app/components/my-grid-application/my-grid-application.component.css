@@ -1,3 +1,17 @@
 .filter {
     margin-bottom: 10px;
 }
+
+.form-group{
+	/*float: left;
+	padding: 5px;*/
+}
+
+.editNewLine{
+	padding-bottom: 4%;
+}
+
+.form-inline .form-control{
+	display: block!important;
+	width: 93%!important;
+}

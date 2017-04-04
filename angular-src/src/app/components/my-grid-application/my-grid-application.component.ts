@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GridOptions } from 'ag-grid';
-import { RedComponentComponent } from '../red-component/red-component.component'
-import { DashboardService } from '../../services/dashboard.service'
+import { RedComponentComponent } from '../red-component/red-component.component';
+import { DashboardService } from '../../services/dashboard.service';
+import { FlashMessagesService} from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-my-grid-application',
@@ -26,9 +27,7 @@ export class MyGridApplicationComponent implements OnInit {
         //         cellRendererFramework: RedComponentComponent,
         //         width: 100
         //     },
-
         // ];
-
 
         this.gridOptions.columnDefs = [
             {
@@ -101,8 +100,8 @@ export class MyGridApplicationComponent implements OnInit {
   getSalesData() {
 
      this.dashboardService.getSalesData().subscribe( data => {
-        console.log('got data from service');
-        console.log(data);
+        // console.log('got data from service');
+        // console.log(data);
         this.gridOptions.api.setRowData(data);
         //this.gridOptions.rowData = data;
       });
@@ -122,5 +121,53 @@ export class MyGridApplicationComponent implements OnInit {
     // });
 }
 
+  firstName: String;
+  lastName: String;
+  title: String;
+  email: String
+  phone: String;
+  company: String;
+  supervisor: String;
+  managementLevel: String;
+  etouchSl: String;
+
+  onMemberSubmit() {
+    console.log("member Submit");
+    const user = {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          title: this.title,
+          email: this.email,
+          phone: this.phone,
+          company: this.company,
+          supervisor: this.supervisor,
+          managementLevel: this.managementLevel,
+          etouchSl: this.etouchSl
+    };
+
+    // if(!this.validateService.validateRegister(user)) {
+    //   console.log('Please fill all fields');
+    //   this.flashMessage.show('Please fill all fields', {cssClass: 'alert-danger', timeout: 3000});
+    //   return false;
+    // }
+
+    //  if(!this.validateService.validateEmail(user.email)) {
+    //   console.log('Please user valid email');
+    //   this.flashMessage.show('Please user valid email', {cssClass: 'alert-danger', timeout: 3000});
+    //   return false;
+    // }
+
+    // Get User
+    this.dashboardService.updateProfile(user).subscribe( (data) => {
+      if(data.success) {
+        // this.flashMessage.show('You are registered and can log in', {cssClass: 'alert-success', timeout: 3000});
+        // this.router.navigate(['/login']);
+      } else {
+        // this.flashMessage.show('Something happened, check logs', {cssClass: 'alert-danger', timeout: 3000});
+        // this.router.navigate(['/register']);
+      }
+    })
+
+  }
 
 }
