@@ -10,7 +10,7 @@ export class DashboardService {
 
    getSalesData() {
     var username = JSON.parse(localStorage.getItem('user')).username;
-    var salesDataUrl = 'http://localhost:3000/clients/data/'+username;
+    var salesDataUrl = 'http://localhost:3000/clients/cachedata/'+username;
     let headers =  new Headers();
     headers.append('Content-type', 'application/json');
     return this.http.get(salesDataUrl)
