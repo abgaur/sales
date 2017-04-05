@@ -96,4 +96,21 @@ router.get('/data/:uploadedBy', (req, res, next) => {
         });
 });
 
+
+// fetch data by uploader name
+router.post('/assignto/', (req, res, next) => {
+    const assignTo = req.body.assignTo;
+    const ids = req.body.ids;
+
+    console.log(ids);
+
+     Client.update(
+         { _id: { $in: ids } },
+         { multi: true},
+         { $set: { firstName : assignTo }
+     });     
+
+      return res.json({success: true, msg: 'Assigned'});
+});
+
 module.exports = router;  
