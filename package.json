@@ -18,6 +18,7 @@
     "multer": "*",
     "passport": "*",
     "passport-jwt": "*",
+    "redis": "^2.7.1",
     "xls-to-json-lc": "*",
     "xlsx-to-json-lc": "*"
   },
