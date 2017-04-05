@@ -1,8 +1,14 @@
 <div>
-  <div >
-    <input class="filter" placeholder="Filter..." type="text" (keyup)="onFilterChange($event)"/>
+
+    <div class="assign">
+        <input class="filter" placeholder="Assign To" type="text"  [(ngModel)]="isrName"/>            
+        <button class="btn btn-primary" (click)="assignTo()">Assign</button>
+    </div>
+    <div >
+        <input class="filter" placeholder="Filter..." type="text" (keyup)="onFilterChange($event)"/>
+
     <!--<button style="margin-left: 20px;" onclick="onPrintQuickFilterTexts(this.value)">Print Quick Filter Texts</button>-->
-</div>
+    </div>
     <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
                  [gridOptions]="gridOptions">
     </ag-grid-angular>

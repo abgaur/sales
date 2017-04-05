@@ -12,6 +12,7 @@ var clientSchema = new Schema({
   'nickname': String,
   'etouchSl': String,
   'title': String,
+  'assignedTo': String,
   'managementLevel': String,
   'email': String,
   'address1': String,
@@ -50,6 +51,10 @@ var clientSchema = new Schema({
 // the schema is useless so far
 // we need to create a model using it
 var Client = mongoose.model('Client', clientSchema);
+
+
+
+
 
 // make this available to our clients in our Node applications
 module.exports = Client;
