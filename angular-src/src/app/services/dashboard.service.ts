@@ -17,4 +17,13 @@ export class DashboardService {
       .map(res => res.json());
   }
 
+   setAssignedTo(assignToBody) {
+    //var username = JSON.parse(localStorage.getItem('user')).username;
+    var salesDataUrl = 'http://localhost:3000/clients/assignto';
+    let headers =  new Headers();
+    headers.append('Content-type', 'application/json');
+    return this.http.post(salesDataUrl, assignToBody, {headers: headers})
+      .map(res => res.json());
+  }
+
 }

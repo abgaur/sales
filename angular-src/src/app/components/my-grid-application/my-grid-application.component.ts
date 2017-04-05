@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GridOptions } from 'ag-grid';
 import { RedComponentComponent } from '../red-component/red-component.component'
+import { FlashMessagesService} from 'angular2-flash-messages';
 import { DashboardService } from '../../services/dashboard.service'
 
 @Component({
@@ -11,8 +12,11 @@ import { DashboardService } from '../../services/dashboard.service'
 export class MyGridApplicationComponent implements OnInit {
 
   private gridOptions: GridOptions;
+  private isrName: string;
 
-    constructor(private dashboardService: DashboardService) {
+    constructor(private dashboardService: DashboardService,
+        private flashMessage: FlashMessagesService
+    ) {
         this.gridOptions = {};
         // this.gridOptions.columnDefs = [
         //     {
@@ -36,7 +40,10 @@ export class MyGridApplicationComponent implements OnInit {
                 field: "firstName",
                 width: 200,
                 sort: 'asc',
-                filter: 'text'
+                filter: 'text',
+                headerCheckboxSelection: true,
+                headerCheckboxSelectionFilteredOnly: true,
+                checkboxSelection: true
             },
              {
                 headerName: "Last Name",
@@ -50,6 +57,12 @@ export class MyGridApplicationComponent implements OnInit {
              {
                 headerName: "Title",
                 field: "title",
+                width: 200,
+                filter: 'text'
+            },
+            {
+                headerName: "Assigned To",
+                field: "assignedTo",
                 width: 200,
                 filter: 'text'
             },
@@ -90,6 +103,9 @@ export class MyGridApplicationComponent implements OnInit {
         this.gridOptions.enableSorting = true;
         this.gridOptions.enableFilter = true;
         this.gridOptions.enableColResize = true;
+        this.gridOptions.rowSelection = 'multiple';
+        this.gridOptions.suppressRowClickSelection = true;
+        //this.gridOptions.defaultColDef.checkboxSelection = this.isfirstColumn;
         //this.gridOptions.quickFilterText = true;
         this.gridOptions.rowData = [];
         this.getSalesData();       
@@ -98,14 +114,43 @@ export class MyGridApplicationComponent implements OnInit {
   ngOnInit() {
   }
 
+   isFirstColumn(params) {
+    var displayedColumns = params.columnApi.getAllDisplayedColumns();
+    var thisIsFirstColumn = displayedColumns[0] === params.column;
+    return thisIsFirstColumn;
+}
+
+
   getSalesData() {
 
      this.dashboardService.getSalesData().subscribe( data => {
         console.log('got data from service');
-        console.log(data);
+        //console.log(data);
         this.gridOptions.api.setRowData(data);
         //this.gridOptions.rowData = data;
       });
+
+  }
+
+  assignTo() {
+
+    var assignToBody = {
+        ids: [],
+        assignTo: this.isrName
+    };    
+    assignToBody.ids = this.gridOptions.api.getSelectedNodes().map(function(rowNode) {return rowNode.data._id;});
+    console.log(assignToBody.ids);
+
+
+    this.dashboardService.setAssignedTo(assignToBody).subscribe( (data) => {
+      if(data.success) {
+        this.flashMessage.show('Tasks are assigned', {cssClass: 'alert-success', timeout: 3000});
+        //this.router.navigate(['/login']);
+      } else {
+        //this.flashMessage.show('Something happened, check logs', {cssClass: 'alert-danger', timeout: 3000});
+        //this.router.navigate(['/register']);
+      }
+    })
 
   }
 
@@ -121,6 +166,8 @@ export class MyGridApplicationComponent implements OnInit {
     //     console.log('Row ' + index + ' quick filter text is ' + rowNode.quickFilterAggregateText);
     // });
 }
+
+
 
 
 }

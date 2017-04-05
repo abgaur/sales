@@ -105,11 +105,11 @@ router.get('/cachedata/:uploadedBy', (req, res, next) => {
      redis.get(uploadedBy, function (err, reply) {
         if (err) return console.error(err);
         else if (reply){ //Client exists in cache
-        console.log('picked up from cache');
-        res.send(JSON.parse(reply));
-        var receiveCacheDate = (new Date()).getTime();
-        var cacheResponseTimeMs = receiveCacheDate - sendDate;
-        console.log('cache hit === ', cacheResponseTimeMs + " ms");    
+            console.log('picked up from cache');
+            res.send(JSON.parse(reply));
+            var receiveCacheDate = (new Date()).getTime();
+            var cacheResponseTimeMs = receiveCacheDate - sendDate;
+            console.log('cache hit === ', cacheResponseTimeMs + " ms");    
         }
         else {
         Client.find({uploadedBy: uploadedBy}, function(err, client) {
@@ -120,11 +120,28 @@ router.get('/cachedata/:uploadedBy', (req, res, next) => {
                        res.send(JSON.stringify(client));
                        var receiveDate = (new Date()).getTime();
                         var responseTimeMs = receiveDate - sendDate;
-                        console.log('db hit === ', responseTimeMs + " ms");                    });
+                        console.log('db hit === ', responseTimeMs + " ms");                   
+                });
             }     
-            });
+        });
         }
     });
+});
+
+// fetch data by uploader name
+router.post('/assignto/', (req, res, next) => {
+    const assignTo = req.body.assignTo;
+    const ids = req.body.ids;
+
+    console.log(ids);
+
+     Client.update(
+         { _id: { $in: ids } },
+         { multi: true},
+         { $set: { firstName : assignTo }
+     });     
+
+      return res.json({success: true, msg: 'Assigned'});
 });
 
 module.exports = router;  
