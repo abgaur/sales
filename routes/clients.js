@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const config = require('../config/database');
+const config = require('../config/database');   
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const xlstojson = require("xls-to-json-lc");
@@ -128,20 +128,48 @@ router.get('/cachedata/:uploadedBy', (req, res, next) => {
     });
 });
 
-// fetch data by uploader name
+// multi-update assingnto
 router.post('/assignto/', (req, res, next) => {
     const assignTo = req.body.assignTo;
     const ids = req.body.ids;
+    Client.update(
+        { _id: { "$in": ids } }, 
+        {assignedTo : assignTo},
+        {multi:true},
+        function(err,docs) {
+        if (err) res.json({success: false, msg:'Failed to update assignee'});
+        else{
+            console.log('updated records === ', docs.nModified);
+            return res.json({success: true, msg: docs.nModified + ' clients assigned'});
+        } 
+    });
+});
 
-    console.log(ids);
+// update client
+router.post('/update', (req, res, next) => {
+    let clientId =  req.body._id;
+    let updateClient = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        title: req.body.title,
+        email: req.body.email,
+        phone: req.body.phone,
+        company: req.body.company,
+        supervisor: req.body.supervisor,
+        managementLevel: req.body.managementLevel,
+        etouchSl: req.body.etouchSl
+    }; 
 
-     Client.update(
-         { _id: { $in: ids } },
-         { multi: true},
-         { $set: { firstName : assignTo }
-     });     
-
-      return res.json({success: true, msg: 'Assigned'});
+    Client.findByIdAndUpdate(
+        clientId,
+        updateClient,
+        function(err, client){
+            if (err) res.json({success: false, msg:'Failed to update client'});
+        else{
+            console.log('updated client data === ', client);
+            return res.json({success: true, msg:'Updated client data'});
+        } 
+    });
 });
 
 module.exports = router;  
