@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const config = require('../config/database');   
+const config = require('../config/database');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const xlstojson = require("xls-to-json-lc");
