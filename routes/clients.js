@@ -7,8 +7,7 @@ const xlstojson = require("xls-to-json-lc");
 const xlsxtojson = require("xlsx-to-json-lc");
 const Client = require('../models/client');
 const clientHelper = require('../helpers/client.helper');
-const redisClient = require('redis').createClient;
-const redis = redisClient(6379, 'localhost');
+const redisHelper = require('../helpers/redis.helper');
 
 const storage = multer.diskStorage({ //multers disk storage settings
     destination: function (req, file, cb) {
@@ -101,29 +100,21 @@ router.get('/data/:uploadedBy', (req, res, next) => {
 // fetch cached data by uploader name
 router.get('/cachedata/:uploadedBy', (req, res, next) => {
     let uploadedBy = req.params.uploadedBy;
-    var sendDate = (new Date()).getTime();
-     redis.get(uploadedBy, function (err, reply) {
-        if (err) return console.error(err);
-        else if (reply){ //Client exists in cache
+    redisHelper.getCacheData(uploadedBy, function(data){
+        if(data){
             console.log('picked up from cache');
-            res.send(JSON.parse(reply));
-            var receiveCacheDate = (new Date()).getTime();
-            var cacheResponseTimeMs = receiveCacheDate - sendDate;
-            console.log('cache hit === ', cacheResponseTimeMs + " ms");    
-        }
-        else {
-        Client.find({uploadedBy: uploadedBy}, function(err, client) {
-            if (err) return console.error(err);
-            else{
-                console.log('coming first time');
-                redis.set(uploadedBy, JSON.stringify(client), function () {
-                       res.send(JSON.stringify(client));
-                       var receiveDate = (new Date()).getTime();
-                        var responseTimeMs = receiveDate - sendDate;
-                        console.log('db hit === ', responseTimeMs + " ms");                   
-                });
-            }     
-        });
+            res.send(JSON.parse(data));  
+        } else {
+            Client.find({uploadedBy: uploadedBy}, function(err, client) {
+                if (err) return console.error(err);
+                else{
+                    console.log('coming first time');
+                    redisHelper.setCacheData(uploadedBy, JSON.stringify(client), function(){
+                        console.log('set data in cache');
+                        res.send(JSON.stringify(client));
+                    });               
+                }     
+            });
         }
     });
 });
@@ -167,6 +158,7 @@ router.post('/update', (req, res, next) => {
             if (err) res.json({success: false, msg:'Failed to update client'});
         else{
             console.log('updated client data === ', client);
+           // redisHelper.updateCacheDate();
             return res.json({success: true, msg:'Updated client data'});
         } 
     });
