@@ -81,28 +81,28 @@ router.post('/upload:username', (req, res, next) => {
 });
 
 // fetch data by uploader name
-router.get('/data/:uploadedBy', (req, res, next) => {
+/*router.get('/data/:uploadedBy', (req, res, next) => {
      Client.find({uploadedBy: req.params.uploadedBy}, function(err, client) {
           if (err) return console.error(err);
           //console.log(client);
             res.send(JSON.stringify(client));
         });
-});
+});*/
 
-// fetch cached data by uploader name
-router.get('/cachedata/:uploadedBy', (req, res, next) => {
-    let uploadedBy = req.params.uploadedBy;
-    redisHelper.getCacheDatabyPattern(uploadedBy, function(data){
+// fetch cached data
+router.get('/data', (req, res, next) => {
+    //let uploadedBy = req.params.uploadedBy;
+    redisHelper.getCacheDatabyPattern('client', function(data){
         if(data){
            // console.log('data', data);
             console.log('picked up from cache');
             res.send(data);  
         } else {
-            Client.find({uploadedBy: uploadedBy}, function(err, client) {
+            Client.find({}, function(err, client) {
                 if (err) return console.error(err);
                 else{
                     console.log('coming first time');
-                    redisHelper.setCacheDatabyPattern(uploadedBy, client, function(){
+                    redisHelper.setCacheDatabyPattern('client', client, function(){
                         console.log('set data in cache');
                     });   
                     console.log('returned response');
@@ -113,10 +113,26 @@ router.get('/cachedata/:uploadedBy', (req, res, next) => {
     });
 });
 
+// fetch data by id
+router.get('/task/:id', (req, res, next) => {
+    Client.findById(req.params.id, function (err, client) {
+        if (err) return console.error(err);
+        res.send(JSON.stringify(client));
+    });
+});
+
+// fetch data by assignTo
+router.get('/assignto/:assignto', (req, res, next) => {
+    Client.find({ assignedTo: req.params.assignto }, function (err, client) {
+        if (err) return console.error(err);
+        res.send(JSON.stringify(client));
+    });
+});
+
 // multi-update assingnto
-router.post('/assignto/', (req, res, next) => {
-    const assignTo = req.body.assignTo;
-    const ids = req.body.ids;
+router.post('/assignto', (req, res, next) => {
+    let assignTo = req.body.assignTo;
+    let ids = req.body.ids;
     Client.update(
         { _id: { "$in": ids } }, 
         {assignedTo : assignTo},
@@ -131,7 +147,7 @@ router.post('/assignto/', (req, res, next) => {
 });
 
 // update client
-router.post('/update', (req, res, next) => {
+router.post('/task', (req, res, next) => {
     let clientId =  req.body._id;
     let updateClient = {
         firstName: req.body.firstName,

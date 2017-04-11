@@ -9,8 +9,8 @@ export class DashboardService {
   constructor(private http: Http) { }
 
    getSalesData() {
-    var username = JSON.parse(localStorage.getItem('user')).username;
-    var salesDataUrl = 'http://localhost:3000/clients/cachedata/'+username;
+    //var username = JSON.parse(localStorage.getItem('user')).username;
+    var salesDataUrl = 'http://localhost:3000/clients/data/';
     let headers =  new Headers();
     headers.append('Content-type', 'application/json');
     return this.http.get(salesDataUrl)
