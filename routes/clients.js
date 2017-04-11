@@ -64,22 +64,14 @@ router.post('/upload:username', (req, res, next) => {
               } 
               
               // extra code
-              //console.log(result);
             
               for(let i=0; i<result.length; i++){
                   result[i].uploadedBy = uploadedBy;
                   let newClient = Client(clientHelper.createDBObjFromExcel(result[i]));
                   let newId = newClient.save(function (err) {
-                      if (err) {
-                          console.log(err);
-                      } else {
-                          // console.log(JSON.stringify(newClient));
-                      }
+                      if (err) return console.error(err);
                   });
               }
-              //console.log('===== SUCCESS ===== ' + result.length+ ' records added');
-              //res.json({error_code:0,err_desc:null, data: result.length+ ' records added'});
-              //res.send('<h1>' +result.length+ ' records added</h1>');
               return res.json({success: true, msg: 'Records Added'});
           });
       } catch (e){
@@ -100,19 +92,21 @@ router.get('/data/:uploadedBy', (req, res, next) => {
 // fetch cached data by uploader name
 router.get('/cachedata/:uploadedBy', (req, res, next) => {
     let uploadedBy = req.params.uploadedBy;
-    redisHelper.getCacheData(uploadedBy, function(data){
+    redisHelper.getCacheDatabyPattern(uploadedBy, function(data){
         if(data){
+           // console.log('data', data);
             console.log('picked up from cache');
-            res.send(JSON.parse(data));  
+            res.send(data);  
         } else {
             Client.find({uploadedBy: uploadedBy}, function(err, client) {
                 if (err) return console.error(err);
                 else{
                     console.log('coming first time');
-                    redisHelper.setCacheData(uploadedBy, JSON.stringify(client), function(){
+                    redisHelper.setCacheDatabyPattern(uploadedBy, client, function(){
                         console.log('set data in cache');
-                        res.send(JSON.stringify(client));
-                    });               
+                    });   
+                    console.log('returned response');
+                    res.send(JSON.stringify(client));            
                 }     
             });
         }
@@ -158,7 +152,7 @@ router.post('/update', (req, res, next) => {
             if (err) res.json({success: false, msg:'Failed to update client'});
         else{
             console.log('updated client data === ', client);
-           // redisHelper.updateCacheDate();
+            redisHelper.setCacheData(clientId, client);
             return res.json({success: true, msg:'Updated client data'});
         } 
     });
