@@ -170,6 +170,7 @@ export class MyGridApplicationComponent implements OnInit {
     this.dashboardService.setAssignedTo(assignToBody).subscribe( (data) => {
       if(data.success) {
         this.flashMessage.show('Tasks are assigned', {cssClass: 'alert-success', timeout: 3000});
+        this.getSalesData();
         
       } else {
         this.flashMessage.show('Something happened, check logs', {cssClass: 'alert-danger', timeout: 3000});
