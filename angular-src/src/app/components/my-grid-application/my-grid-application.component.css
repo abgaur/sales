@@ -5,3 +5,7 @@
 .assign {
     float: right;
 }
+
+.filter-block {
+    display: inline-block;
+}
