@@ -27,6 +27,7 @@ import { ClientdataComponent } from './components/clientdata/clientdata.componen
 import { UploadComponent } from './components/upload/upload.component';
 import { MyGridApplicationComponent } from './components/my-grid-application/my-grid-application.component';
 import { RedComponentComponent } from './components/red-component/red-component.component';
+import { EditTaskComponent } from './components/edit-task/edit-task.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -52,7 +53,8 @@ const appRoutes: Routes = [
     UploadComponent,
     FileSelectDirective,
     MyGridApplicationComponent,
-    RedComponentComponent
+    RedComponentComponent,
+    EditTaskComponent
     
   ],
   imports: [
@@ -62,7 +64,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule,
     Ng2CompleterModule,
-    AgGridModule.withComponents([RedComponentComponent])
+    AgGridModule.withComponents([EditTaskComponent])
   ],
   providers: [ValidateService, AuthService, AuthGuard, UploadService, DashboardService],
   bootstrap: [AppComponent]
