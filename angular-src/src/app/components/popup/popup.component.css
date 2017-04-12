@@ -1,0 +1,17 @@
+.row {
+	margin: 25px 0px 0px 0px;	
+}
+
+.editNewLine {
+	padding-bottom: 4%;
+}
+
+.form-inline .form-control {
+	display: block !important;
+	width: 100% !important;
+}
+
+.list-group-item {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}

@@ -5,7 +5,9 @@ import { EditTaskComponent } from '../edit-task/edit-task.component';
 import { FlashMessagesService} from 'angular2-flash-messages';
 import { DashboardService } from '../../services/dashboard.service'
 import { CompleterService, CompleterData, CompleterItem} from 'ng2-completer';
+import { PopupComponent } from '../popup/popup.component';
 import { Observable } from "rxjs/Rx";
+import { ClientService } from '../../services/client.service'
 
 @Component({
   selector: 'app-my-grid-application',
@@ -19,11 +21,12 @@ export class MyGridApplicationComponent implements OnInit {
  
   private searchStr: string;
   private dataService: CompleterData;
-  private selectedClient: string;
+  private selectedClient: any;
 
     constructor(private dashboardService: DashboardService,
         private flashMessage: FlashMessagesService,
-        private completerService: CompleterService
+        private completerService: CompleterService,
+        private clientService: ClientService,
     ) {
         var self = this;
 
@@ -137,12 +140,16 @@ export class MyGridApplicationComponent implements OnInit {
    }
 
    selectClient(id) {
-       this.selectedClient = id;       
+       // this.selectedClient = id;   
+       this.clientService.getDataById(id).subscribe((data) => {
+        this.selectedClient = data;
+        this.selectedClient.comments = [];
+      });    
     }
 
 
   getSalesData() {
-
+      console.log("get sales data");
      this.dashboardService.getSalesData().subscribe( data => {
         console.log('got data from service');
         this.gridOptions.api.setRowData(data);
