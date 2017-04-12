@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GridOptions } from 'ag-grid';
-import { RedComponentComponent } from '../red-component/red-component.component'
+import { RedComponentComponent } from '../red-component/red-component.component';
+import { EditTaskComponent } from '../edit-task/edit-task.component';
 import { FlashMessagesService} from 'angular2-flash-messages';
 import { DashboardService } from '../../services/dashboard.service'
 import { CompleterService, CompleterData, CompleterItem} from 'ng2-completer';
@@ -18,6 +19,7 @@ export class MyGridApplicationComponent implements OnInit {
  
   private searchStr: string;
   private dataService: CompleterData;
+  private selectedClient: string;
 
     constructor(private dashboardService: DashboardService,
         private flashMessage: FlashMessagesService,
@@ -31,22 +33,37 @@ export class MyGridApplicationComponent implements OnInit {
         });
     
         this.gridOptions = {};
-       
+        this.gridOptions = <GridOptions>{
+            context: {
+                componentParent: this
+            }
+        };
         this.gridOptions.columnDefs = [
             {
-                headerName: "First Name",
-                field: "firstName",
-                width: 200,
-                sort: 'asc',
-                filter: 'text',
+                headerName: "Actions",
+                width: 150,
+                field: "_id",
+                cellRendererFramework: EditTaskComponent,
                 headerCheckboxSelection: true,
                 headerCheckboxSelectionFilteredOnly: true,
                 checkboxSelection: true
+                //cellRenderer: this.createEditButton;
+            },
+
+            {
+                headerName: "First Name",
+                field: "firstName",
+                width: 100,
+                sort: 'asc',
+                filter: 'text',
+                // headerCheckboxSelection: true,
+                // headerCheckboxSelectionFilteredOnly: true,
+                // checkboxSelection: true
             },
              {
                 headerName: "Last Name",
                 field: "lastName",
-                width: 200,
+                width: 100,
                 filter: 'text',
                 getQuickFilterText: function(params) {
                     return params.value.name;
@@ -61,7 +78,7 @@ export class MyGridApplicationComponent implements OnInit {
             {
                 headerName: "Assigned To",
                 field: "assignedTo",
-                width: 200,
+                width: 120,
                 filter: 'text'
             },
             {
@@ -94,11 +111,12 @@ export class MyGridApplicationComponent implements OnInit {
              {
                 headerName: "Etouch SL",
                 field: "etouchSl",
-                width: 200
+                width: 100
             }
         ];
         // setting up features for grid
         this.gridOptions.enableSorting = true;
+        this.gridOptions.rowHeight =30
         this.gridOptions.enableFilter = true;
         this.gridOptions.enableColResize = true;
         this.gridOptions.rowSelection = 'multiple';
@@ -112,21 +130,23 @@ export class MyGridApplicationComponent implements OnInit {
   ngOnInit() {
   }
 
-   isFirstColumn(params) {
-    var displayedColumns = params.columnApi.getAllDisplayedColumns();
-    var thisIsFirstColumn = displayedColumns[0] === params.column;
-    return thisIsFirstColumn;
-}
+  isFirstColumn(params) {
+        var displayedColumns = params.columnApi.getAllDisplayedColumns();
+        var thisIsFirstColumn = displayedColumns[0] === params.column;
+        return thisIsFirstColumn;
+   }
+
+   selectClient(id) {
+       this.selectedClient = id;       
+    }
 
 
   getSalesData() {
 
      this.dashboardService.getSalesData().subscribe( data => {
         console.log('got data from service');
-        //console.log(data);
         this.gridOptions.api.setRowData(data);
-        //this.gridOptions.rowData = data;
-      });
+    });
 
   }
 
@@ -157,6 +177,7 @@ export class MyGridApplicationComponent implements OnInit {
     this.gridOptions.api.setQuickFilter(event.target.value);
   }
 
+  // using for testing, or now please dont delete
   onPrintQuickFilterTexts() {
     // this.gridOptions.api.forEachNode((rowNode, index)=> {
     //     console.log('Row ' + index + ' quick filter text is ' + rowNode.quickFilterAggregateText);
