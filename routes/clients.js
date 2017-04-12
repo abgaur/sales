@@ -141,7 +141,12 @@ router.post('/assignto', (req, res, next) => {
         if (err) res.json({success: false, msg:'Failed to update assignee'});
         else{
             console.log('updated records === ', docs.nModified);
-            return res.json({success: true, msg: docs.nModified + ' clients assigned'});
+            Client.find({ _id: { "$in": ids }}, function (err, docs) {
+                redisHelper.setCacheDatabyPattern('client', docs, function(){
+                    console.log('set data in cache');
+                    return res.json({success: true, msg: docs.nModified + ' clients assigned'});
+                });
+            });
         } 
     });
 });
