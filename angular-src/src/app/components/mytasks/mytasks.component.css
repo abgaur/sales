@@ -1,0 +1,11 @@
+.filter {
+    margin-bottom: 10px;
+}
+
+.assign {
+    float: right;
+}
+
+.filter-block {
+    display: inline-block;
+}

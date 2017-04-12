@@ -19,6 +19,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 import { AuthService } from './services/auth.service';
 import { DashboardService } from './services/dashboard.service';
+import { MyTasksService } from './services/my-tasks.service';
 import { ValidateService} from './services/validate.service';
 import { UploadService } from './services/upload.service';
 
@@ -28,6 +29,7 @@ import { UploadComponent } from './components/upload/upload.component';
 import { MyGridApplicationComponent } from './components/my-grid-application/my-grid-application.component';
 import { RedComponentComponent } from './components/red-component/red-component.component';
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
+import { MytasksComponent } from './components/mytasks/mytasks.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'clientdata', component: ClientdataComponent},
   { path: 'upload', component: UploadComponent, canActivate: [AuthGuard]},
-  { path: 'grid', component: MyGridApplicationComponent, canActivate: [AuthGuard]}
+  { path: 'grid', component: MyGridApplicationComponent, canActivate: [AuthGuard]},
+  { path: 'mytasks', component: MytasksComponent, canActivate: [AuthGuard]}
 ]
 
 @NgModule({
@@ -54,7 +57,8 @@ const appRoutes: Routes = [
     FileSelectDirective,
     MyGridApplicationComponent,
     RedComponentComponent,
-    EditTaskComponent
+    EditTaskComponent,
+    MytasksComponent
     
   ],
   imports: [
@@ -66,7 +70,7 @@ const appRoutes: Routes = [
     Ng2CompleterModule,
     AgGridModule.withComponents([EditTaskComponent])
   ],
-  providers: [ValidateService, AuthService, AuthGuard, UploadService, DashboardService],
+  providers: [ValidateService, AuthService, AuthGuard, UploadService, DashboardService, MyTasksService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
