@@ -3,6 +3,8 @@ import { GridOptions } from 'ag-grid';
 import { RedComponentComponent } from '../red-component/red-component.component'
 import { FlashMessagesService} from 'angular2-flash-messages';
 import { DashboardService } from '../../services/dashboard.service'
+import { CompleterService, CompleterData, CompleterItem} from 'ng2-completer';
+import { Observable } from "rxjs/Rx";
 
 @Component({
   selector: 'app-my-grid-application',
@@ -13,27 +15,23 @@ export class MyGridApplicationComponent implements OnInit {
 
   private gridOptions: GridOptions;
   private isrName: string;
+ 
+  private searchStr: string;
+  private dataService: CompleterData;
 
     constructor(private dashboardService: DashboardService,
-        private flashMessage: FlashMessagesService
+        private flashMessage: FlashMessagesService,
+        private completerService: CompleterService
     ) {
+        var self = this;
+
+        this.dashboardService.getUsers().subscribe( data => {
+            console.dir(data);
+            self.dataService =  completerService.local(data, "name", "name").descriptionField("email");
+        });
+    
         this.gridOptions = {};
-        // this.gridOptions.columnDefs = [
-        //     {
-        //         headerName: "ID",
-        //         field: "id",
-        //         width: 100
-        //     },
-        //     {
-        //         headerName: "Value",
-        //         field: "value",
-        //         cellRendererFramework: RedComponentComponent,
-        //         width: 100
-        //     },
-
-        // ];
-
-
+       
         this.gridOptions.columnDefs = [
             {
                 headerName: "First Name",
@@ -139,19 +137,17 @@ export class MyGridApplicationComponent implements OnInit {
         assignTo: this.isrName
     };    
     assignToBody.ids = this.gridOptions.api.getSelectedNodes().map(function(rowNode) {return rowNode.data._id;});
-    console.log(assignToBody.ids);
-
+    console.log(assignToBody);
+    
 
     this.dashboardService.setAssignedTo(assignToBody).subscribe( (data) => {
       if(data.success) {
         this.flashMessage.show('Tasks are assigned', {cssClass: 'alert-success', timeout: 3000});
-        //this.router.navigate(['/login']);
+        
       } else {
-        //this.flashMessage.show('Something happened, check logs', {cssClass: 'alert-danger', timeout: 3000});
-        //this.router.navigate(['/register']);
+        this.flashMessage.show('Something happened, check logs', {cssClass: 'alert-danger', timeout: 3000});
       }
     })
-
   }
 
   // quick filter 
@@ -167,7 +163,14 @@ export class MyGridApplicationComponent implements OnInit {
     // });
 }
 
-
+public onAssignSelected(selected: CompleterItem) {
+    console.log(selected);
+        if (selected) {
+            this.isrName = selected.description;
+        } else {
+            this.isrName = "";
+        }
+    }
 
 
 }

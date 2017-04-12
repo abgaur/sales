@@ -26,4 +26,14 @@ export class DashboardService {
       .map(res => res.json());
   }
 
+  getUsers() {
+    
+    var allUsersUrl = 'http://localhost:3000/users/all/';
+    let headers =  new Headers();
+    headers.append('Content-type', 'application/json');
+    return this.http.get(allUsersUrl)
+      .map(res => res.json());
+
+  }
+
 }

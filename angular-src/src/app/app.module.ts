@@ -7,6 +7,7 @@ import { RouterModule, Routes} from '@angular/router';
 
 import { FlashMessagesModule} from 'angular2-flash-messages';
 import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
+import { Ng2CompleterModule } from 'ng2-completer';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -60,6 +61,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule,
+    Ng2CompleterModule,
     AgGridModule.withComponents([RedComponentComponent])
   ],
   providers: [ValidateService, AuthService, AuthGuard, UploadService, DashboardService],
