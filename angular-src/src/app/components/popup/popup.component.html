@@ -1,0 +1,142 @@
+<!-- Modal -->
+<div *ngIf="selectedClient" id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h4 class="modal-title">Edit Client</h4>
+	  </div>
+
+	  <form class="form-inline" (submit)="onMemberSubmit()">
+		<div class="modal-body">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group input-group-sm">
+			   			<label class="control-label" >First Name</label>
+					   	<input class="form-control" type="text" [(ngModel)]="selectedClient.firstName" name="firstName">
+				 	</div> 
+			 	</div>
+
+			 	<div class="col-md-4">
+				  	<div class="form-group input-group-sm">
+				   		<label class="control-label">Last Name</label>
+				   		<!-- <input type="text" [(ngModel)]="name" name="name" value="Kulkarni" class="form-control"> -->
+				   		<input class="form-control" type="text" [(ngModel)]="selectedClient.lastName" name="lastName">
+				 	</div> 
+
+		 		</div>
+
+			 	<div class="col-md-4">
+			  		<div class="form-group input-group-sm">
+				   		<label class="control-label">Title</label>
+				   		<!-- <input type="text" [(ngModel)]="name" name="name" class="form-control"> -->
+				   		<input class="form-control" type="text" [(ngModel)]="selectedClient.title" name="title" >
+			 		</div> 
+			 	</div>
+			</div>
+
+			<div class="row">
+			   	<div class="col-md-4">
+				   <div class="form-group input-group-sm">
+				   <label class="control-label">Email</label>
+				   <!-- <input type="text" [(ngModel)]="name" name="name" class="form-control"> -->
+				   <input class="form-control" type="text" [(ngModel)]="selectedClient.email" name="email" >
+				 </div> 
+				 </div>
+				  <div class="col-md-4">
+				  <div class="form-group input-group-sm">
+				   <label class="control-label">Phone</label>
+				   <!-- <input type="text" [(ngModel)]="name" name="name" class="form-control"> -->
+				   <input class="form-control" type="text" [(ngModel)]="selectedClient.phone" name="phone">
+				 </div> 
+				 </div>
+				 <div class="col-md-4">
+				 <div class="form-group input-group-sm">
+				   <label class="control-label">Company</label>
+					<!-- <input type="text" [(ngModel)]="name" name="name" class="form-control"> -->
+					<input class="form-control" type="text" [(ngModel)]="selectedClient.company" name="company">
+				 </div> 
+				 </div>
+		   	</div>
+
+			<div class="row">
+				 <div class="col-lg-4">
+				 <div class="form-group input-group-sm">
+				   <label class="control-label">Supervisor Name</label>
+					<!-- <input type="text" [(ngModel)]="name" name="name" class="form-control"> -->
+					<input class="form-control" type="text" [(ngModel)]="selectedClient.supervisor" name="supervisor">
+				 </div> 
+				 </div>
+				 <div class="col-lg-4">
+				 <div class="form-group input-group-sm">
+				   <label class="control-label">Management Level</label>
+				   <!-- <input type="text" [(ngModel)]="name" name="name" class="form-control"> -->
+				   <input class="form-control" type="text" [(ngModel)]="selectedClient.managementLevel" name="managementLevel">
+				 </div>
+				 </div>
+				 <div class="col-lg-4">
+				 <div class="form-group input-group-sm">
+				   <label class="control-label">eTouch SL</label>
+				   <!-- <input type="text" [(ngModel)]="name" name="name" class="form-control"> -->
+				   <input class="form-control" type="text" [(ngModel)]="selectedClient.etouchSl" name="etouchSl">
+				 </div> 
+				 </div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-8">
+					<div class="form-group">
+						<label class="control-label">Reminder Date</label>
+						<div class="input-group input-group-sm">
+						  <input class="form-control" a2e-datetimepicker 
+						  	[(date)]="reminderDate" (onChange)="dateChange($event)" />
+						  <span class="input-group-addon">
+						    <span class="glyphicon glyphicon-calendar"></span>
+						  </span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h4>Comments</h4>
+
+
+			<div class="row" style="max-height: 250px; overflow-y: auto;">
+				<div class="col-sm-12">
+					<div *ngIf="!selectedClient.comments || selectedClient.comments.length === 0">No comments added yet.</div>
+					<div class="list-group">
+					  <div *ngFor="let item of selectedClient.comments" class="list-group-item active">
+					    <div class="list-group-item-heading">{{ item }}</div>
+					    <h6 class="list-group-item-text">Added by: ABC | 24/05/1927</h6>
+					  </div>
+					</div>
+			 	</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+			 		<div>
+					   	<label class="control-label" for="comment">New comment</label>
+						<textarea rows="4" class="form-control" [(ngModel)]="newComment" name="comment"></textarea>
+						<input type="button" class="btn btn-primary btn-xs" value="Add Comment" (click)="addComment()">
+				 	</div> 
+			 	</div>
+			</div>
+
+		   	<div class="modal-footer">
+			 	<input type="button" class="btn btn-primary btn-sm" value="Update" (click)="updateClient()" > 
+		    	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+			</div>
+
+   		</div>
+	</form>
+	
+	</div>
+	 
+  </div>
+</div>
+
+<!-- End of PopUp -->
+

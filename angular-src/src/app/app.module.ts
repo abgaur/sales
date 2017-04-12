@@ -9,6 +9,8 @@ import { FlashMessagesModule} from 'angular2-flash-messages';
 import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
 import { Ng2CompleterModule } from 'ng2-completer';
 
+// components
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
@@ -16,12 +18,20 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { PopupComponent } from './components/popup/popup.component';
+
+// directives 
+
+import {DateTimePickerDirective} from 'ng2-eonasdan-datetimepicker/dist/datetimepicker.directive.js';
+
+// services
 
 import { AuthService } from './services/auth.service';
 import { DashboardService } from './services/dashboard.service';
 import { MyTasksService } from './services/my-tasks.service';
 import { ValidateService} from './services/validate.service';
 import { UploadService } from './services/upload.service';
+import { ClientService } from './services/client.service';
 
 import { AuthGuard} from './guard/auth.guard';
 import { ClientdataComponent } from './components/clientdata/clientdata.component';
@@ -58,8 +68,9 @@ const appRoutes: Routes = [
     MyGridApplicationComponent,
     RedComponentComponent,
     EditTaskComponent,
-    MytasksComponent
-    
+    MytasksComponent,
+    DateTimePickerDirective,
+    PopupComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +81,7 @@ const appRoutes: Routes = [
     Ng2CompleterModule,
     AgGridModule.withComponents([EditTaskComponent])
   ],
-  providers: [ValidateService, AuthService, AuthGuard, UploadService, DashboardService, MyTasksService],
+  providers: [ValidateService, AuthService, AuthGuard, UploadService, DashboardService, MyTasksService, ClientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
