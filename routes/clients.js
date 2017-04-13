@@ -70,6 +70,11 @@ router.post('/upload:username', (req, res, next) => {
                   let newClient = Client(clientHelper.createDBObjFromExcel(result[i]));
                   let newId = newClient.save(function (err) {
                       if (err) return console.error(err);
+                      else{ 
+                        redisHelper.setCacheData('client', newClient, function(){
+                            return false;
+                        });
+                      }
                   });
               }
               return res.json({success: true, msg: 'Records Added'});
