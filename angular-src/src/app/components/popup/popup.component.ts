@@ -13,20 +13,13 @@ export class PopupComponent implements OnInit {
 
   @Input() selectedClient = { comments: [] };
   @Output() clientUpdated: EventEmitter<any> = new EventEmitter();
-  // selectedClient = { comments: null };
-  reminderDate = moment();
-  newComment = '';
+
+  private reminderDate = moment();
+  private newComment = '';
 
   constructor(private clientService: ClientService) {}
 
-  ngOnInit() {
-    /*if(this.selectedClientId){
-      this.clientService.getDataById(this.selectedClientId).subscribe((data) => {
-        this.selectedClient = data;
-        this.selectedClient.comments = ['Test 1', 'Test 2', 'Test 3', 'Test 4','Test 1', 'Test 2', 'Test 3', 'Test 4'];
-      });
-    }*/
-  }
+  ngOnInit() {}
 
   dateChange(date) {
     this.reminderDate = date;
@@ -36,6 +29,7 @@ export class PopupComponent implements OnInit {
     if(!this.selectedClient.comments){
       this.selectedClient.comments = [];
     }
+    // { comment: , author: }
     this.selectedClient.comments.push(this.newComment);
     // this.clientService.addComment(this.newComment).subscribe();
   }
@@ -44,6 +38,6 @@ export class PopupComponent implements OnInit {
   	console.log(this.selectedClient);
   	this.clientService.updateClient(this.selectedClient).subscribe((data) => {
         this.clientUpdated.emit(data);
-      });
+    });
   }
 }
