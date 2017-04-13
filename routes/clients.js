@@ -173,8 +173,10 @@ router.post('/task', (req, res, next) => {
             if (err) res.json({success: false, msg:'Failed to update client'});
         else{
             console.log('updated client data === ', client);
-            redisHelper.setCacheData(clientId, client, function(){
-              return res.json({success: true, msg:'Updated client data'});
+            Client.findById(clientId, function (err, doc) {
+                redisHelper.setCacheData('client', doc, function(){
+                    return res.json({success: true, msg:'Updated client data'});
+                });
             });
         } 
     });

@@ -13,7 +13,7 @@ module.exports = {
     },
 
     setCacheData: function (key, value, cb) {
-        redis.set(key, value, function (err, reply) {
+        redis.set(key + '_' + value._id, JSON.stringify(value), function (err, reply) {
             if (err) return console.error(err);
             cb();
         });
