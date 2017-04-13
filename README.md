@@ -10,3 +10,9 @@
 8. Run "nodemon app" command inside the root directory
 9. nodejs server - http://localhost:3000
 10. angular server - http://localhost:4200
+
+
+# redis
+
+1. Start redis server "redis-server" (On windows -> pass path of confing file as parameter: ./redis.windows.conf)
+2. Run redis client "redis-cli"
