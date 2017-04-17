@@ -168,7 +168,8 @@ router.post('/task', (req, res, next) => {
         company: req.body.company,
         supervisor: req.body.supervisor,
         managementLevel: req.body.managementLevel,
-        etouchSl: req.body.etouchSl
+        etouchSl: req.body.etouchSl,
+        reminderDate: req.body.reminderDate
     }; 
 
     Client.findByIdAndUpdate(
@@ -177,7 +178,6 @@ router.post('/task', (req, res, next) => {
         function(err, client){
             if (err) res.json({success: false, msg:'Failed to update client'});
         else{
-            console.log('updated client data === ', client);
             Client.findById(clientId, function (err, doc) {
                 redisHelper.setCacheData('client', doc, function(){
                     return res.json({success: true, msg:'Updated client data'});

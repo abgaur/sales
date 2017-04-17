@@ -46,7 +46,7 @@ var clientSchema = new Schema({
   'uploadedBy': String,
   'assignedTo': String,
   'reminderDate': String
-});
+},{timestamps: true});
 
 // the schema is useless so far
 // we need to create a model using it
