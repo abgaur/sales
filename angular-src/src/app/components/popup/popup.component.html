@@ -86,30 +86,31 @@
 			</div>
 
 			<div class="row">
-				<div class="col-sm-8">
+				<div class="col-sm-12">
 					<div class="form-group">
-						<label class="control-label">Reminder Date</label>
+						<label class="control-label">Reminder Date</label><br/>
 						<div class="input-group input-group-sm">
-						  <input class="form-control" a2e-datetimepicker 
-						  	[(date)]="reminderDate" (onChange)="dateChange($event)" />
+						  <input readonly="true" [disabled]="!isReminderEnabled" class="form-control" a2e-datetimepicker [date]="reminderDate" [options]="datetimepickerOptions" (onChange)="dateChange($event)" />
 						  <span class="input-group-addon">
 						    <span class="glyphicon glyphicon-calendar"></span>
 						  </span>
 						</div>
+						<span [ngClass]="{ 'icon-clear glyphicon glyphicon-ok-circle': true, 'enabled': isReminderEnabled  }" class="icon-clear glyphicon glyphicon-ok-circle" (click)="clearReminder()"></span>
 					</div>
 				</div>
 			</div>
 
-			<h4>Comments</h4>
-
+			<div class="row">
+				<div class="col-sm-12"><h4>Comments</h4></div>
+			</div>
 
 			<div class="row" style="max-height: 250px; overflow-y: auto;">
 				<div class="col-sm-12">
 					<div *ngIf="!selectedClient.comments || selectedClient.comments.length === 0">No comments added yet.</div>
 					<div class="list-group">
 					  <div *ngFor="let item of selectedClient.comments" class="list-group-item active">
+					    <label class="list-group-item-text">Added by: ABC | 24/05/1927</label>
 					    <div class="list-group-item-heading">{{ item }}</div>
-					    <h6 class="list-group-item-text">Added by: ABC | 24/05/1927</h6>
 					  </div>
 					</div>
 			 	</div>

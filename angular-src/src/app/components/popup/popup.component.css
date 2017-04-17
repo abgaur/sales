@@ -1,5 +1,5 @@
 .row {
-	margin: 25px 0px 0px 0px;	
+	margin: 0px 0px 18px 0px;	
 }
 
 .editNewLine {
@@ -14,4 +14,15 @@
 .list-group-item {
 	padding-top: 5px;
 	padding-bottom: 5px;
+}
+
+.icon-clear {
+	top: 5px;
+    left: 5px;
+	font-size: 20px;
+	color: #cccccc;
+}
+
+.icon-clear.enabled {
+	color: #5e950d
 }
