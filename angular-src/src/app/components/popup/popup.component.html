@@ -90,7 +90,7 @@
 					<div class="form-group">
 						<label class="control-label">Reminder Date</label><br/>
 						<div class="input-group input-group-sm">
-						  <input readonly="true" [disabled]="!isReminderEnabled" class="form-control" a2e-datetimepicker [date]="reminderDate" [options]="datetimepickerOptions" (onChange)="dateChange($event)" />
+						  <input readonly="true" [disabled]="!isReminderEnabled" class="reminder-date form-control" a2e-datetimepicker [date]="reminderDate" [options]="datetimepickerOptions" (onChange)="dateChange($event)" />
 						  <span class="input-group-addon">
 						    <span class="glyphicon glyphicon-calendar"></span>
 						  </span>
