@@ -1,10 +1,8 @@
-// grab the things we need
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // create a schema
 var clientSchema = new Schema({
-  'uploadedBy': String,
   'rainKingContactId': String,
   'salutation': String,
   'firstName': String,
@@ -12,7 +10,6 @@ var clientSchema = new Schema({
   'nickname': String,
   'etouchSl': String,
   'title': String,
-  'assignedTo': String,
   'managementLevel': String,
   'email': String,
   'address1': String,
@@ -45,16 +42,15 @@ var clientSchema = new Schema({
   'tags': String,
   'status': String,
   'linkedInUrl': String,
-  'twitterUrl': String
+  'twitterUrl': String,
+  'uploadedBy': String,
+  'assignedTo': String,
+  'reminderDate': String
 });
 
 // the schema is useless so far
 // we need to create a model using it
 var Client = mongoose.model('Client', clientSchema);
-
-
-
-
 
 // make this available to our clients in our Node applications
 module.exports = Client;

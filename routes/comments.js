@@ -22,12 +22,26 @@ router.post('/add', (req, res, next) => {
   });
 });
 
-// find Comment
-router.get('/data/:id', (req, res, next) => {
-  console.log('req.params.id',req.params.id)
-  Comment.findComments(req.params.id, function(err, comments){
+// Get Comments by client
+router.get('/data/:clientId', (req, res, next) => {
+  Comment.findCommentsbyClient(req.params.clientId, (err, comments) => {
+    if (err) return console.error(err);
     res.send(JSON.stringify(comments));
   });
+});
+
+//update Comment
+router.post('/update', (req, res, next) => {
+    let commentId =  req.body._id;
+    let updateComment= {
+        author: req.body.author,
+        text: req.body.text
+    };
+
+    Comment.updateComment(commentId, updateComment, (err, comment) => {
+      if (err) res.json({success: false, msg:'Failed to update comment'});
+      return res.json({success: true, msg:'Updated comment data'});
+    });
 });
 
 module.exports = router;

@@ -1,24 +1,26 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-var commentSchema = new Schema({
+let commentSchema = new Schema({
     'author': String,
     'client': String,
     'authorMail': String,
     'authorUsername': String,
-    'text': String 
-});
+    'text': String
+},{timestamps: true});
 
-var Comment = mongoose.model('Comment', commentSchema);
+let Comment = mongoose.model('Comment', commentSchema);
 module.exports = Comment;
 
 module.exports.addComment = function(newComment, callback) {
     newComment.save(callback);
 };
 
-module.exports.findComments = function(id, callback){
-    Comment.find({ client: id }, function (err, client) {
-        if (err) return console.error(err);
-        return client;
-    });
-}
+module.exports.findCommentsbyClient = function(id, callback){
+    let query = {client: id};
+    Comment.find(query, callback);
+};
+
+module.exports.updateComment = function(commentId, updateComment, callback){
+    Comment.findByIdAndUpdate(commentId, updateComment, callback);
+};
