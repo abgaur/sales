@@ -2,11 +2,11 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let commentSchema = new Schema({
-    'author': String,
-    'client': String,
-    'authorMail': String,
-    'authorUsername': String,
-    'text': String
+    clientId: String,
+    message: String,
+    user:  {name: String,
+            email: String,
+            username: String}
 },{timestamps: true});
 
 let Comment = mongoose.model('Comment', commentSchema);
@@ -17,7 +17,7 @@ module.exports.addComment = function(newComment, callback) {
 };
 
 module.exports.findCommentsbyClient = function(id, callback){
-    let query = {client: id};
+    let query = {clientId: id};
     Comment.find(query, callback);
 };
 
