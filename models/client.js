@@ -45,7 +45,8 @@ var clientSchema = new Schema({
   'twitterUrl': String,
   'uploadedBy': String,
   'assignedTo': String,
-  'reminderDate': String
+  'reminderDate': Date,
+  'bdm': String
 },{timestamps: true});
 
 // the schema is useless so far
@@ -54,3 +55,13 @@ var Client = mongoose.model('Client', clientSchema);
 
 // make this available to our clients in our Node applications
 module.exports = Client;
+
+module.exports.getClientByDaterange = function(assignedTo, startDate, endDate, callback){
+  Client.find({
+        "assignedTo" : assignedTo,
+        "reminderDate" : {
+                            $gte: startDate,
+                            $lte: endDate
+                        }
+        }, callback);
+};

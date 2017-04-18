@@ -169,7 +169,7 @@ router.post('/task', (req, res, next) => {
         supervisor: req.body.supervisor,
         managementLevel: req.body.managementLevel,
         etouchSl: req.body.etouchSl,
-        reminderDate: req.body.reminderDate
+        reminderDate: new Date(req.body.reminderDate).toISOString()
     }; 
 
     Client.findByIdAndUpdate(
@@ -187,4 +187,16 @@ router.post('/task', (req, res, next) => {
     });
 });
 
-module.exports = router;  
+//get reminders by assignee and daterange
+router.get('/reminders/:assignedto/:startdate/:enddate', (req, res, next) => {
+    Client.getClientByDaterange(
+        req.params.assignedto,
+        new Date(req.params.startdate).toISOString(),
+        new Date(req.params.enddate).toISOString(),
+        function(err, client){
+            if (err) return console.error(err);
+            res.send(JSON.stringify(client));
+        });
+});
+
+module.exports = router;

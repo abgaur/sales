@@ -7,7 +7,10 @@ const commentSchema = new Schema({
     user:  {name: String,
             email: String,
             username: String},
-    isDeleted:  { type: Boolean, default: false }
+    isDeleted:  { type: Boolean, default: false },
+    isr: String,
+    bdm: String,
+    commentType: String
 },{timestamps: true});
 
 const Comment = mongoose.model('Comment', commentSchema);
