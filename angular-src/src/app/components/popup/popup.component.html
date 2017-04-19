@@ -87,43 +87,55 @@
 
 			<div class="row">
 				<div class="col-sm-12">
-					<div class="form-group">
-						<label class="control-label">Reminder Date</label><br/>
-						<div class="input-group input-group-sm">
-						  <input readonly="true" [disabled]="!isReminderEnabled" class="reminder-date form-control" a2e-datetimepicker [date]="reminderDate" [options]="datetimepickerOptions" (onChange)="dateChange($event)" />
+					<div class="form-group reminder-date-container" [ngClass]="{ 'form-group reminder-date-container': true, 'visible': isReminderEnabled }">
+						<span>
+							<span [ngClass]="{ 'icon-set-reminder glyphicon': true, 'glyphicon-check': isReminderEnabled, 'glyphicon-unchecked': !isReminderEnabled, 'enabled': isReminderEnabled  }" (click)="clearReminder()"></span>
+							<label class="control-label">Set Remider</label>
+						</span>
+
+
+						<div class="input-group input-group-sm reminder-date">
+						  <input readonly="true" class="form-control" a2e-datetimepicker [date]="reminderDate" [options]="datetimepickerOptions" (onChange)="dateChange($event)" />
 						  <span class="input-group-addon">
 						    <span class="glyphicon glyphicon-calendar"></span>
 						  </span>
 						</div>
-						<span [ngClass]="{ 'icon-clear glyphicon glyphicon-ok-circle': true, 'enabled': isReminderEnabled  }" class="icon-clear glyphicon glyphicon-ok-circle" (click)="clearReminder()"></span>
+
+						<div class="form-group input-group-sm reminder-title-container">
+						   <!-- <input type="text" [(ngModel)]="name" name="name" class="form-control"> -->
+						   <input class="form-control reminder-title" placeholder="Reminder label" type="text" [(ngModel)]="reminderTitle" name="reminderTitle" width="auto">
+						 </div> 
 					</div>
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col-sm-12"><h4>Comments</h4></div>
+			<div class="comments-container">
+				<h4>Comments ({{selectedClient.comments.length}})<small> View All</small></h4>
 			</div>
 
-			<div class="row" style="max-height: 250px; overflow-y: auto;">
-				<div class="col-sm-12">
-					<div *ngIf="!selectedClient.comments || selectedClient.comments.length === 0">No comments added yet.</div>
+			<div class="row" >
+				<div class="col-sm-12" style="max-height: 200px; overflow-y: auto;">
 					<div class="list-group">
 					  <div *ngFor="let item of selectedClient.comments" class="list-group-item active">
-					    <label class="list-group-item-text">Added by: ABC | 24/05/1927</label>
+					    <label class="list-group-item-text">Added by: ABC | 24/05/1927</label> <span class="glyphicon glyphicon-earphone"></span>
 					    <div class="list-group-item-heading">{{ item }}</div>
 					  </div>
 					</div>
 			 	</div>
+			 	<div class="col-sm-12">
+			 		<div class="comment-type-container">
+					   	<ul class="nav nav-pills comment-type">
+						  <li role="presentation" class="active"><a><span class="glyphicon glyphicon-earphone"> Call</span></a></li>
+						  <li role="presentation"><a><span class="glyphicon glyphicon-pushpin"> Note</span></a></li>
+						</ul>
+						<textarea rows="4" class="form-control" [(ngModel)]="newComment" name="comment"></textarea>
+						<input type="button" class="btn btn-primary btn-xs" value="Add Call Details" (click)="addComment()">
+				 	</div> 
+			 	</div>
 			</div>
 
 			<div class="row">
-				<div class="col-sm-12">
-			 		<div>
-					   	<label class="control-label" for="comment">New comment</label>
-						<textarea rows="4" class="form-control" [(ngModel)]="newComment" name="comment"></textarea>
-						<input type="button" class="btn btn-primary btn-xs" value="Add Comment" (click)="addComment()">
-				 	</div> 
-			 	</div>
+				
 			</div>
 
 		   	<div class="modal-footer">
