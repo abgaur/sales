@@ -5,7 +5,7 @@
      <div class="assign">
         <!--<input type="text"  [(ngModel)]="isrName"/>   -->
         <ng2-completer class="filter" placeholder="Assign To"  [(ngModel)]="searchStr" (selected)="onAssignSelected($event)" [dataService]="dataService" [minSearchLength]="0" ></ng2-completer>         
-        <button class="btn btn-primary" (click)="assignTo()">Assign</button>
+        <button class="btn btn-primary btn-sm" (click)="assignTo()">Assign</button>
     </div>
     <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
                  [gridOptions]="gridOptions">
