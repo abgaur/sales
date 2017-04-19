@@ -1,0 +1,10 @@
+<p>
+  reminders works!
+</p>
+<div class="reminders">
+  <div class="list-group">
+     <a (click)='openReminder($event, reminder)' *ngFor="let reminder of reminders; let i = index" class="list-group-item list-group-item-action" >
+       {{reminder.reminderDate}}
+     </a>
+  </div>
+</div>
