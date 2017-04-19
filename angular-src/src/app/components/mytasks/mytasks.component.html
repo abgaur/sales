@@ -12,3 +12,6 @@
                  [gridOptions]="gridOptions">
     </ag-grid-angular>
 </div>
+
+<app-popup [selectedClient]="selectedClient" (clientUpdated)="getMyTasks()"></app-popup>
+
