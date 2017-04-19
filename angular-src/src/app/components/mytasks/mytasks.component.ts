@@ -5,8 +5,10 @@ import { EditTaskComponent } from '../edit-task/edit-task.component';
 import { FlashMessagesService} from 'angular2-flash-messages';
 import { DashboardService } from '../../services/dashboard.service'
 import { MyTasksService } from  '../../services/my-tasks.service';
+import { PopupComponent } from '../popup/popup.component';
 import { CompleterService, CompleterData, CompleterItem} from 'ng2-completer';
 import { Observable } from "rxjs/Rx";
+import { ClientService } from '../../services/client.service'
 
 
 @Component({
@@ -25,7 +27,8 @@ export class MytasksComponent implements OnInit {
     constructor(private dashboardService: DashboardService,
         private flashMessage: FlashMessagesService,
         private completerService: CompleterService,
-        private myTasksService: MyTasksService
+        private myTasksService: MyTasksService,
+        private clientService: ClientService
     ) {
         var self = this;
 
@@ -49,7 +52,7 @@ export class MytasksComponent implements OnInit {
                 headerCheckboxSelection: true,
                 headerCheckboxSelectionFilteredOnly: true,
                 checkboxSelection: true
-                //cellRenderer: this.createEditButton;
+                
             },
 
             {
@@ -127,18 +130,21 @@ export class MytasksComponent implements OnInit {
   ngOnInit() {
   } 
 
-   selectClient(id) {
-       this.selectedClient = id;       
-    }
+  selectClient(id) {
+
+       // this.selectedClient = id;   
+       this.clientService.getDataById(id).subscribe((data) => {
+        this.selectedClient = data;
+        // this.selectedClient.comments = [];
+      });    
+   }
 
 
   getMyTasks() {
-
-     this.myTasksService.getMyTasks().subscribe( data => {
-        console.log('got data from my tasks service');
+    this.myTasksService.getMyTasks().subscribe( data => {
+        // console.log('got data --- from my tasks service');
         this.gridOptions.api.setRowData(data);
     });
-
   }
 
   assignTo() {

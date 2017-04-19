@@ -16,12 +16,5 @@ export class MyTasksService {
       return this.http.get(salesDataUrl)
         .map(res => res.json());
     }
-    
-  
-  
-
-
-  
-  
 
 }
