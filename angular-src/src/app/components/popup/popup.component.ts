@@ -18,7 +18,7 @@ export class PopupComponent implements OnInit, OnChanges {
     ignoreReadonly: true
   }
   private reminderDate = moment();
-  private reminderTitle: String;
+  private reminderText: String;
   private isReminderEnabled = false;
   private newComment = '';
 
@@ -28,19 +28,20 @@ export class PopupComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if(this.selectedClient){
-        this.isReminderEnabled = !!this.selectedClient.reminderDate;
-        if(this.selectedClient.reminderDate){
-          this.reminderDate = moment(this.selectedClient.reminderDate);
-          this.reminderTitle = this.selectedClient.reminderTitle;
+        this.isReminderEnabled = !!this.selectedClient.reminder;
+        if(this.isReminderEnabled){
+          this.reminderDate = moment(this.selectedClient.reminder.date);
+          this.reminderText = this.selectedClient.reminder.text;
         }else{
           this.reminderDate = moment();
-          this.reminderTitle = '';
+          this.reminderText = '';
         }
     }
   }
 
   dateChange(date) {
     this.reminderDate = date;
+    // var reminder = { date: "", text: "" };
   }
 
   addComment() {
@@ -53,7 +54,11 @@ export class PopupComponent implements OnInit, OnChanges {
   }
 
   updateClient(){
-    this.selectedClient.reminderDate = this.isReminderEnabled ? this.reminderDate.toString() : null;
+    if(this.isReminderEnabled) {
+      this.selectedClient.reminder = { date: this.reminderDate.toString(), text: this.reminderText };
+    }else{
+      this.selectedClient.reminder = null;
+    }
   	this.clientService.updateClient(this.selectedClient).subscribe((data) => {
         this.clientUpdated.emit(data);
     });
