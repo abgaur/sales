@@ -169,8 +169,10 @@ router.post('/task', (req, res, next) => {
         supervisor: req.body.supervisor,
         managementLevel: req.body.managementLevel,
         etouchSl: req.body.etouchSl,
-        reminderDate: new Date(req.body.reminderDate).toISOString()
-    }; 
+        reminder: req.body.reminder
+    };
+
+    if(updateClient.reminder)updateClient.reminder.date = new Date(updateClient.reminder.date).toISOString();
 
     Client.findByIdAndUpdate(
         clientId,

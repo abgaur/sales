@@ -45,7 +45,7 @@ var clientSchema = new Schema({
   'twitterUrl': String,
   'uploadedBy': String,
   'assignedTo': String,
-  'reminderDate': Date,
+  'reminder': {date :Date, text: String},
   'bdm': String
 },{timestamps: true});
 
@@ -59,7 +59,7 @@ module.exports = Client;
 module.exports.getClientByDaterange = function(assignedTo, startDate, endDate, callback){
   Client.find({
         "assignedTo" : assignedTo,
-        "reminderDate" : {
+        "reminder.date" : {
                             $gte: startDate,
                             $lte: endDate
                         }
