@@ -12,6 +12,7 @@ import { Ng2CompleterModule } from 'ng2-completer';
 // components
 
 import { AppComponent } from './app.component';
+import { AppBodyComponent } from './components/app-body/app-body.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -60,6 +61,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    AppBodyComponent,
     NavbarComponent,
     LoginComponent,
     RegisterComponent,
