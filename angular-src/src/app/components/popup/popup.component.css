@@ -16,21 +16,36 @@
 	padding-bottom: 5px;
 }
 
-.icon-clear {
-	top: 5px;
-    left: 5px;
+.icon-set-reminder {
+	cursor: pointer;
+	top: 3px;
 	font-size: 20px;
+	padding: 2px;
 	color: #cccccc;
 }
 
-.icon-clear.enabled {
-	color: #5e950d
+.reminder-date-container {
+	height: 35px;
+	margin-top: 5px;
+	width: 100%;
 }
 
-.reminder-date {
-	background-color: #ffffff !important;
+.reminder-date-container.visible .icon-set-reminder {
+	color: #5e950d;
 }
 
-.reminder-date[disabled] {
-	background-color: #f8f5f0 !important;
+.reminder-title-container {
+	width: 60%;
+}
+
+.reminder-date, .reminder-title-container{
+	display: none !important;
+}
+
+.reminder-date-container.visible .reminder-date, .reminder-date-container.visible .reminder-title-container {
+	display: inline-table !important;
+}
+
+.comments-container {
+	padding: 10px 15px;
 }
