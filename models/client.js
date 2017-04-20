@@ -56,13 +56,12 @@ var Client = mongoose.model('Client', clientSchema);
 // make this available to our clients in our Node applications
 module.exports = Client;
 
-module.exports.getClientByDaterange = function(assignedTo, startDate, endDate, callback){
-  console.log('testing');
+module.exports.getClientByDateRange = function(assignedTo, startDate, endDate, callback){
   Client.find({
         "assignedTo" : assignedTo,
         "reminder.date" : {
                             $gte: startDate,
                             $lte: endDate
                         }
-        }, callback);
+        }, callback).sort({"reminder.date" : 'asc'});
 };

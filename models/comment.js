@@ -21,7 +21,7 @@ module.exports.addComment = function(newComment, callback) {
 };
 
 module.exports.findCommentsbyClient = function(clientId, callback){
-    Comment.find({clientId}, callback);
+    Comment.find({clientId}, callback).sort({"updatedAt" : 'desc'});
 };
 
 module.exports.updateComment = function(commentId, updateComment, callback){

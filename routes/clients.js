@@ -191,7 +191,7 @@ router.post('/task', (req, res, next) => {
 
 //get reminders by assignee and daterange
 router.get('/reminders/:assignedto/:startdate/:enddate', (req, res, next) => {
-    Client.getClientByDaterange(
+    Client.getClientByDateRange(
         req.params.assignedto,
         new Date(req.params.startdate).toISOString(),
         new Date(req.params.enddate).toISOString(),
