@@ -57,6 +57,7 @@ var Client = mongoose.model('Client', clientSchema);
 module.exports = Client;
 
 module.exports.getClientByDaterange = function(assignedTo, startDate, endDate, callback){
+  console.log('testing');
   Client.find({
         "assignedTo" : assignedTo,
         "reminder.date" : {
