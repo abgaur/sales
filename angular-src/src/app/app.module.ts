@@ -33,6 +33,7 @@ import { MyTasksService } from './services/my-tasks.service';
 import { ValidateService} from './services/validate.service';
 import { UploadService } from './services/upload.service';
 import { ClientService } from './services/client.service';
+import { RemindersService } from './services/reminders.service';
 
 import { AuthGuard} from './guard/auth.guard';
 import { ClientdataComponent } from './components/clientdata/clientdata.component';
@@ -41,6 +42,7 @@ import { MyGridApplicationComponent } from './components/my-grid-application/my-
 import { RedComponentComponent } from './components/red-component/red-component.component';
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { MytasksComponent } from './components/mytasks/mytasks.component';
+import { RemindersComponent } from './components/reminders/reminders.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -48,10 +50,12 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-  { path: 'clientdata', component: ClientdataComponent},
   { path: 'upload', component: UploadComponent, canActivate: [AuthGuard]},
   { path: 'grid', component: MyGridApplicationComponent, canActivate: [AuthGuard]},
-  { path: 'mytasks', component: MytasksComponent, canActivate: [AuthGuard]}
+  { path: 'mytasks', component: MytasksComponent, canActivate: [AuthGuard]},
+  { path: 'clients', component: ClientdataComponent, canActivate: [AuthGuard]},
+  { path: 'reminders', component: RemindersComponent, canActivate: [AuthGuard]}
+  
 ]
 
 @NgModule({
@@ -72,7 +76,8 @@ const appRoutes: Routes = [
     EditTaskComponent,
     MytasksComponent,
     DateTimePickerDirective,
-    PopupComponent
+    PopupComponent,
+    RemindersComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +88,9 @@ const appRoutes: Routes = [
     Ng2CompleterModule,
     AgGridModule.withComponents([EditTaskComponent])
   ],
-  providers: [ValidateService, AuthService, AuthGuard, UploadService, DashboardService, MyTasksService, ClientService],
+  providers: [
+    ValidateService, AuthService, AuthGuard, UploadService,
+    DashboardService, MyTasksService, ClientService, RemindersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
