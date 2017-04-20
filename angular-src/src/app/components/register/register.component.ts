@@ -5,9 +5,9 @@ import { FlashMessagesService} from 'angular2-flash-messages';
 import { Router} from '@angular/router';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-register,ng-select',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
 
@@ -15,7 +15,8 @@ export class RegisterComponent implements OnInit {
   username: String;
   email: String;
   password: String;
-
+  singleSelect: String;
+  role: String;
 
   constructor(private validateService: ValidateService,
     private flashMessage: FlashMessagesService,
@@ -26,13 +27,21 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
+  public roles = [
+    { value: 'bdm', display: 'BDM' },
+    { value: 'isr', display: 'ISR' } 
+  ]
+
   onRegisterSubmit() {
     const user = {
       name: this.name,
       email: this.email,
       username: this.username,
-      password: this.password
+      password: this.password,
+      role: this.role
     };
+
+    // console.log("User:" + JSON.stringify({user}));
 
     if(!this.validateService.validateRegister(user)) {
       console.log('Please fill all fields');
