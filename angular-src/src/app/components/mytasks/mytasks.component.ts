@@ -22,7 +22,7 @@ export class MytasksComponent implements OnInit {
  
   private searchStr: string;
   private dataService: CompleterData;
-  private selectedClient: string;
+  private selectedClient: any;
 
     constructor(private dashboardService: DashboardService,
         private flashMessage: FlashMessagesService,
@@ -134,8 +134,8 @@ export class MytasksComponent implements OnInit {
 
        // this.selectedClient = id;   
        this.clientService.getDataById(id).subscribe((data) => {
-        this.selectedClient = data;
-        // this.selectedClient.comments = [];
+       this.selectedClient = data;
+       this.selectedClient.comments = [];
       });    
    }
 

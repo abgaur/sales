@@ -1,3 +1,19 @@
 .reminders {
-    width:50%;
+    width:40%;
+}
+
+.reminders .reminder-text {
+  font-size: 1.2em;
+}
+.reminders .reminder-text .badge {
+  font-size: 1.2em;
+}
+
+.reminders .reminder-text .title {
+  margin-left:10px;
+}
+
+
+.reminders .reminder {
+    cursor: pointer;
 }

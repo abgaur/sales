@@ -10,34 +10,18 @@ import { ClientService } from '../../services/client.service'
   styleUrls: ['./reminders.component.css']
 })
 export class RemindersComponent implements OnInit {
-  reminders: any;
-  constructor(private remindersService: RemindersService) { 
-    this.reminders = [
-      {
-        id: "1",
-        reminderDate: "today",
-        
-      },
-      {
-        id: "2",
-        reminderDate: "todaytoday"
-      },
-      {
-        id: "3",
-        reminderDate: "todaytodaytoday"
-      },
-      {
-        id: "4",
-        reminderDate: "todaytodaytodaytoday"
-      }
-    ]
-
+  clients: any;
+  selectedClient: any;
+  constructor(private remindersService: RemindersService,
+    private clientService: ClientService) { 
+    this.getReminders();
   }
 
   getReminders() {
     this.remindersService.getReminders().subscribe( data => {
         console.log('got data from service');
-        //this.gridOptions.api.setRowData(data);
+        console.dir(data);
+        this.clients = data;        
     });
   }
 
@@ -46,6 +30,10 @@ export class RemindersComponent implements OnInit {
 
   openReminder(evt, rem) {
     console.dir(rem);
+     this.clientService.getDataById(rem._id).subscribe((data) => {
+        this.selectedClient = data;
+        this.selectedClient.comments = [];
+      });    
   }
 
 }

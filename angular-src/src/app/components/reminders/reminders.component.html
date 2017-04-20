@@ -1,10 +1,18 @@
-<p>
-  reminders works!
-</p>
+<h2>Reminders</h2>
 <div class="reminders">
   <div class="list-group">
-     <a (click)='openReminder($event, reminder)' *ngFor="let reminder of reminders; let i = index" class="list-group-item list-group-item-action" >
-       {{reminder.reminderDate}}
+     <a (click)='openReminder($event, client)' data-toggle="modal" data-target="#myModal" *ngFor="let client of clients; let i = index" class="list-group-item list-group-item-action reminder" >
+       
+       <!--<div class="reminder-date"></div>-->
+       <div class="reminder-text">
+         <span class="badge badge-default">{{client.reminder.date | date:'hh:mm a'}}</span>
+         <span class="title">{{client.reminder.text}}</span>
+         
+      </div>
+       
      </a>
   </div>
 </div>
+
+<app-popup [selectedClient]="selectedClient" (clientUpdated)="getReminders()"></app-popup>
+
