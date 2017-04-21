@@ -47,6 +47,16 @@ export class AuthService {
     return tokenNotExpired();
   }
 
+  bdmRole() {
+    let role = JSON.parse(localStorage.getItem('user')).role;
+    if(role === 'bdm') {
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
   logout() {
     this.authToken = null;
     this.user = null;

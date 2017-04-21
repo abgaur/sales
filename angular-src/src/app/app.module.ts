@@ -36,6 +36,8 @@ import { ClientService } from './services/client.service';
 import { RemindersService } from './services/reminders.service';
 
 import { AuthGuard} from './guard/auth.guard';
+import { RoleGuard} from './guard/role.guard';
+
 import { ClientdataComponent } from './components/clientdata/clientdata.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { MyGridApplicationComponent } from './components/my-grid-application/my-grid-application.component';
@@ -43,6 +45,7 @@ import { RedComponentComponent } from './components/red-component/red-component.
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { MytasksComponent } from './components/mytasks/mytasks.component';
 import { RemindersComponent } from './components/reminders/reminders.component';
+import { TeamDataComponent } from './components/team-data/team-data.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -54,7 +57,8 @@ const appRoutes: Routes = [
   { path: 'grid', component: MyGridApplicationComponent, canActivate: [AuthGuard]},
   { path: 'mytasks', component: MytasksComponent, canActivate: [AuthGuard]},
   { path: 'clients', component: ClientdataComponent, canActivate: [AuthGuard]},
-  { path: 'reminders', component: RemindersComponent, canActivate: [AuthGuard]}
+  { path: 'reminders', component: RemindersComponent, canActivate: [AuthGuard]},
+  { path: 'teamdata', component: TeamDataComponent, canActivate: [AuthGuard, RoleGuard]}  
   
 ]
 
@@ -77,7 +81,8 @@ const appRoutes: Routes = [
     MytasksComponent,
     DateTimePickerDirective,
     PopupComponent,
-    RemindersComponent
+    RemindersComponent,
+    TeamDataComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +94,7 @@ const appRoutes: Routes = [
     AgGridModule.withComponents([EditTaskComponent])
   ],
   providers: [
-    ValidateService, AuthService, AuthGuard, UploadService,
+    ValidateService, AuthService, AuthGuard, UploadService, RoleGuard,
     DashboardService, MyTasksService, ClientService, RemindersService],
   bootstrap: [AppComponent]
 })
