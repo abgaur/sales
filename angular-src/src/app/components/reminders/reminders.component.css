@@ -1,5 +1,11 @@
 .reminders {
-    width:40%;
+   margin: 10px 30px;
+  
+}
+
+.reminders .list-group {
+  height: 300px;
+  overflow-y: auto;
 }
 
 .reminders .reminder-text {
