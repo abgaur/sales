@@ -5,7 +5,7 @@ import { FlashMessagesService} from 'angular2-flash-messages';
 import { Router} from '@angular/router';
 
 @Component({
-  selector: 'app-register,ng-select',
+  selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
