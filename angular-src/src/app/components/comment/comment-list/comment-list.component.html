@@ -1,0 +1,6 @@
+<div class="col-sm-12 comment-item-outer-container" style="max-height: 200px; overflow-y: auto;">
+	<span>{{ comments.length }} comments</span>
+	<div class="comment-item-inner-container">
+	  	<app-comment-item [comment]="comment" *ngFor="let comment of comments"></app-comment-item>
+	</div>
+</div>

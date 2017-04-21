@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
+import { CommentComponent } from '../comment/comment.component';
 import { ClientService } from '../../services/client.service';
 import 'eonasdan-bootstrap-datetimepicker';
 import * as moment from 'moment'
@@ -10,6 +11,7 @@ import * as moment from 'moment'
 })
 export class PopupComponent implements OnInit, OnChanges {
 
+  @Input() id;
   @Input() selectedClient;
   @Output() clientUpdated: EventEmitter<any> = new EventEmitter();
   
@@ -60,7 +62,11 @@ export class PopupComponent implements OnInit, OnChanges {
       this.selectedClient.reminder = null;
     }
   	this.clientService.updateClient(this.selectedClient).subscribe((data) => {
+      if(data.success){
         this.clientUpdated.emit(data);
+      }else{
+        alert('Error occurred while updating the client.');
+      }
     });
   }
 

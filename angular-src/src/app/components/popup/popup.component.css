@@ -1,5 +1,5 @@
 .row {
-	margin: 0px 0px 18px 0px;	
+	margin: 0px 0px 8px 0px;	
 }
 
 .editNewLine {
@@ -48,4 +48,8 @@
 
 .comments-container {
 	padding: 10px 15px;
+}
+
+.modal-footer {
+	padding: 5px;
 }

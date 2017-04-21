@@ -1,0 +1,16 @@
+.comment-input {
+	margin-bottom: 5px;
+	width: 100% !important;
+}
+
+.post-button {
+	width: 70px;
+	margin-right: 20px;
+}
+.glyphicon-alert {
+	visibility: none;
+}
+.error-notification .glyphicon-alert{
+	color: red;
+	visibility: visible;
+}

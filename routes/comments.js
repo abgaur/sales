@@ -7,7 +7,10 @@ router.post('/add', (req, res, next) => {
   let newComment = new Comment({
     clientId: req.body.clientId,
     message: req.body.message,
-    user: req.body.user
+    user: req.body.user,
+    commentType: req.body.commentType,
+    isr: req.body.isr,
+    bdm: req.body.bdm
   });
 
   Comment.addComment(newComment, (err, comment) => {
@@ -20,10 +23,14 @@ router.post('/add', (req, res, next) => {
 });
 
 // Get Comments by client
-router.get('/data/:clientId', (req, res, next) => {
+router.get('/:clientId', (req, res, next) => {
   Comment.findCommentsbyClient(req.params.clientId, (err, comments) => {
-    if (err) return console.error(err);
-    res.send(JSON.stringify(comments));
+    if (err) {
+      console.error(err);
+      res.json({ success: false, msg:'Failed to retrieve comments.'});
+    }else {
+      res.send(JSON.stringify(comments));
+    }
   });
 });
 
