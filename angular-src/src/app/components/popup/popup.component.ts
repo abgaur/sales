@@ -16,7 +16,7 @@ export class PopupComponent implements OnInit, OnChanges {
   @Output() clientUpdated: EventEmitter<any> = new EventEmitter();
   
   private datetimepickerOptions = {
-    minDate: moment(),
+    //minDate: moment().startOf('day'),
     ignoreReadonly: true
   }
   private reminderDate = moment();
@@ -57,6 +57,10 @@ export class PopupComponent implements OnInit, OnChanges {
 
   updateClient(){
     if(this.isReminderEnabled) {
+      if(this.reminderDate < moment()){
+        alert("Invalid date");
+        return;
+      }
       this.selectedClient.reminder = { date: this.reminderDate.toString(), text: this.reminderText };
     }else{
       this.selectedClient.reminder = null;
