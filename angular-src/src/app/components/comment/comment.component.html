@@ -7,8 +7,8 @@
 	   	<ul class="nav nav-pills comment-type-container">
 		  <li role="presentation comment-type" [ngClass]="{'active': newComment.commentType === type.type}" (click)="newComment.commentType = type.type; type.active = true;" *ngFor="let type of commentTypes"><a><span class="glyphicon" [ngClass]="type.cssClass"> {{ type.type }}</span></a></li>
 		</ul>
-		<textarea class="form-control comment-input" rows="3" [(ngModel)]="newComment.message" name="comment"></textarea>
-		<input type="button" class="btn btn-primary btn-xs post-button" value="Post" (click)="addComment()">
+		<textarea class="form-control comment-input" rows="3" #comment [(ngModel)]="newComment.message" name="comment"></textarea>
+		<input type="button" class="btn btn-primary btn-xs post-button" value="Post" [disabled]="comment.value.length === 0" (click)="addComment()">
 		<span *ngIf="notification">
 			<span [ngClass]="{ 'error-notification': notification.type === 'Error'}">
 				<span class="glyphicon glyphicon-alert"></span> {{ notification.message }}

@@ -8,13 +8,13 @@
 	<h4 class="modal-title">Edit Client</h4>
   </div>
 
-  <form class="form-inline">
+  <form class="form-inline" #editForm="ngForm" (ngSubmit)="editForm.form.valid && updateClient()" >
 	<div class="modal-body" *ngIf="selectedClient">
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group input-group-sm">
-		   			<label class="control-label" >First Name</label>
-				   	<input class="form-control" type="text" [(ngModel)]="selectedClient.firstName" name="firstName">
+		   			<label class="control-label">First Name</label>
+				   	<input class="form-control" required type="text" [(ngModel)]="selectedClient.firstName" name="firstName">
 			 	</div> 
 		 	</div>
 
@@ -22,7 +22,7 @@
 			  	<div class="form-group input-group-sm">
 			   		<label class="control-label">Last Name</label>
 			   		<!-- <input type="text" [(ngModel)]="name" name="name" value="Kulkarni" class="form-control"> -->
-			   		<input class="form-control" type="text" [(ngModel)]="selectedClient.lastName" name="lastName">
+			   		<input class="form-control" required type="text" [(ngModel)]="selectedClient.lastName" name="lastName">
 			 	</div> 
 
 	 		</div>
@@ -101,14 +101,13 @@
 					</div>
 
 					<div class="form-group input-group-sm reminder-title-container">
-					   <!-- <input type="text" [(ngModel)]="name" name="name" class="form-control"> -->
-					   <input class="form-control reminder-title" placeholder="Reminder text" type="text" [(ngModel)]="reminderText" name="reminderText" width="auto">
+					   <input class="form-control reminder-title" placeholder="Reminder text (Max length: 100 characters)" type="text" [(ngModel)]="reminderText" name="reminderText"  maxlength="100" [required]="isReminderEnabled">
 					 </div> 
 				</div>
 			</div>
 		</div>
 		<div class="modal-footer">
-		 	<input type="button" class="btn btn-primary btn-sm" value="Update" (click)="updateClient()" > 
+		 	<input type="submit" class="btn btn-primary btn-sm" value="Update" [disabled]="!editForm.form.valid" > 
 	    	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
 		</div>
 		<client-comment [selectedClient]="selectedClient"></client-comment>
