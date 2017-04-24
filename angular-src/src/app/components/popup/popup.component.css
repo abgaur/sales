@@ -1,5 +1,5 @@
 .row {
-	margin: 0px 0px 18px 0px;	
+	margin: 0px 0px 8px 0px;	
 }
 
 .editNewLine {
@@ -48,4 +48,16 @@
 
 .comments-container {
 	padding: 10px 15px;
+}
+
+.modal-footer {
+	padding: 5px;
+}
+
+/*.ng-dirty.ng-valid[required], .ng-dirty.ng-valid.required  {
+  border-left: 5px solid #42A948; 
+}*/
+
+form.ng-touched .ng-invalid:not(form)  {
+  border: 1px solid #a94442; /* red */
 }

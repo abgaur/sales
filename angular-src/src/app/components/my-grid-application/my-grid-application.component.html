@@ -15,4 +15,6 @@
 
 <button class="btn btn-primary" (click)="onFilterChanged()">Get Sales Data</button>
 
-<app-popup [selectedClient]="selectedClient" (clientUpdated)="getSalesData()"></app-popup>
+<div id="myModal" class="modal fade" role="dialog">
+    <app-popup [selectedClient]="selectedClient" (clientUpdated)="getSalesData()"></app-popup>
+</div>

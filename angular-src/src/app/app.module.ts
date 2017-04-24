@@ -13,13 +13,14 @@ import { Ng2CompleterModule } from 'ng2-completer';
 
 import { AppComponent } from './app.component';
 import { AppBodyComponent } from './components/app-body/app-body.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { HomeComponent } from './components/home/home.component';
+import { CommentComponent } from './components/comment/comment.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { PopupComponent } from './components/popup/popup.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { RegisterComponent } from './components/register/register.component';
 
 // directives 
 
@@ -46,6 +47,8 @@ import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { MytasksComponent } from './components/mytasks/mytasks.component';
 import { RemindersComponent } from './components/reminders/reminders.component';
 import { TeamDataComponent } from './components/team-data/team-data.component';
+import { CommentItemComponent } from './components/comment/comment-item/comment-item.component';
+import { CommentListComponent } from './components/comment/comment-list/comment-list.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -82,7 +85,10 @@ const appRoutes: Routes = [
     DateTimePickerDirective,
     PopupComponent,
     RemindersComponent,
-    TeamDataComponent
+    TeamDataComponent,
+    CommentComponent,
+    CommentItemComponent,
+    CommentListComponent
   ],
   imports: [
     BrowserModule,
