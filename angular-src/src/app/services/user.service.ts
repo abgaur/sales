@@ -17,12 +17,20 @@ export class UserService {
       .map(res => res.json());
   }
 
-  getBdms() {
-    
+  getBdms() {    
     var bdmsUrl = 'http://localhost:3000/users/bdm/';
     let headers =  new Headers();
     headers.append('Content-type', 'application/json');
     return this.http.get(bdmsUrl)
+      .map(res => res.json());
+
+  }
+
+  getStages() {    
+    var stagesUrl = 'http://localhost:3000/stages/';
+    let headers =  new Headers();
+    headers.append('Content-type', 'application/json');
+    return this.http.get(stagesUrl)
       .map(res => res.json());
 
   }

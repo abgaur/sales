@@ -7,7 +7,7 @@ router.get('/', (req, res, next) => {
         if(err){
             res.json({success: false, msg:'Failed to retrive stages'});
         } else {
-            res.json({success: true, msg:'Retreive stages', stages: stages});
+            res.send(JSON.stringify(stages));
         }
     })
 });

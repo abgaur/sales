@@ -29,20 +29,23 @@ export class PopupComponent implements OnInit, OnChanges {
   private dataService: CompleterData;
   private bdmName: String;
   private bdm: any;
+  private stages: any; 
 
   constructor(private clientService: ClientService,
     private userService: UserService,
     private completerService: CompleterService) {
-      var self= this;
-      
-    this.userService.getBdms().subscribe( data => {
-        console.dir(data);
+      var self= this;      
+      this.userService.getBdms().subscribe( data => {
         self.dataService =  completerService.local(data, "name", "name").descriptionField("email");
-    });
-
+      });
   }
 
   ngOnInit() {
+      var self = this;
+      this.userService.getStages().subscribe( data => {
+        console.dir(data);
+        self.stages = data;
+      });
     
   } 
 

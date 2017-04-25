@@ -170,7 +170,8 @@ router.post('/task', (req, res, next) => {
         managementLevel: req.body.managementLevel,
         etouchSl: req.body.etouchSl,
         reminder: req.body.reminder,
-        bdm: req.body.bdm
+        bdm: req.body.bdm,
+        status: req.body.status
     };
 
     if(updateClient.reminder)updateClient.reminder.date = new Date(updateClient.reminder.date).toISOString();
