@@ -34,7 +34,7 @@ const app = express();
 const users = require('./routes/users');
 const clients = require('./routes/clients');
 const comments = require('./routes/comments');
-const statuses = require('./routes/statuses');
+const stages = require('./routes/stages');
 
 const port = 3000;
 
@@ -56,7 +56,7 @@ require('./config/passport')(passport);
 app.use('/users', users);
 app.use('/clients', clients);
 app.use('/comments', comments);
-app.use('/statuses', statuses);
+app.use('/stages', stages);
 
 
 
