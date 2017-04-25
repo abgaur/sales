@@ -49,3 +49,7 @@ module.exports.comparePassword = function(candidatePassword, hash, callback) {
         callback(null, isMatch);
     });
 }
+
+module.exports.findBdms = function(role, callback){
+    User.find({role},  'name email', callback);
+};

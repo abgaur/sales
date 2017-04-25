@@ -1,6 +1,9 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
 import { CommentComponent } from '../comment/comment.component';
 import { ClientService } from '../../services/client.service';
+import { UserService } from '../../services/user.service';
+
+import { CompleterService, CompleterData, CompleterItem} from 'ng2-completer';
 import 'eonasdan-bootstrap-datetimepicker';
 import * as moment from 'moment'
 
@@ -23,13 +26,32 @@ export class PopupComponent implements OnInit, OnChanges {
   private reminderText: String;
   private isReminderEnabled = false;
   private newComment = '';
+  private dataService: CompleterData;
+  private bdmName: String;
+  private bdm: any;
+  private stages: any; 
 
-  constructor(private clientService: ClientService) {}
+  constructor(private clientService: ClientService,
+    private userService: UserService,
+    private completerService: CompleterService) {
+      var self= this;      
+      this.userService.getBdms().subscribe( data => {
+        self.dataService =  completerService.local(data, "name", "name").descriptionField("email");
+      });
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+      var self = this;
+      this.userService.getStages().subscribe( data => {
+        console.dir(data);
+        self.stages = data;
+      });
+    
+  } 
 
   ngOnChanges(changes: SimpleChanges) {
     if(this.selectedClient){
+        this.bdmName = !!this.selectedClient.bdm ? this.selectedClient.bdm.name : '';
         this.isReminderEnabled = !!this.selectedClient.reminder;
         if(this.isReminderEnabled){
           this.reminderDate = moment(this.selectedClient.reminder.date);
@@ -65,6 +87,7 @@ export class PopupComponent implements OnInit, OnChanges {
     }else{
       this.selectedClient.reminder = null;
     }
+    this.selectedClient.bdm = this.bdm;
   	this.clientService.updateClient(this.selectedClient).subscribe((data) => {
       if(data.success){
         this.clientUpdated.emit(data);
@@ -77,5 +100,14 @@ export class PopupComponent implements OnInit, OnChanges {
   clearReminder() {
     this.isReminderEnabled = !this.isReminderEnabled;
   }
+
+  public onBdmSelected(selected: CompleterItem) {
+    console.log(selected);
+    if (selected) {
+        this.bdm = { email: selected.description, name: selected.title }        
+    } else {
+        this.bdm = {};
+    }
+}
 
 }

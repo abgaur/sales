@@ -46,7 +46,7 @@ var clientSchema = new Schema({
   'uploadedBy': String,
   'assignedTo': String,
   'reminder': {date :Date, text: String},
-  'bdm': String,
+  'bdm': {name: String, email: String },
   'status': String
 },{timestamps: true});
 
