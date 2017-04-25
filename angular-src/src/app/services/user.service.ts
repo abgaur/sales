@@ -4,25 +4,27 @@ import 'rxjs/add/operator/map';
 import { tokenNotExpired } from 'angular2-jwt';
 
 @Injectable()
-export class DashboardService {
+export class UserService {
 
   constructor(private http: Http) { }
 
-   getSalesData() {
-    //var username = JSON.parse(localStorage.getItem('user')).username;
-    var salesDataUrl = 'http://localhost:3000/clients/data/';
+  getUsers() {
+    
+    var allUsersUrl = 'http://localhost:3000/users/all/';
     let headers =  new Headers();
     headers.append('Content-type', 'application/json');
-    return this.http.get(salesDataUrl)
+    return this.http.get(allUsersUrl)
       .map(res => res.json());
   }
 
-   setAssignedTo(assignToBody) {
-    //var username = JSON.parse(localStorage.getItem('user')).username;
-    var salesDataUrl = 'http://localhost:3000/clients/assignto';
+  getBdms() {
+    
+    var bdmsUrl = 'http://localhost:3000/users/bdm/';
     let headers =  new Headers();
     headers.append('Content-type', 'application/json');
-    return this.http.post(salesDataUrl, assignToBody, {headers: headers})
+    return this.http.get(bdmsUrl)
       .map(res => res.json());
+
   }
+
 }

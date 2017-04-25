@@ -75,6 +75,17 @@ router.get('/all', (req, res, next) => {
     });
 });
 
+// Get All BDMs
+router.get('/bdm', (req, res, next) => {
+
+
+  User.findBdms('bdm', (err, users) => {
+      
+      if (err) res.json({success: false, msg:'Failed to get BDMs'});
+      res.send(JSON.stringify(users));
+    });
+});
+
 
 
 module.exports = router;

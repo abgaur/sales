@@ -7,7 +7,8 @@ import { DashboardService } from '../../services/dashboard.service'
 import { CompleterService, CompleterData, CompleterItem} from 'ng2-completer';
 import { PopupComponent } from '../popup/popup.component';
 import { Observable } from "rxjs/Rx";
-import { ClientService } from '../../services/client.service'
+import { ClientService } from '../../services/client.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-my-grid-application',
@@ -27,10 +28,11 @@ export class MyGridApplicationComponent implements OnInit {
         private flashMessage: FlashMessagesService,
         private completerService: CompleterService,
         private clientService: ClientService,
+        private userService: UserService
     ) {
         var self = this;
 
-        this.dashboardService.getUsers().subscribe( data => {
+        this.userService.getUsers().subscribe( data => {
             console.dir(data);
             self.dataService =  completerService.local(data, "name", "name").descriptionField("email");
         });
