@@ -46,7 +46,8 @@ var clientSchema = new Schema({
   'uploadedBy': String,
   'assignedTo': String,
   'reminder': {date :Date, text: String},
-  'bdm': {name: String, email: String }
+  'bdm': {name: String, email: String },
+  'status': String
 },{timestamps: true});
 
 // the schema is useless so far
