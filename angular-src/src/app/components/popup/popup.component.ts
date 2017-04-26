@@ -1,6 +1,9 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
 import { CommentComponent } from '../comment/comment.component';
 import { ClientService } from '../../services/client.service';
+import { NotificationComponent } from '../notification/notification.component';
+import { NotificationService } from '../notification/notification.service';
+import * as NotificationEnumType from '../notification/notification-types';
 import 'eonasdan-bootstrap-datetimepicker';
 import * as moment from 'moment'
 
@@ -23,8 +26,12 @@ export class PopupComponent implements OnInit, OnChanges {
   private reminderText: String;
   private isReminderEnabled = false;
   private newComment = '';
+  private notificationType = NotificationEnumType.NotificationType;
 
-  constructor(private clientService: ClientService) {}
+  constructor(
+    private clientService: ClientService,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit() {}
 
@@ -57,21 +64,41 @@ export class PopupComponent implements OnInit, OnChanges {
 
   updateClient(){
     if(this.isReminderEnabled) {
-      if(this.reminderDate < moment()){
-        alert("Invalid date");
-        return;
-      }
       this.selectedClient.reminder = { date: this.reminderDate.toString(), text: this.reminderText };
     }else{
       this.selectedClient.reminder = null;
     }
-  	this.clientService.updateClient(this.selectedClient).subscribe((data) => {
-      if(data.success){
+
+    this.clientService.updateClient(this.selectedClient).subscribe(
+      (data) => this.updateClientSuccess(data),
+      (err) => this.updateClientFailure(err),
+    );
+
+  }
+  
+  private updateClientFailure(err: any){
+    this.notificationService.show(
+          'edit-popup-notification',
+          'Error occurred while updating the client.', 
+          null,
+          5000, 
+          this.notificationType.ERROR
+        );
+  }
+
+  private updateClientSuccess(data){
+    if(data.success){
         this.clientUpdated.emit(data);
+        this.notificationService.show(
+          'edit-popup-notification', 
+          'Client updated successfully.', 
+          null,
+          5000, 
+          this.notificationType.SUCCESS
+        );
       }else{
-        alert('Error occurred while updating the client.');
+        this.updateClientFailure(null);
       }
-    });
   }
 
   clearReminder() {

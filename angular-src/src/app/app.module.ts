@@ -8,6 +8,7 @@ import { RouterModule, Routes} from '@angular/router';
 import { FlashMessagesModule} from 'angular2-flash-messages';
 import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
 import { Ng2CompleterModule } from 'ng2-completer';
+import { NotificationModule } from './components/notification/notification.module';
 
 // components
 
@@ -97,6 +98,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule,
     Ng2CompleterModule,
+    NotificationModule.forRoot(),
     AgGridModule.withComponents([EditTaskComponent])
   ],
   providers: [

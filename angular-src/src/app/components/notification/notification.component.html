@@ -1,0 +1,37 @@
+<div class="app-notification-outer-container">
+	<div [ngClass]="{'app-notification-inner-container slide-in from-top': true, 'show': !hide }">
+		<div [ngClass]="{'alert slide-in-content app-notification': true, 'alert-success': notificationType === 'Success', 'alert-danger': notificationType === 'Error', 'alert-info': notificationType === 'Info', 'alert-warning': notificationType === 'Warning' }" class="" role="alert" >
+			<span class="close glyphicon glyphicon-remove-circle" (click)="close()"></span>
+			<div>{{ title }}</div>
+			<div class="details slide-in-content" *ngIf="details && details.length > 0">
+				<div *ngFor="let detail of details">{{detail}}</div>
+			</div>
+		</div>
+		
+	</div>
+<div>
+
+<div [id]="id + '_dialog'" class="modal fade" role="dialog">
+	<!-- Modal -->
+	<div class="modal-dialog modal-lg">
+		<!-- Modal content-->
+		<div class="modal-content">
+		  	<div class="modal-header">
+				<span type="button" class="close glyphicon glyphicon-remove-circle" data-dismiss="modal"></span>
+				<h4 class="modal-title">{{ title }}</h4>
+		  	</div>
+
+			<div class="modal-body" >
+				<div class="details slide-in-content" *ngIf="details && details.length > 0">
+					<div *ngFor="let detail of details">{{ detail }}</div>
+				</div>
+			</div>
+		
+			<div class="modal-footer">
+		    	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">OK</button>
+			</div>
+
+		</div>
+	</div>
+	<!-- End of PopUp -->
+</div>
