@@ -4,6 +4,8 @@ import { ClientService } from '../../services/client.service';
 import { NotificationComponent } from '../notification/notification.component';
 import { NotificationService } from '../notification/notification.service';
 import * as NotificationEnumType from '../notification/notification-types';
+import { UserService } from '../../services/user.service';
+import { CompleterService, CompleterData, CompleterItem} from 'ng2-completer';
 import 'eonasdan-bootstrap-datetimepicker';
 import * as moment from 'moment'
 
@@ -27,16 +29,34 @@ export class PopupComponent implements OnInit, OnChanges {
   private isReminderEnabled = false;
   private newComment = '';
   private notificationType = NotificationEnumType.NotificationType;
+  private dataService: CompleterData;
+  private bdmName: String;
+  private bdm: any;
+  private stages: any; 
 
-  constructor(
-    private clientService: ClientService,
-    private notificationService: NotificationService
-  ) {}
+  constructor(private clientService: ClientService,
+    private userService: UserService,
+    private completerService: CompleterService,
+    private notificationService: NotificationService) {
+      var self= this;      
+      this.userService.getBdms().subscribe( data => {
+        self.dataService =  completerService.local(data, "name", "name").descriptionField("email");
+      });
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+      var self = this;
+      this.userService.getStages().subscribe( data => {
+        console.dir(data);
+        self.stages = data;
+      });
+    
+  } 
 
   ngOnChanges(changes: SimpleChanges) {
     if(this.selectedClient){
+        this.bdmName = !!this.selectedClient.bdm ? this.selectedClient.bdm.name : '';
+        this.bdm = !!this.selectedClient.bdm ? this.selectedClient.bdm : {};
         this.isReminderEnabled = !!this.selectedClient.reminder;
         if(this.isReminderEnabled){
           this.reminderDate = moment(this.selectedClient.reminder.date);
@@ -69,6 +89,7 @@ export class PopupComponent implements OnInit, OnChanges {
       this.selectedClient.reminder = null;
     }
 
+    this.selectedClient.bdm = this.bdmName? this.bdm : {};
     this.clientService.updateClient(this.selectedClient).subscribe(
       (data) => this.updateClientSuccess(data),
       (err) => this.updateClientFailure(err),
@@ -104,5 +125,14 @@ export class PopupComponent implements OnInit, OnChanges {
   clearReminder() {
     this.isReminderEnabled = !this.isReminderEnabled;
   }
+
+  public onBdmSelected(selected: CompleterItem) {
+    console.log(selected);
+    if (selected) {
+        this.bdm = { email: selected.description, name: selected.title }        
+    } else {
+        this.bdm = {};
+    }
+}
 
 }

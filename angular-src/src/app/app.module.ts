@@ -36,6 +36,7 @@ import { ValidateService} from './services/validate.service';
 import { UploadService } from './services/upload.service';
 import { ClientService } from './services/client.service';
 import { RemindersService } from './services/reminders.service';
+import { UserService } from './services/user.service';
 
 import { AuthGuard} from './guard/auth.guard';
 import { RoleGuard} from './guard/role.guard';
@@ -103,7 +104,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     ValidateService, AuthService, AuthGuard, UploadService, RoleGuard,
-    DashboardService, MyTasksService, ClientService, RemindersService],
+    DashboardService, MyTasksService, ClientService, RemindersService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

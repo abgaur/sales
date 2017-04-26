@@ -8,7 +8,8 @@ import { MyTasksService } from  '../../services/my-tasks.service';
 import { PopupComponent } from '../popup/popup.component';
 import { CompleterService, CompleterData, CompleterItem} from 'ng2-completer';
 import { Observable } from "rxjs/Rx";
-import { ClientService } from '../../services/client.service'
+import { ClientService } from '../../services/client.service';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -28,11 +29,12 @@ export class MytasksComponent implements OnInit {
         private flashMessage: FlashMessagesService,
         private completerService: CompleterService,
         private myTasksService: MyTasksService,
-        private clientService: ClientService
+        private clientService: ClientService,
+        private userService: UserService
     ) {
         var self = this;
 
-        this.dashboardService.getUsers().subscribe( data => {
+        this.userService.getUsers().subscribe( data => {
             console.dir(data);
             self.dataService =  completerService.local(data, "name", "name").descriptionField("email");
         });
@@ -183,11 +185,11 @@ export class MytasksComponent implements OnInit {
 
 public onAssignSelected(selected: CompleterItem) {
     console.log(selected);
-        if (selected) {
-            this.isrName = selected.description;
-        } else {
-            this.isrName = "";
-        }
+    if (selected) {
+        this.isrName = selected.description;
+    } else {
+        this.isrName = "";
     }
+}
 
 }
