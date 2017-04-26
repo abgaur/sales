@@ -3,8 +3,9 @@
 
 <!-- Modal content-->
 <div class="modal-content">
+  <app-notification id="edit-popup-notification"></app-notification>
   <div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal">&times;</button>
+	<span type="button" class="close glyphicon glyphicon-remove-circle" data-dismiss="modal"></span>
 	<h4 class="modal-title">Edit Client</h4>
   </div>
 
@@ -83,24 +84,25 @@
 				</div> 
 			 </div>
 
-			 <div class="col-lg-4">
+		</div>
+
+		<div class="row">
+			<div class="col-lg-4">
 			 <div class="form-group input-group-sm">
 			   <label class="control-label">BDM</label>
-			  
 				 <ng2-completer class="" placeholder=""  [(ngModel)]="bdmName" (selected)="onBdmSelected($event)" [dataService]="dataService" [minSearchLength]="0" name="bdm"></ng2-completer>
 			 </div> 
 			 </div>
 
-			  <div class="col-lg-4">
-					<div class="form-group input-group-sm">
-						<label class="control-label">Status</label>
-						<select [(ngModel)]="selectedClient.status" name="status" class="selectpicker form-control">
-							<option *ngFor="let stage of stages" [ngValue]="stage.key" >{{stage.value}}</option>
-						</select>
-					</div> 
-			 	</div>
+		  	<div class="col-lg-4">
+				<div class="form-group input-group-sm">
+					<label class="control-label">Status</label>
+					<select [(ngModel)]="selectedClient.status" name="status" class="selectpicker form-control">
+						<option *ngFor="let stage of stages" [ngValue]="stage.key" >{{stage.value}}</option>
+					</select>
+				</div> 
+	 		</div>
 		</div>
-
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="form-group reminder-date-container" [ngClass]="{ 'form-group reminder-date-container': true, 'visible': isReminderEnabled }">

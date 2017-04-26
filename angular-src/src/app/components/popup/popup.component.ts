@@ -1,8 +1,10 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
 import { CommentComponent } from '../comment/comment.component';
 import { ClientService } from '../../services/client.service';
+import { NotificationComponent } from '../notification/notification.component';
+import { NotificationService } from '../notification/notification.service';
+import * as NotificationEnumType from '../notification/notification-types';
 import { UserService } from '../../services/user.service';
-
 import { CompleterService, CompleterData, CompleterItem} from 'ng2-completer';
 import 'eonasdan-bootstrap-datetimepicker';
 import * as moment from 'moment'
@@ -26,6 +28,7 @@ export class PopupComponent implements OnInit, OnChanges {
   private reminderText: String;
   private isReminderEnabled = false;
   private newComment = '';
+  private notificationType = NotificationEnumType.NotificationType;
   private dataService: CompleterData;
   private bdmName: String;
   private bdm: any;
@@ -33,7 +36,8 @@ export class PopupComponent implements OnInit, OnChanges {
 
   constructor(private clientService: ClientService,
     private userService: UserService,
-    private completerService: CompleterService) {
+    private completerService: CompleterService,
+    private notificationService: NotificationService) {
       var self= this;      
       this.userService.getBdms().subscribe( data => {
         self.dataService =  completerService.local(data, "name", "name").descriptionField("email");
@@ -80,22 +84,42 @@ export class PopupComponent implements OnInit, OnChanges {
 
   updateClient(){
     if(this.isReminderEnabled) {
-      if(this.reminderDate < moment()){
-        alert("Invalid date");
-        return;
-      }
       this.selectedClient.reminder = { date: this.reminderDate.toString(), text: this.reminderText };
     }else{
       this.selectedClient.reminder = null;
     }
+
     this.selectedClient.bdm = this.bdmName? this.bdm : {};
-  	this.clientService.updateClient(this.selectedClient).subscribe((data) => {
-      if(data.success){
+    this.clientService.updateClient(this.selectedClient).subscribe(
+      (data) => this.updateClientSuccess(data),
+      (err) => this.updateClientFailure(err),
+    );
+
+  }
+  
+  private updateClientFailure(err: any){
+    this.notificationService.show(
+          'edit-popup-notification',
+          'Error occurred while updating the client.', 
+          null,
+          5000, 
+          this.notificationType.ERROR
+        );
+  }
+
+  private updateClientSuccess(data){
+    if(data.success){
         this.clientUpdated.emit(data);
+        this.notificationService.show(
+          'edit-popup-notification', 
+          'Client updated successfully.', 
+          null,
+          5000, 
+          this.notificationType.SUCCESS
+        );
       }else{
-        alert('Error occurred while updating the client.');
+        this.updateClientFailure(null);
       }
-    });
   }
 
   clearReminder() {

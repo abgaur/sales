@@ -1,0 +1,40 @@
+.app-notification-outer-container {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  opacity: 1;
+}
+
+.app-notification-inner-container {
+  transition: all .5s ease;
+}
+
+.app-notification {
+  width: 60%;
+  margin: auto;
+}
+
+.alert-success {
+  color: #000000;
+}
+
+.slide-in {
+  z-index: 10; /* to position it in front of the other content */
+  position: relative;
+  overflow: hidden; /* to prevent scrollbar appearing */
+}
+
+.slide-in.from-top {
+  top: 0;
+  transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+}
+
+.slide-in-content {
+  padding: 5px 20px;
+}
+
+.slide-in.show{
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
+}
