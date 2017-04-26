@@ -4,12 +4,10 @@ const Schema = mongoose.Schema;
 const commentSchema = new Schema({
     clientId: String,
     message: String,
-    user:  {name: String,
-            email: String,
-            username: String},
+    user:  {name: String, email: String, username: String},
     isDeleted:  { type: Boolean, default: false },
     isr: String,
-    bdm: String,
+    bdm: {name: String, email: String},
     commentType: String
 },{timestamps: true});
 
