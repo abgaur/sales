@@ -52,6 +52,7 @@ export class PopupComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if(this.selectedClient){
         this.bdmName = !!this.selectedClient.bdm ? this.selectedClient.bdm.name : '';
+        this.bdm = !!this.selectedClient.bdm ? this.selectedClient.bdm : {};
         this.isReminderEnabled = !!this.selectedClient.reminder;
         if(this.isReminderEnabled){
           this.reminderDate = moment(this.selectedClient.reminder.date);
@@ -87,7 +88,7 @@ export class PopupComponent implements OnInit, OnChanges {
     }else{
       this.selectedClient.reminder = null;
     }
-    this.selectedClient.bdm = this.bdm;
+    this.selectedClient.bdm = this.bdmName? this.bdm : {};
   	this.clientService.updateClient(this.selectedClient).subscribe((data) => {
       if(data.success){
         this.clientUpdated.emit(data);
