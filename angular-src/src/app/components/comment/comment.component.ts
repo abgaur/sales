@@ -30,6 +30,7 @@ export class CommentComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if(this.selectedClient){
+      console.log("Selected Client updated");
         this.clientService.getComments(this.selectedClient._id).subscribe((data) => {
           this.comments = data;
         });
@@ -44,6 +45,7 @@ export class CommentComponent implements OnInit, OnChanges {
         if(data.success) {
           this.comments.unshift(data.comment);
           this.notification = null;
+          this.newComment.message = '';
         }else{
           this.notification = { type: "Error", message: "Error occurred while adding a comment. Please try again." };
         }

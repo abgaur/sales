@@ -72,16 +72,7 @@ export class PopupComponent implements OnInit, OnChanges {
     this.reminderDate = date;
     // var reminder = { date: "", text: "" };
   }
-
-  addComment() {
-    if(!this.selectedClient.comments){
-      this.selectedClient.comments = [];
-    }
-    // { comment: , author: }
-    this.selectedClient.comments.push(this.newComment);
-    // this.clientService.addComment(this.newComment).subscribe();
-  }
-
+  
   updateClient(){
     if(this.isReminderEnabled) {
       this.selectedClient.reminder = { date: this.reminderDate.toString(), text: this.reminderText };
