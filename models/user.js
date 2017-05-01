@@ -53,3 +53,7 @@ module.exports.comparePassword = function(candidatePassword, hash, callback) {
 module.exports.findBdms = function(role, callback){
     User.find({role},  'name email', callback);
 };
+
+module.exports.updateUser = function(userId, updateUser, callback){
+    User.findByIdAndUpdate(userId, updateUser, callback);
+};
