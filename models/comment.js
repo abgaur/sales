@@ -18,7 +18,7 @@ module.exports.addComment = function(newComment, callback) {
     newComment.save(callback);
 };
 
-module.exports.findCommentsbyClient = function(clientId, callback){
+module.exports.getCommentsbyClient = function(clientId, callback){
     Comment.find({clientId}, callback).sort({"updatedAt" : 'desc'});
 };
 
