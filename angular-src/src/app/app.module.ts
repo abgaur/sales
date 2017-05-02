@@ -51,6 +51,7 @@ import { RemindersComponent } from './components/reminders/reminders.component';
 import { TeamDataComponent } from './components/team-data/team-data.component';
 import { CommentItemComponent } from './components/comment/comment-item/comment-item.component';
 import { CommentListComponent } from './components/comment/comment-list/comment-list.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
   { path: 'mytasks', component: MytasksComponent, canActivate: [AuthGuard]},
   { path: 'clients', component: ClientdataComponent, canActivate: [AuthGuard]},
   { path: 'reminders', component: RemindersComponent, canActivate: [AuthGuard]},
-  { path: 'teamdata', component: TeamDataComponent, canActivate: [AuthGuard, RoleGuard]}  
+  { path: 'teamdata', component: TeamDataComponent, canActivate: [AuthGuard, RoleGuard]},
+  { path: 'editprofile', component: EditProfileComponent, canActivate: [AuthGuard]}  
   
 ]
 
@@ -90,7 +92,8 @@ const appRoutes: Routes = [
     TeamDataComponent,
     CommentComponent,
     CommentItemComponent,
-    CommentListComponent
+    CommentListComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +103,7 @@ const appRoutes: Routes = [
     FlashMessagesModule,
     Ng2CompleterModule,
     NotificationModule.forRoot(),
-    AgGridModule.withComponents([EditTaskComponent])
+    AgGridModule.withComponents([EditTaskComponent,EditProfileComponent])
   ],
   providers: [
     ValidateService, AuthService, AuthGuard, UploadService, RoleGuard,
