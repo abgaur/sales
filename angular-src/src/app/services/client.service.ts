@@ -9,12 +9,12 @@ export class ClientService {
   	constructor(private http: Http) { }
 
 	getDataById(id: String){
-		const url = `http://localhost:3000/clients/task/${id}`;
+		const url = `http://localhost:3000/clients/${id}`;
   	return this.http.get(url).map((res) => res.json());
 	}
 	
 	updateClient(client){
-		const url = "http://localhost:3000/clients/task";
+		const url = "http://localhost:3000/clients/";
 		const username = JSON.parse(localStorage.getItem('user')).username;
 		const headers = new Headers();
 	  	headers.append('Content-type', 'application/json');

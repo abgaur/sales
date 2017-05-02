@@ -57,6 +57,34 @@ var Client = mongoose.model('Client', clientSchema);
 // make this available to our clients in our Node applications
 module.exports = Client;
 
+module.exports.addClient = function(newClient, callback){
+  newClient.save(callback);
+};
+
+module.exports.getClientById = function(clientId, callback){
+    Client.findById(clientId, callback);
+};
+
+module.exports.getClientByAssignTo = function(assignto, callback){
+    Client.find({assignedTo: assignto}, callback);
+};
+
+module.exports.updateAssignedTo = function(clientIds, assignTo, callback){
+    Client.update(
+        { _id: { "$in": clientIds } },
+        {assignedTo : assignTo},
+        {multi:true},
+        callback);
+};
+
+module.exports.getClientsByIds = function(clientIds, callback){
+    Client.find({ _id: { "$in": clientIds }}, callback);
+};
+
+module.exports.updateClient = function(clientId, updateClient, callback){
+    Client.findByIdAndUpdate(clientId, updateClient, callback);
+};
+
 module.exports.getClientByDateRange = function(assignedTo, startDate, endDate, callback){
   Client.find({
         "assignedTo" : assignedTo,

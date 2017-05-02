@@ -24,7 +24,7 @@ router.post('/add', (req, res, next) => {
 
 // Get Comments by client
 router.get('/:clientId', (req, res, next) => {
-  Comment.findCommentsbyClient(req.params.clientId, (err, comments) => {
+  Comment.getCommentsbyClient(req.params.clientId, (err, comments) => {
     if (err) {
       console.error(err);
       res.json({ success: false, msg:'Failed to retrieve comments.'});
