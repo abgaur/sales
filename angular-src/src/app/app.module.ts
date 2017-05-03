@@ -36,6 +36,7 @@ import { ValidateService} from './services/validate.service';
 import { UploadService } from './services/upload.service';
 import { ClientService } from './services/client.service';
 import { RemindersService } from './services/reminders.service';
+import { ReportService } from './services/report.service';
 import { UserService } from './services/user.service';
 
 import { AuthGuard} from './guard/auth.guard';
@@ -51,6 +52,8 @@ import { RemindersComponent } from './components/reminders/reminders.component';
 import { TeamDataComponent } from './components/team-data/team-data.component';
 import { CommentItemComponent } from './components/comment/comment-item/comment-item.component';
 import { CommentListComponent } from './components/comment/comment-list/comment-list.component';
+import { CallsMeetingReportComponent } from './components/calls-meeting-report/calls-meeting-report.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -90,7 +93,9 @@ const appRoutes: Routes = [
     TeamDataComponent,
     CommentComponent,
     CommentItemComponent,
-    CommentListComponent
+    CommentListComponent,
+    CallsMeetingReportComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -104,7 +109,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     ValidateService, AuthService, AuthGuard, UploadService, RoleGuard,
-    DashboardService, MyTasksService, ClientService, RemindersService, UserService],
+    DashboardService, MyTasksService, ClientService, RemindersService, UserService, ReportService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
