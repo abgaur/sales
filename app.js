@@ -36,6 +36,7 @@ const users = require('./routes/users');
 const clients = require('./routes/clients');
 const comments = require('./routes/comments');
 const stages = require('./routes/stages');
+const teamdata = require('./routes/teamdata');
 
 const port = 3000;
 
@@ -58,6 +59,7 @@ app.use('/users', users);
 app.use('/clients', clients);
 app.use('/comments', comments);
 app.use('/stages', stages);
+app.use('/teamdata', teamdata);
 
 
 
