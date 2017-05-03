@@ -51,6 +51,7 @@ import { RemindersComponent } from './components/reminders/reminders.component';
 import { TeamDataComponent } from './components/team-data/team-data.component';
 import { CommentItemComponent } from './components/comment/comment-item/comment-item.component';
 import { CommentListComponent } from './components/comment/comment-list/comment-list.component';
+import { BdmFilterComponent } from './components/bdm-filter/bdm-filter.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -90,7 +91,8 @@ const appRoutes: Routes = [
     TeamDataComponent,
     CommentComponent,
     CommentItemComponent,
-    CommentListComponent
+    CommentListComponent,
+    BdmFilterComponent
   ],
   imports: [
     BrowserModule,
