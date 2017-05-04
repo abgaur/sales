@@ -26,8 +26,8 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-    editProfileRole() {
-     this.router.navigate(['/editprofile']);
-    }
+    // editProfileRole() {
+    //  this.router.navigate(['/editprofile']);
+    // }
 
 }
