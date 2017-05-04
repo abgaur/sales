@@ -52,6 +52,7 @@ import { TeamDataComponent } from './components/team-data/team-data.component';
 import { CommentItemComponent } from './components/comment/comment-item/comment-item.component';
 import { CommentListComponent } from './components/comment/comment-list/comment-list.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { BdmFilterComponent } from './components/bdm-filter/bdm-filter.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -93,7 +94,8 @@ const appRoutes: Routes = [
     CommentComponent,
     CommentItemComponent,
     CommentListComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    BdmFilterComponent
   ],
   imports: [
     BrowserModule,
