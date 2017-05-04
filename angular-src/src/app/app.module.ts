@@ -54,6 +54,8 @@ import { CommentItemComponent } from './components/comment/comment-item/comment-
 import { CommentListComponent } from './components/comment/comment-list/comment-list.component';
 import { CallsMeetingReportComponent } from './components/calls-meeting-report/calls-meeting-report.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { BdmFilterComponent } from './components/bdm-filter/bdm-filter.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -66,7 +68,8 @@ const appRoutes: Routes = [
   { path: 'mytasks', component: MytasksComponent, canActivate: [AuthGuard]},
   { path: 'clients', component: ClientdataComponent, canActivate: [AuthGuard]},
   { path: 'reminders', component: RemindersComponent, canActivate: [AuthGuard]},
-  { path: 'teamdata', component: TeamDataComponent, canActivate: [AuthGuard, RoleGuard]}  
+  { path: 'teamdata', component: TeamDataComponent, canActivate: [AuthGuard, RoleGuard]},
+  { path: 'editprofile', component: EditProfileComponent, canActivate: [AuthGuard]}  
   
 ]
 
@@ -95,7 +98,9 @@ const appRoutes: Routes = [
     CommentItemComponent,
     CommentListComponent,
     CallsMeetingReportComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    EditProfileComponent,
+    BdmFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +110,7 @@ const appRoutes: Routes = [
     FlashMessagesModule,
     Ng2CompleterModule,
     NotificationModule.forRoot(),
-    AgGridModule.withComponents([EditTaskComponent])
+    AgGridModule.withComponents([EditTaskComponent,EditProfileComponent])
   ],
   providers: [
     ValidateService, AuthService, AuthGuard, UploadService, RoleGuard,

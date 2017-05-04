@@ -9,8 +9,8 @@ const clientHelper = require('../helpers/client.helper');
 const redisHelper = require('../helpers/redis.helper');
 
 // Upload
-router.post('/upload/:username', (req, res, next) => {
-    let uploadedBy = req.params.username;
+router.post('/upload/:email', (req, res, next) => {
+    let uploadedBy = req.params.email;
     let exceltojson;
     let upload = clientHelper.getUploader();
     upload(req, res, function (err) {

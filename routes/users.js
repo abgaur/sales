@@ -11,14 +11,17 @@ router.post('/register', (req, res, next) => {
   let newUser = new User({
     name: req.body.name,
     email: req.body.email,
-    username: req.body.username,
     password: req.body.password,
     role: req.body.role
   });
 
   User.addUser(newUser, (err, user) => {
     if(err){
-      res.json({success: false, msg:'Failed to register user'});
+      if(err.code === 11000) {
+        res.json({success: false, msg:'Email already exists'});  
+      } else {
+        res.json({success: false, msg:'Failed to register user'});
+      }
     } else {
       res.json({success: true, msg:'User registered'});
     }
@@ -27,10 +30,10 @@ router.post('/register', (req, res, next) => {
 
 // Authenticate
 router.post('/authenticate', (req, res, next) => {
-  const username = req.body.username;
+  const email = req.body.email;
   const password = req.body.password;
 
-  User.getUserByUsername(username, (err, user) => {
+  User.getUserByEmail(email, (err, user) => {
     if(err) throw err;
     if(!user){
       return res.json({success: false, msg: 'User not found'});
@@ -49,7 +52,6 @@ router.post('/authenticate', (req, res, next) => {
           user: {
             id: user._id,
             name: user.name,
-            username: user.username,
             email: user.email,
             role: user.role
           }
@@ -68,7 +70,7 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
 
 // Get All Users
 router.get('/all', (req, res, next) => {
-   User.find({}, 'name email', function(err, users) {
+   User.find({}, 'name email', function(err, users) { 
       if (err) return console.error(err);
        // console.log(users);
         res.send(JSON.stringify(users));
