@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-profile',
@@ -9,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
   user: Object;
   constructor(
     private authService: AuthService,
@@ -18,11 +18,16 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.authService.getProfile().subscribe(profile => {
       this.user = profile.user;
+      console.log(profile.user);
     },
     err => {
       console.log(err);
       return false;
     });
   }
+
+    // editProfileRole() {
+    //  this.router.navigate(['/editprofile']);
+    // }
 
 }
