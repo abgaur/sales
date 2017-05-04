@@ -12,7 +12,6 @@ import { Router} from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   name: String;
-  username: String;
   email: String;
   password: String;
   role: String;
@@ -35,7 +34,6 @@ export class RegisterComponent implements OnInit {
     const user = {
       name: this.name,
       email: this.email,
-      username: this.username,
       password: this.password,
       role: this.role
     };
@@ -60,7 +58,7 @@ export class RegisterComponent implements OnInit {
         this.flashMessage.show('You are registered and can log in', {cssClass: 'alert-success', timeout: 3000});
         this.router.navigate(['/login']);
       } else {
-        this.flashMessage.show('Something happened, check logs', {cssClass: 'alert-danger', timeout: 3000});
+        this.flashMessage.show(data.msg, {cssClass: 'alert-danger', timeout: 3000});
         this.router.navigate(['/register']);
       }
     })
