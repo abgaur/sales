@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const commentSchema = new Schema({
     clientId: String,
     message: String,
-    user:  {name: String, email: String, username: String},
+    user:  {name: String, email: String},
     isDeleted:  { type: Boolean, default: false },
     isr: String,
     bdm: {name: String, email: String},
