@@ -15,7 +15,6 @@ export class ClientService {
 	
 	updateClient(client){
 		const url = "http://localhost:3000/clients/";
-		const username = JSON.parse(localStorage.getItem('user')).username;
 		const headers = new Headers();
 	  	headers.append('Content-type', 'application/json');
 
@@ -39,7 +38,6 @@ export class ClientService {
     updateProfile(user:Object){
 		console.log(user);
 		const url = "http://localhost:3000/users/profile";
-		const username = JSON.parse(localStorage.getItem('user')).username;
 		const headers = new Headers();
 	  	headers.append('Content-type', 'application/json');
   		return this.http.post(url, user, { headers: headers }).map(res => res.json());	
