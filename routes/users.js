@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const appConfig = require('../config/app.config');
 const dbConfig = require('../config/database');
 const User = require('../models/user');
+const redisHelper = require('../helpers/redis.helper');
 
 // Register
 router.post('/register', (req, res, next) => {
@@ -68,23 +69,42 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
 
 // Get All Users
 router.get('/all', (req, res, next) => {
-   User.find({}, 'name email', function(err, users) {
-      if (err) return console.error(err);
-       // console.log(users);
-        res.send(JSON.stringify(users));
-    });
+  redisHelper.getCacheData('all_users', function (data) {
+    if (data) {
+      res.send(data);
+    } else {
+      User.getAllUsers('all', (err, users) => {
+        if (err) res.json({ success: false, msg: 'Failed to get All Users' });
+        else {
+          users._id = 'users';
+          redisHelper.setCacheData('all', users, function () {
+          });
+          res.send(JSON.stringify(users));
+        }
+      });
+    }
+  });
 });
 
 // Get All BDMs
 router.get('/bdm', (req, res, next) => {
-
-
-  User.findBdms('bdm', (err, users) => {
-      
-      if (err) res.json({success: false, msg:'Failed to get BDMs'});
-      res.send(JSON.stringify(users));
-    });
+  redisHelper.getCacheData('bdm_users', function (data) {
+    if (data) {
+      res.send(data);
+    } else {
+      User.getAllBdms('bdm', (err, users) => {
+        if (err) res.json({ success: false, msg: 'Failed to get BDMs' });
+        else {
+          users._id = 'users';
+          redisHelper.setCacheData('bdm', users, function () {
+          });
+          res.send(JSON.stringify(users));
+        }
+      });
+    }
+  });
 });
+
 
 router.post('/profile', (req, res, next) => {
     const userId =  req.body._id;
