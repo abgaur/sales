@@ -25,9 +25,4 @@ export class ProfileComponent implements OnInit {
       return false;
     });
   }
-
-    // editProfileRole() {
-    //  this.router.navigate(['/editprofile']);
-    // }
-
 }
