@@ -25,6 +25,7 @@ export const columnConfig = {
         }
     },
     yAxis: {
+        allowDecimals: false,
         title: {
             text: 'Count'
         },
