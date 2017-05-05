@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 const Comment = require('../models/comment');
 
 module.exports.getCallToMeeting = function(fromDate, toDate, arrBDM, callback){
+    console.log(arrBDM);
+
     Comment.aggregate([
-    { $match: {"updatedAt" : {$gte: fromDate , $lte: toDate}}},
+   //{ $match: {"updatedAt" : {$gte: fromDate , $lte: toDate}}},
     { $match: { $or: [ { commentType: "Call" }, { commentType: "Meeting" } ] } },
     { $match: {"bdm.email" : { $in: arrBDM }} },
   
@@ -24,8 +26,7 @@ module.exports.getCallToMeeting = function(fromDate, toDate, arrBDM, callback){
                 }
             }
         }
-    },
-    { $project : {_id : 0}
     }
+    
     ], callback)
 };

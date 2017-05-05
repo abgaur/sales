@@ -4,17 +4,31 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="row">
-	<div class="col-xs-6"><app-bdm-filter></app-bdm-filter></div>
-	<!-- this will go into its own component -->
-	<div class="col-xs-6">
-		<ul class="nav nav-pills pull-right" role="tablist">
-		  <li role="presentation" class="active"><a href="#">Weekly</a></li>
-		  <li role="presentation"><a href="#">Monthly</a></li>
-		  <li role="presentation"><a href="#">Yearly</a></li>
-		</ul>
+		<div class="col-xs-6"><app-bdm-filter></app-bdm-filter></div>
+		<!-- this will go into its own component -->
+		<div class="col-xs-6">
+			<ul class="nav nav-pills pull-right" role="tablist">
+			  <li role="presentation" class="active"><a href="#">Weekly</a></li>
+			  <li role="presentation"><a href="#">Monthly</a></li>
+			  <li role="presentation"><a href="#">Yearly</a></li>
+			</ul>
+		</div>
 	</div>
-</div>
   </div>
 </div>
-
-
+<div class="row">
+	<div class="col-xs-8">
+		<app-calls-meeting-report></app-calls-meeting-report>
+	</div>
+	<div class="col-xs-4">
+		<!-- todo: create component -->
+		<div class="well" style="min-height: 200px">	
+			<app-loading-spinner [hide]="!isLoading"></app-loading-spinner>
+			<h4>{{ 'Meetings Schedule (This Month)' }}</h4>
+		</div>
+		<div class="well" style="min-height: 200px">	
+			<app-loading-spinner [hide]="!isLoading"></app-loading-spinner>
+			<h4>{{ 'Top Callers' }}</h4>
+		</div>
+	</div>
+</div>

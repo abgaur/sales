@@ -1,0 +1,8 @@
+.loading-spinner{
+	z-index: 1;
+    position: absolute;
+    text-align: center;
+    top: 40%;
+    width: 90%;
+    font-size: 1.6em;
+}
