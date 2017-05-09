@@ -30,3 +30,34 @@ module.exports.getCallToMeeting = function(fromDate, toDate, arrBDM, callback){
     
     ], callback)
 };
+
+/** returns top callers for given month */
+module.exports.getTopUsersforMonth = function(month, noOfUsers, callback){
+    Comment.aggregate([
+        {
+            $redact: {
+                $cond: [
+                    { $eq: [{ $month: "$updatedAt" }, month] },
+                    "$$KEEP",
+                    "$$PRUNE"
+                ]
+            }
+        },
+        { $match: { $or: [{ commentType: "Call" }, { commentType: "Meeting" }] } },
+        {
+            $group: {
+                _id: "$user.email",
+                name: { $first: '$user.name' },
+                email: { $first: '$user.email' },
+                count: { $sum: 1 }
+            }
+        },
+        {
+            $sort: { count: -1 }
+        },
+        { $limit: noOfUsers },
+        {
+            $project: { _id: 0 }
+        }
+    ], callback);
+};
