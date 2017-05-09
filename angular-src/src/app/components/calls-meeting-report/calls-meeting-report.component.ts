@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input,  OnChanges, SimpleChanges} from '@angular/core';
 import { ReportService } from '../../services/report.service';
 import * as ChartConfig from '../../config/column-chart-config';
 
@@ -10,26 +10,40 @@ const Highcharts = require("highcharts");
   styleUrls: ['./calls-meeting-report.component.css']
 })
 export class CallsMeetingReportComponent implements OnInit {
+	@Input()
+  	filter: any;
+	
 	isLoading: Boolean = false;
 	bdms: any;
-
-  	constructor(private reportService: ReportService) {
-  		
+	fromDate: any;
+	toDate: any;
+  	constructor(private reportService: ReportService) {	
   		
 		  this.bdms = [];
 		  // this is for one BDM, it will change
 		  var bdm = JSON.parse(localStorage.getItem('user')).email
 		  this.bdms.push(bdm);
-		  this.populateUsersCallsToMeeting();
+		 
 	}
 
+	ngOnChanges() {
+		if(this.filter) {
+			this.fromDate = this.filter.fromDate;
+			this.toDate = this.filter.toDate;
+			this.populateUsersCallsToMeeting();
+		}
+	}
+
+	ngOnInit() {
+		
+	}	
+
 	populateUsersCallsToMeeting() {
-		var fromDate = new Date("Apr 10, 2017 11:13:00");
-		var toDate = new Date("May 4, 2017 11:13:00");
+		
 		var filter = {
 			bdm: this.bdms,
-			fromDate: fromDate,
-			toDate: toDate
+			fromDate: this.fromDate,
+			toDate: this.toDate
 		}
 		this.isLoading = true;
 		this.reportService.getCallsToMeeting(filter).subscribe(
@@ -48,9 +62,6 @@ export class CallsMeetingReportComponent implements OnInit {
 			this.isLoading = false;
   		 	console.log(err);
 		});
-	}
-
-  	ngOnInit() {
-  	}
+	} 
 
 }

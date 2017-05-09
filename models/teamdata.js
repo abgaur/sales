@@ -5,7 +5,7 @@ module.exports.getCallToMeeting = function(fromDate, toDate, arrBDM, callback){
     console.log(arrBDM);
 
     Comment.aggregate([
-   //{ $match: {"updatedAt" : {$gte: fromDate , $lte: toDate}}},
+    { $match: {"updatedAt" : {$gte: fromDate , $lte: toDate}}},
     { $match: { $or: [ { commentType: "Call" }, { commentType: "Meeting" } ] } },
     { $match: {"bdm.email" : { $in: arrBDM }} },
   
