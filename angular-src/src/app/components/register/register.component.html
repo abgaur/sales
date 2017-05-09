@@ -14,7 +14,7 @@
   </div>
   <div class="form-group">
       <label>Select Role</label>
-      <select name="role" class="form-control" [(ngModel)]="role" placeholder="No Role Selected">
+      <select name="role" class="form-control optionControl" [(ngModel)]="role" placeholder="No Role Selected">
         <option *ngFor="let role of roles" [value]="role.value">{{role.display}}</option>
       </select>
   </div>

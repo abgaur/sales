@@ -17,12 +17,54 @@ import { UserService } from '../../services/user.service';
 })
 export class MyGridApplicationComponent implements OnInit {
 
-  private gridOptions: GridOptions;
-  private isrName: string;
- 
-  private searchStr: string;
-  private dataService: CompleterData;
-  private selectedClient: any;
+    private gridOptions: GridOptions;
+    private isrName: string;
+   
+    private searchStr: string;
+    private dataService: CompleterData;
+    private selectedClient: any;
+
+
+     rainKingContactId: String;
+     salutation: String;
+     firstName: String;
+     lastName: String;
+     nickname: String;
+     etouchSl: String;
+     title: String;
+     managementLevel: String;
+     email: String;
+     address1: String;
+     address2: String;
+     city: String;
+     state: String;
+     zip: String;
+     country: String;
+     phone: String;
+     extension: String;
+     supervisor: String;
+     fax: String;
+     hasGatekeeper: String;
+     executive: String;
+     rainKingCompanyId: String;
+     company: String;
+     website: String;
+     sector: String;
+     industry: String;
+     duns: String;
+     allEmployees: String;
+     itEmployees: String;
+     managers: String;
+     revenue: String;
+     itBudget: String;
+     fiscalYearEnd: String;
+     rank: String;
+     lastUpdatedDate: String;
+     notes: String;
+     tags: String;
+     status: String;
+     linkedInUrl: String;
+     twitterUrl: String;
 
     constructor(private dashboardService: DashboardService,
         private flashMessage: FlashMessagesService,
@@ -178,6 +220,55 @@ export class MyGridApplicationComponent implements OnInit {
         this.flashMessage.show('Something happened, check logs', {cssClass: 'alert-danger', timeout: 3000});
       }
     })
+  }
+
+  onClientSubmit(){
+
+  const user = {
+       rainKingContactId: this.rainKingContactId,
+       salutation: this.salutation,
+       firstName: this.salutation,
+       lastName: this.lastName,
+       nickname: this.nickname,
+       etouchSl: this.etouchSl,
+       title: this.title,
+       managementLevel: this.managementLevel,
+       email: this.email,
+       address1: this.address1,
+       address2: this.address2,
+       city: this.city,
+       state: this.state,
+       zip: this.zip,
+       country: this.country,
+       phone: this.phone,
+       extension: this.extension,
+       supervisor: this.supervisor,
+       fax: this.fax,
+       hasGatekeeper: this.hasGatekeeper,
+       executive: this.executive,
+       rainKingCompanyId: this.rainKingCompanyId,
+       company: this.company,
+       website: this.website,
+       sector: this.sector,
+       industry: this.industry,
+       duns: this.duns,
+       allEmployees: this.allEmployees,
+       itEmployees: this.itEmployees,
+       managers: this.managers,
+       revenue: this.revenue,
+       itBudget: this.itBudget,
+       fiscalYearEnd: this.fiscalYearEnd,
+       rank: this.rank,
+       lastUpdatedDate: this.lastUpdatedDate,
+       notes: this.notes,
+       tags: this.tags,
+       status: this.status,
+       linkedInUrl: this.linkedInUrl,
+       twitterUrl: this.twitterUrl,
+    };
+
+   console.log("Data Check:", user)
+
   }
 
   // quick filter 
