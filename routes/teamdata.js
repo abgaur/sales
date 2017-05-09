@@ -15,4 +15,16 @@ router.post("/calltomeeting", (req, res, next) => {
     });
 });
 
+router.get("/topusers", (req, res, next) => {
+    let currentMonth = new Date().getMonth()+1;
+    let noOfUsers = 5;
+    teamData.getTopUsersforMonth(currentMonth, noOfUsers, (err, data) => {
+        if(err){
+            res.json({success: false, msg:'Failed to retrive top users'});
+        } else {
+            res.send(JSON.stringify(data));
+        }
+    });
+});
+
 module.exports = router;

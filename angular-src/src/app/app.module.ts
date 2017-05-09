@@ -58,6 +58,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { BdmFilterComponent } from './components/bdm-filter/bdm-filter.component';
 import { MeetingsScheduledComponent } from './components/meetings-scheduled/meetings-scheduled.component';
 import { TopCallersComponent } from './components/top-callers/top-callers.component';
+import { DateFilterComponent } from './components/date-filter/date-filter.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -104,7 +105,8 @@ const appRoutes: Routes = [
     EditProfileComponent,
     BdmFilterComponent,
     MeetingsScheduledComponent,
-    TopCallersComponent
+    TopCallersComponent,
+    DateFilterComponent
   ],
   imports: [
     BrowserModule,

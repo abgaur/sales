@@ -1,0 +1,19 @@
+<div>
+  <nav class="date-label">
+    <ul class="pager">
+      <li (click)="getPreviousData()">
+        <a><span class="glyphicon glyphicon-chevron-left"></span></a>
+      </li>
+      <span class="date-text">{{dateText}}</span>
+      <li  [ngClass]="{'disabled': disableNextButtonFlag}">
+        <a (click)="getNextData()"><span class="glyphicon glyphicon-chevron-right"></span></a>
+      </li>   
+    </ul>
+  </nav>
+
+  <ul class="nav nav-pills pull-right">
+		  <li role="presentation date-type" [ngClass]="{'active': selectedDateType.type === type.type}"  (click)="selectedDateType.type = type.type; type.active = true;changeDateType($event)" *ngFor="let type of dateTypes">
+        <a><span class="glyphicon"> {{ type.type }}</span></a>
+      </li>
+		</ul>
+</div>
