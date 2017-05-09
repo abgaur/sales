@@ -56,19 +56,21 @@ import { CallsMeetingReportComponent } from './components/calls-meeting-report/c
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { BdmFilterComponent } from './components/bdm-filter/bdm-filter.component';
+import { MeetingsScheduledComponent } from './components/meetings-scheduled/meetings-scheduled.component';
+import { TopCallersComponent } from './components/top-callers/top-callers.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: 'dashboard', component: DashboardComponent, data: { type:"sa", title: "Team Data"}, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'upload', component: UploadComponent, canActivate: [AuthGuard]},
   { path: 'grid', component: MyGridApplicationComponent, canActivate: [AuthGuard]},
   { path: 'mytasks', component: MytasksComponent, canActivate: [AuthGuard]},
   { path: 'clients', component: ClientdataComponent, canActivate: [AuthGuard]},
   { path: 'reminders', component: RemindersComponent, canActivate: [AuthGuard]},
-  { path: 'teamdata', component: TeamDataComponent, canActivate: [AuthGuard, RoleGuard]},
+  { path: 'teamdata', component: TeamDataComponent, data: { type:"sa", title: "Team Data"}, canActivate: [AuthGuard, RoleGuard]},
   { path: 'editprofile', component: EditProfileComponent, canActivate: [AuthGuard]}  
   
 ]
@@ -100,7 +102,9 @@ const appRoutes: Routes = [
     CallsMeetingReportComponent,
     LoadingSpinnerComponent,
     EditProfileComponent,
-    BdmFilterComponent
+    BdmFilterComponent,
+    MeetingsScheduledComponent,
+    TopCallersComponent
   ],
   imports: [
     BrowserModule,

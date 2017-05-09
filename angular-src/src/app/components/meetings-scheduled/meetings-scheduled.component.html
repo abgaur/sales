@@ -1,0 +1,23 @@
+<div class="well meetings-scheduled-container">	
+	<app-loading-spinner [hide]="!isLoading"></app-loading-spinner>
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Meetings Scheduled</h3>
+	  </div>
+	  <div class="panel-body main-body">
+	    <div class="list-group">
+		  <div class="list-group-item active" *ngFor="let item of ['Test1', 'Test2']">
+		    <label class="list-group-item-heading">{{ item }}</label>
+		    <label class="list-group-item-heading pull-right">{{ item }} / {{ item }}</label>
+		    <p class="list-group-item-text">{{ item }}</p>
+		  </div>
+		</div>
+	  </div>
+	  <div class="panel-footer">
+	    <h3 class="panel-title">Meetings Scheduled</h3>
+	  </div>
+	  <div class="panel-body secondary-body">
+	    Panel content
+	  </div>
+	</div>
+</div>

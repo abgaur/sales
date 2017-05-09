@@ -1,0 +1,16 @@
+<div class="well top-callers-container">	
+	<app-loading-spinner [hide]="!isLoading"></app-loading-spinner>
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Top Callers</h3>
+	  </div>
+	  
+	  	<ul class="panel-body list-group">
+		  <li class="list-group-item" *ngFor="let item of ['Test1', 'Test2']">
+		    <span class="badge">14</span>
+		    {{ item }}
+		  </li>
+		</ul>
+	  
+	</div>
+</div>

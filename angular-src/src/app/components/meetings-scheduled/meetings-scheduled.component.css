@@ -1,0 +1,13 @@
+.meetings-scheduled-container {
+	min-height: 200px;
+}
+
+.meetings-scheduled-container .main-body {
+	padding: 5px 5px 0px 5px;
+}
+
+.meetings-scheduled-container .list-group {
+	max-height: 400px; 
+	overflow-y: auto;
+}
+
