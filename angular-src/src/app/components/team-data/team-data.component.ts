@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamDataComponent implements OnInit {
 
+  private filterDates: any;
   constructor() { }
 
   ngOnInit() {
   }
+
+  sendDates(event) {
+    console.log(event);
+     this.filterDates = event;
+  }
+
+  
+  
+
 
 }

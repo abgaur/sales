@@ -1,0 +1,10 @@
+.date-type:hover {
+    cursor: pointer;
+}
+.date-label {
+    display: inline-block;
+}
+
+.date-label .pager {
+    font-size: 1.1em;
+}

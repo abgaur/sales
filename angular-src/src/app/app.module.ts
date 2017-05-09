@@ -56,6 +56,7 @@ import { CallsMeetingReportComponent } from './components/calls-meeting-report/c
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { BdmFilterComponent } from './components/bdm-filter/bdm-filter.component';
+import { DateFilterComponent } from './components/date-filter/date-filter.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -100,7 +101,8 @@ const appRoutes: Routes = [
     CallsMeetingReportComponent,
     LoadingSpinnerComponent,
     EditProfileComponent,
-    BdmFilterComponent
+    BdmFilterComponent,
+    DateFilterComponent
   ],
   imports: [
     BrowserModule,
