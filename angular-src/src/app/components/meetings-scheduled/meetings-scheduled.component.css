@@ -7,7 +7,31 @@
 }
 
 .meetings-scheduled-container .list-group {
-	max-height: 400px; 
+	max-height: 230px; 
 	overflow-y: auto;
 }
 
+.meetings-scheduled-container .panel-title {
+	font-size: 1.3em;
+}
+
+.meetings-scheduled-container .panel-title.month{
+	height: 100%; 
+	width:33.33%;
+	display: inline-block; 
+	text-align: center; 
+	padding: 7px;
+}
+
+.meetings-scheduled-container .panel-title.count{
+	font-size: 1.7em;
+	height: 100%; 
+	width:33.33%; 
+	display: inline-block; 
+	text-align: center; 
+	padding: 10px;
+}
+
+.loading-spinner{
+	top: 10%;
+}
