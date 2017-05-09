@@ -1,0 +1,13 @@
+.top-callers-container {
+	min-height: 200px;
+}
+
+.top-callers-container .list-group{
+	padding: 5px 5px 0px 5px;
+	max-height: 400px; 
+	overflow-y: auto;
+}
+
+.top-callers-container .panel-title {
+	font-size: 1.3em;
+}
