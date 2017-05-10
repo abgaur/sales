@@ -59,6 +59,8 @@ import { BdmFilterComponent } from './components/bdm-filter/bdm-filter.component
 import { MeetingsScheduledComponent } from './components/meetings-scheduled/meetings-scheduled.component';
 import { TopCallersComponent } from './components/top-callers/top-callers.component';
 import { DateFilterComponent } from './components/date-filter/date-filter.component';
+import { NewClientComponent } from './components/new-client/new-client.component';
+import { CallsMeetingPiechartComponent } from './components/calls-meeting-piechart/calls-meeting-piechart.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -72,7 +74,10 @@ const appRoutes: Routes = [
   { path: 'clients', component: ClientdataComponent, canActivate: [AuthGuard]},
   { path: 'reminders', component: RemindersComponent, canActivate: [AuthGuard]},
   { path: 'teamdata', component: TeamDataComponent, data: { type:"sa", title: "Team Data"}, canActivate: [AuthGuard, RoleGuard]},
-  { path: 'editprofile', component: EditProfileComponent, canActivate: [AuthGuard]}  
+  { path: 'editprofile', component: EditProfileComponent, canActivate: [AuthGuard]},  
+  { path: 'teamdata', component: TeamDataComponent, canActivate: [AuthGuard, RoleGuard]},
+  { path: 'editprofile', component: EditProfileComponent, canActivate: [AuthGuard]},
+  { path: 'newclient', component: NewClientComponent, canActivate: [AuthGuard]}  
   
 ]
 
@@ -106,7 +111,9 @@ const appRoutes: Routes = [
     BdmFilterComponent,
     MeetingsScheduledComponent,
     TopCallersComponent,
-    DateFilterComponent
+    DateFilterComponent,
+    NewClientComponent,
+    CallsMeetingPiechartComponent
   ],
   imports: [
     BrowserModule,

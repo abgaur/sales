@@ -42,4 +42,12 @@ export class ClientService {
 	  	headers.append('Content-type', 'application/json');
   		return this.http.post(url, user, { headers: headers }).map(res => res.json());	
 	}
+
+	// addClient(user:Object){
+	// 	const url = "http://localhost:3000/clients/newClient";
+	// 	const headers = new Headers();
+	//   	headers.append('Content-type', 'application/json');
+
+ //  		return this.http.post(url, user, { headers: headers }).map(res => res.json());
+	// }
 }
