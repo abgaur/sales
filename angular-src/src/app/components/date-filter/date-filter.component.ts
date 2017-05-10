@@ -66,7 +66,7 @@ export class DateFilterComponent implements OnInit {
       this.dateText = 'Q'+requiredDate.quarter() + ' '+ requiredDate.year();;
     }
 
-    this.filterDates.emit({'fromDate': this.fromDate, 'toDate': this.toDate});
+    this.filterDates.emit({'fromDate': this.fromDate.set({'hour':0, 'minute': 0, 'second': 0}), 'toDate': this.toDate.set({'hour':23, 'minute': 59, 'second': 59})});
   }
 
   getPreviousData() {    
@@ -134,8 +134,8 @@ export class DateFilterComponent implements OnInit {
   }
 
   getCustomDateData(){
-     this.fromDate = this.customFromDate;
-     this.toDate = this.customToDate;
+     this.fromDate = this.customFromDate.set({'hour':0, 'minute': 0, 'second': 0});
+     this.toDate = this.customToDate.set({'hour':23, 'minute': 59, 'second': 59});
      this.filterDates.emit({'fromDate': this.fromDate, 'toDate': this.toDate});
 
   }
