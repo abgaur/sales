@@ -134,8 +134,8 @@ export class DateFilterComponent implements OnInit {
   }
 
   getCustomDateData(){
-     this.fromDate = this.customFromDate;
-     this.toDate = this.customToDate;
+     this.fromDate = this.customFromDate.set({'hour':0, 'minute': 0, 'second': 0});
+     this.toDate = this.customToDate.set({'hour':23, 'minute': 59, 'second': 59});;
      this.filterDates.emit({'fromDate': this.fromDate, 'toDate': this.toDate});
 
   }
