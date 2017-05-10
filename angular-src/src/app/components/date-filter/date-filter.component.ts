@@ -1,6 +1,6 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import * as moment from 'moment'
-
+import { DateTimePickerDirective } from 'ng2-eonasdan-datetimepicker/dist/datetimepicker.directive.js';
 @Component({
   selector: 'app-date-filter',
   templateUrl: './date-filter.component.html',
@@ -9,17 +9,30 @@ import * as moment from 'moment'
 export class DateFilterComponent implements OnInit {
 
   @Output() filterDates: EventEmitter<any> = new EventEmitter<any>();
+  @ViewChild(DateTimePickerDirective ) dp: DateTimePickerDirective ; 
   // @Output()
   // filterDates: EventEmitter<string> = new EventEmitter<number>();
 
   private dateTypes = [
     { type: 'Weekly' },
     { type: 'Monthly'},
-    { type: 'Quarterly'}
+    { type: 'Quarterly'},
+    { type: 'Custom'}
   ];
 
   private selectedDateType: any  = {
     type: 'Weekly'
+  }
+  private customFromDate = moment();
+  private customToDate = moment();
+  private fromDateOptions = {    
+    format: 'D-MMM-YYYY',
+    //maxDate: this.customToDate
+  }
+  private toDateOptions = {    
+    format: 'D-MMM-YYYY',
+    //minDate: this.customFromDate
+    
   }
   private disableNextButtonFlag =true;
   private fromDate;
@@ -28,8 +41,7 @@ export class DateFilterComponent implements OnInit {
 
   private dateText: String;
 
-  constructor() { 
-   
+  constructor() {   
     
   }
 
@@ -55,9 +67,6 @@ export class DateFilterComponent implements OnInit {
     }
 
     this.filterDates.emit({'fromDate': this.fromDate, 'toDate': this.toDate});
-
-
-    // emit
   }
 
   getPreviousData() {    
@@ -80,8 +89,6 @@ export class DateFilterComponent implements OnInit {
     if(this.disableNextButtonFlag) {
       return false;
     }
-    
-    
 
     if(this.selectedDateType.type === 'Weekly') {
       this.currentDate.add(7, 'd');
@@ -94,8 +101,6 @@ export class DateFilterComponent implements OnInit {
        this.populateDateText(this.currentDate);
     }
     this.enableNextButton();
-    
-
   }
 
   enableNextButton() {
@@ -113,10 +118,26 @@ export class DateFilterComponent implements OnInit {
 
   changeDateType(obj) {
     this.currentDate = moment();
-    console.log(this.selectedDateType);
     this.enableNextButton();
-    this.populateDateText(this.currentDate);
+    if(this.selectedDateType.type!=='Custom') {
+      this.populateDateText(this.currentDate);
+    }
     
+    
+  }
+
+  fromDateChanged(evt) {
+    this.customFromDate = evt;    
+  }
+  toDateChanged(evt) {
+    this.customToDate = evt;
+  }
+
+  getCustomDateData(){
+     this.fromDate = this.customFromDate;
+     this.toDate = this.customToDate;
+     this.filterDates.emit({'fromDate': this.fromDate, 'toDate': this.toDate});
+
   }
 
 }
