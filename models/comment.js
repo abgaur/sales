@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
-    clientId: String,
+    clientId: Schema.Types.ObjectId,
     message: String,
     user:  {name: String, email: String},
     isDeleted:  { type: Boolean, default: false },
