@@ -6,9 +6,9 @@
 	  </div>
 	  
 	  	<ul class="panel-body list-group">
-		  <li class="list-group-item" *ngFor="let item of ['Test1', 'Test2']">
-		    <span class="badge">14</span>
-		    {{ item }}
+		  <li class="list-group-item" *ngFor="let caller of callers">
+		    <span class="badge">{{ caller.count }}</span>
+		    {{ caller.name }}
 		  </li>
 		</ul>
 	  

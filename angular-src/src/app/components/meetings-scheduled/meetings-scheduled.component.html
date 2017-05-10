@@ -2,22 +2,22 @@
 	<app-loading-spinner [hide]="!isLoading"></app-loading-spinner>
 	<div class="panel panel-default">
 	  <div class="panel-heading">
-	    <span class="panel-title">Meetings Scheduled</span>
+	    <span class="panel-title">Meetings Scheduled</span><span class="pull-right panel-title">{{ currentMonth.month | date: 'MMM yyyy' }}</span>
 	  </div>
 	  <div class="panel-body main-body">
 	    <div class="list-group">
-		  <div class="list-group-item active" *ngFor="let item of meetings">
+		  <div class="list-group-item active" *ngFor="let item of currentMonth.clients">
 		    <label class="list-group-item-heading">{{ item.company }}</label>
-		    <label class="list-group-item-heading pull-right">{{ item.isr }} / {{ item.bdm }}</label>
+		    <label class="list-group-item-heading pull-right">{{ item.isr }} {{ !!item.bdm ? "/" + item.bdm : '' }}</label>
 		    <p class="list-group-item-text">{{ item.name }}</p>
 		  </div>
 		</div>
 	  </div>
 	  <div class="panel-footer" style="width: 100%; height: 3.5em; padding: 0px">
-	    <div class="panel-title month" *ngFor="let data of monthCounts">{{ data.month }}</div>
+	    <div class="panel-title month" *ngFor="let data of prevMonths">{{ data.month | date: 'MMM yyyy' }}</div>
 	  </div>
 	  <div class="panel-body secondary-body" style="width: 100%; height: 4em; padding: 0px">
-	    <div class="panel-title count" *ngFor="let data of monthCounts" style="">{{ data.count }}</div>
+	    <div class="panel-title count" *ngFor="let data of prevMonths" style="">{{ data.clientCount }}</div>
 	  </div>
 	</div>
 </div>
