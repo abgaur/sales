@@ -17,12 +17,12 @@ import { UserService } from '../../services/user.service';
 })
 export class MyGridApplicationComponent implements OnInit {
 
-  private gridOptions: GridOptions;
-  private isrName: string;
- 
-  private searchStr: string;
-  private dataService: CompleterData;
-  private selectedClient: any;
+    private gridOptions: GridOptions;
+    private isrName: string;
+   
+    private searchStr: string;
+    private dataService: CompleterData;
+    private selectedClient: any;
 
     constructor(private dashboardService: DashboardService,
         private flashMessage: FlashMessagesService,
@@ -192,6 +192,10 @@ export class MyGridApplicationComponent implements OnInit {
     // this.gridOptions.api.forEachNode((rowNode, index)=> {
     //     console.log('Row ' + index + ' quick filter text is ' + rowNode.quickFilterAggregateText);
     // });
+}
+
+openNewClient(event){
+    console.log(" New Client ", event.target.value);
 }
 
 public onAssignSelected(selected: CompleterItem) {

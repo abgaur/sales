@@ -1,6 +1,8 @@
 <div>   
     <div class="filter-block">
         <input class="filter" placeholder="Filter..." type="text" (keyup)="onFilterChange($event)"/>
+        <button type="button" class="btn btn-primary btn-sm"  (click)='openNewClient($event)' data-toggle="modal" data-target="#new-client">New Client</button>
+        <!-- btn btn-default btn-small btn-info btn-lg -->
     </div>
      <div class="assign">
         <!--<input type="text"  [(ngModel)]="isrName"/>   -->
@@ -12,9 +14,12 @@
     </ag-grid-angular>
 </div>
 
-
-<button class="btn btn-primary" (click)="onFilterChanged()">Get Sales Data</button>
+<!-- <button class="btn btn-primary" (click)="onFilterChanged()">Get Sales Data</button> -->
 
 <div id="myModal" class="modal fade" role="dialog">
     <app-popup [selectedClient]="selectedClient" (clientUpdated)="getSalesData()"></app-popup>
+</div>
+
+<div id="new-client" class="modal fade" role="dialog">
+<app-new-client></app-new-client>
 </div>
