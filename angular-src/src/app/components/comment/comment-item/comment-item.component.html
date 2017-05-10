@@ -1,5 +1,5 @@
 <div class="comment-item" style="border-top: 1px Solid #cccccc;  padding: 10px 0px">
-	<span class="comment-date"><small>{{ comment.createdAt | date:'mediumDate' }} - {{comment.user.name}}</small></span><span [ngClass]="{'comment-type pull-right': true, badge: comment.commentType && comment.commentType !== 'Note'}"><span [ngClass]="{ 'glyphicon': true, 'glyphicon-earphone': comment.commentType === 'Call', 'glyphicon-calendar': comment.commentType === 'Meeting' }"></span></span><br/>
+	<span class="comment-date"><small>{{ comment.createdAt | date:'mediumDate' }} - {{comment.user.name}}</small></span><span [ngClass]="{'comment-type pull-right': true, badge: comment.commentType && comment.commentType.toUpperCase() !== 'NOTE'}"><span [ngClass]="{ 'glyphicon': true, 'glyphicon-earphone': comment.commentType.toUpperCase() === 'CALL', 'glyphicon-calendar': comment.commentType.toUpperCase() === 'MEETING' }"></span></span><br/>
 	
 	<div class="list-group-item-heading comment-message">{{ comment.message }}</div>
 </div>

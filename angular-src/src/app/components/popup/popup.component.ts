@@ -120,10 +120,11 @@ export class PopupComponent implements OnInit, OnChanges {
   public onBdmSelected(selected: CompleterItem) {
     console.log(selected);
     if (selected) {
-        this.bdm = { email: selected.description, name: selected.title }        
+        this.bdm = { email: selected.description, name: selected.title };
     } else {
         this.bdm = {};
     }
+    this.selectedClient.bdm = this.bdm;
 }
 
 }

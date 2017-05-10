@@ -11,17 +11,18 @@
 
   <form class="form-inline" #editForm="ngForm" (ngSubmit)="editForm.form.valid && updateClient()" >
 	<div class="modal-body" *ngIf="selectedClient">
+		<div class="row"><small>Fields marked with * are required.</small></div>
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group input-group-sm">
-		   			<label class="control-label">First Name</label>
+		   			<label class="control-label">First Name *</label>
 				   	<input class="form-control" required type="text" [(ngModel)]="selectedClient.firstName" name="firstName">
 			 	</div> 
 		 	</div>
 
 		 	<div class="col-md-4">
 			  	<div class="form-group input-group-sm">
-			   		<label class="control-label">Last Name</label>
+			   		<label class="control-label">Last Name *</label>
 			   		<!-- <input type="text" [(ngModel)]="name" name="name" value="Kulkarni" class="form-control"> -->
 			   		<input class="form-control" required type="text" [(ngModel)]="selectedClient.lastName" name="lastName">
 			 	</div> 
@@ -89,8 +90,8 @@
 		<div class="row">
 			<div class="col-lg-4">
 			 <div class="form-group input-group-sm">
-			   <label class="control-label">BDM</label>
-				 <ng2-completer class="" placeholder=""  [(ngModel)]="bdmName" (selected)="onBdmSelected($event)" [dataService]="dataService" [minSearchLength]="0" name="bdm"></ng2-completer>
+			   <label class="control-label">BDM *</label>
+				 <ng2-completer required class="" inputName="bdm-completer-popup" placeholder="" [(ngModel)]="bdmName" (selected)="onBdmSelected($event)" (blur)="onBdmSelected($event)" [dataService]="dataService" [minSearchLength]="0" name="bdm"></ng2-completer>
 			 </div> 
 			 </div>
 

@@ -65,3 +65,7 @@
 form.ng-touched .ng-invalid:not(form)  {
   border: 1px solid #a94442; /* red */
 }
+
+ng2-completer {
+	display: block;
+}
