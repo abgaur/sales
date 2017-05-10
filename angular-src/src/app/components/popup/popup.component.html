@@ -91,7 +91,7 @@
 			<div class="col-lg-4">
 			 <div class="form-group input-group-sm">
 			   <label class="control-label">BDM *</label>
-				 <ng2-completer required class="" inputName="bdm-completer-popup" placeholder="" [(ngModel)]="bdmName" (selected)="onBdmSelected($event)" (blur)="onBdmSelected($event)" [dataService]="dataService" [minSearchLength]="0" name="bdm"></ng2-completer>
+			     <app-bdm-filter cssClass="input-group-sm" [selectedBDM]="bdm" (changed)="bdmSelected($event)"></app-bdm-filter>
 			 </div> 
 			 </div>
 
