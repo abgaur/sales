@@ -1,11 +1,11 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CommentComponent } from '../comment/comment.component';
 import { ClientService } from '../../services/client.service';
 import { NotificationComponent } from '../notification/notification.component';
 import { NotificationService } from '../notification/notification.service';
 import * as NotificationEnumType from '../notification/notification-types';
 import { UserService } from '../../services/user.service';
-import { CompleterService, CompleterData, CompleterItem} from 'ng2-completer';
+import { CompleterService, CompleterData, CompleterItem, CompleterCmp } from 'ng2-completer';
 import 'eonasdan-bootstrap-datetimepicker';
 import * as moment from 'moment'
 
@@ -19,7 +19,8 @@ export class PopupComponent implements OnInit, OnChanges {
   @Input() id;
   @Input() selectedClient;
   @Output() clientUpdated: EventEmitter<any> = new EventEmitter();
-  
+  @ViewChild(CompleterCmp) bdmCompleterCtr: CompleterCmp;
+
   private datetimepickerOptions = {
     //minDate: moment().startOf('day'),
     ignoreReadonly: true
@@ -119,11 +120,29 @@ export class PopupComponent implements OnInit, OnChanges {
 
   public onBdmSelected(selected: CompleterItem) {
     console.log(selected);
+    console.log('Selected');
     if (selected) {
         this.bdm = { email: selected.description, name: selected.title }        
     } else {
         this.bdm = {};
     }
 }
+
+  public onBdmBlur(selected: CompleterItem) {
+    console.log('Blur');
+    console.log(this.bdmCompleterCtr);
+    console.log(this.bdmName);
+    console.log(this.bdm);
+    if(!this.bdm.email) {
+      this.bdmCompleterCtr.searchStr = "";
+    }
+    /*if()
+    if (selected) {
+        this.bdm = { email: selected.description, name: selected.title };
+    } else {
+        this.bdm = {};
+    }
+    this.selectedClient.bdm = this.bdm;*/
+  }
 
 }

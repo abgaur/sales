@@ -25,26 +25,24 @@ export class DashboardService {
   }
 
   getMeetingsCount(){
-    var data = {
-      counts: [
-        {
-          "month": "Apr",
-          "count": 3
-        },
-        {
-          "month": "Mar",
-          "count": 4
-        },
-        {
-          "month": "Feb",
-          "count": 1
-        }
-      ]
-    }
+    var url = 'http://localhost:3000/teamdata/meetingsscheduled';
+    let headers =  new Headers();
+    headers.append('Content-type', 'application/json');
+    return this.http.get(url, { headers: headers })
+      .map(res => {
+        let counts = res.json();
+        let currentMonth = counts.shift();
+        let prevMonths = counts;
+        return { currentMonth, prevMonths };
+      });
+  }
 
-    return new Promise<any>((resolve, reject) => {
-      setTimeout(() => resolve(data), 3000);
-    });
+  getTopUsers(){
+    var url = 'http://localhost:3000/teamdata/topusers';
+    let headers =  new Headers();
+    headers.append('Content-type', 'application/json');
+    return this.http.get(url, { headers: headers })
+      .map(res => res.json());
   }
 
   getMeetingsScheduled() {
