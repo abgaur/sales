@@ -13,6 +13,10 @@ export class TeamDataComponent implements OnInit {
   ngOnInit() {
   }
 
+  bdmSelected(event){
+    console.log(event);
+  }
+
   sendDates(event) {
     console.log(event);
      this.filterDates = event;

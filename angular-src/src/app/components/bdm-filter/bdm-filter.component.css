@@ -1,0 +1,7 @@
+.selected-item {
+	min-width: 159px;
+}
+.form-control {
+	display: block !important;
+	width: 100% !important;
+}

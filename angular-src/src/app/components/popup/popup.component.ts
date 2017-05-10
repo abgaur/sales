@@ -122,12 +122,16 @@ export class PopupComponent implements OnInit, OnChanges {
     console.log(selected);
     console.log('Selected');
     if (selected) {
-        this.bdm = { email: selected.description, name: selected.title }        
+        this.bdm = { email: selected.description, name: selected.title };
     } else {
         this.bdm = {};
     }
+    this.selectedClient.bdm = this.bdm;
 }
-
+public bdmSelected(bdm) {
+      console.log(bdm);
+      
+  }
   public onBdmBlur(selected: CompleterItem) {
     console.log('Blur');
     console.log(this.bdmCompleterCtr);
@@ -136,6 +140,8 @@ export class PopupComponent implements OnInit, OnChanges {
     if(!this.bdm.email) {
       this.bdmCompleterCtr.searchStr = "";
     }
+
+    
     /*if()
     if (selected) {
         this.bdm = { email: selected.description, name: selected.title };
