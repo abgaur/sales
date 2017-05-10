@@ -1,5 +1,5 @@
 <div>
-  <nav class="date-label">
+  <nav class="date-label" *ngIf="selectedDateType.type!=='Custom'">
     <ul class="pager">
       <li (click)="getPreviousData()">
         <a><span class="glyphicon glyphicon-chevron-left"></span></a>
@@ -10,6 +10,30 @@
       </li>   
     </ul>
   </nav>
+
+ 
+
+  <div class="custom-date-filter input-group" *ngIf="selectedDateType.type==='Custom'">
+    
+    <div class="input-group custom-date-from" >
+      <input class="form-control" a2e-datetimepicker  [date]="customFromDate" [options]="fromDateOptions" (onChange)="fromDateChanged($event)"/>
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
+    
+    <div class="input-group custom-date-to" >
+      <input class="form-control" a2e-datetimepicker  [date]="customToDate" [options]="toDateOptions" (onChange)="toDateChanged($event)"/>
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
+    <div class="input-group custom-date-submit" >
+      <button type="button" class="btn btn-primary form-control" value="Submit" (click)="getCustomDateData()">Submit</button>
+    </div>
+  </div>
+  
+
 
   <ul class="nav nav-pills pull-right">
 		  <li role="presentation date-type" [ngClass]="{'active': selectedDateType.type === type.type}"  (click)="selectedDateType.type = type.type; type.active = true;changeDateType($event)" *ngFor="let type of dateTypes">

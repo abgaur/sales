@@ -7,4 +7,19 @@
 
 .date-label .pager {
     font-size: 1.1em;
+    margin: 8px 0 9px 0;
+}
+.custom-date-filter {
+    display: inline-block;
+}
+.custom-date-from, .custom-date-to {
+    width:200px;
+    display: inline-table;
+}
+.custom-date-submit {
+    width:100px;
+    display: inline-table;
+}
+.date-label {
+    display: inline-block;
 }

@@ -27,4 +27,15 @@ router.get("/topusers", (req, res, next) => {
     });
 });
 
+router.get("/meetingsscheduled", (req, res, next) => {
+    let noOfMonths = 4;
+    teamData.getMeetingsScheduledforMonths(noOfMonths, (err, data) =>{
+        if(err){
+            res.json({success: false, msg:'Failed to retrive scheduled meetings'});
+        } else {
+            res.send(JSON.stringify(data));
+        }
+    });
+});
+
 module.exports = router;
