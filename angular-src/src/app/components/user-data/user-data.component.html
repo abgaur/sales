@@ -1,0 +1,26 @@
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+		<div class="col-xs-4">
+			<div class="bdm-filter-container">
+				Select BDM: <app-bdm-filter showAllOption="true" (changed)="bdmSelected($event)"></app-bdm-filter>
+			</div>
+		</div>
+		<!-- this will go into its own component -->
+		<div class="col-xs-8">
+			<app-date-filter  (filterDates)="sendDates($event)"></app-date-filter>
+		
+		</div>
+	</div>
+  </div>
+</div>
+<div class="row">
+	<div class="col-xs-8">
+		<!--<app-calls-meeting-report [filter]= 'filterDates'></app-calls-meeting-report>-->
+   <app-user-calls-line-chart [filter]= 'filterDates'></app-user-calls-line-chart>
+	</div>
+	<div class="col-xs-4">
+		
+	</div>
+</div>

@@ -59,6 +59,8 @@ import { BdmFilterComponent } from './components/bdm-filter/bdm-filter.component
 import { MeetingsScheduledComponent } from './components/meetings-scheduled/meetings-scheduled.component';
 import { TopCallersComponent } from './components/top-callers/top-callers.component';
 import { DateFilterComponent } from './components/date-filter/date-filter.component';
+import { UserDataComponent } from './components/user-data/user-data.component';
+import { UserCallsLineChartComponent } from './components/shared-components/user-calls-line-chart/user-calls-line-chart.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -72,8 +74,8 @@ const appRoutes: Routes = [
   { path: 'clients', component: ClientdataComponent, canActivate: [AuthGuard]},
   { path: 'reminders', component: RemindersComponent, canActivate: [AuthGuard]},
   { path: 'teamdata', component: TeamDataComponent, data: { type:"sa", title: "Team Data"}, canActivate: [AuthGuard, RoleGuard]},
-  { path: 'editprofile', component: EditProfileComponent, canActivate: [AuthGuard]}  
-  
+  { path: 'editprofile', component: EditProfileComponent, canActivate: [AuthGuard]},
+  { path: 'userdata', component: UserDataComponent, canActivate: [AuthGuard]}  
 ]
 
 @NgModule({
@@ -106,7 +108,9 @@ const appRoutes: Routes = [
     BdmFilterComponent,
     MeetingsScheduledComponent,
     TopCallersComponent,
-    DateFilterComponent
+    DateFilterComponent,
+    UserDataComponent,
+    UserCallsLineChartComponent
   ],
   imports: [
     BrowserModule,
