@@ -8,13 +8,16 @@ import { Component, OnInit } from '@angular/core';
 export class TeamDataComponent implements OnInit {
 
   private filterDates: any;
+  private selectedBdm: any;
+  private bdmSelected: any;  
   constructor() { }
 
   ngOnInit() {
+    this.bdmSelected = JSON.parse(localStorage.getItem('user'));
   }
 
-  bdmSelected(event){
-    console.log(event);
+  bdmSelection(event){
+    this.bdmSelected = event;   
   }
 
   sendDates(event) {

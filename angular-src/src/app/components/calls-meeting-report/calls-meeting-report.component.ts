@@ -12,17 +12,20 @@ const Highcharts = require("highcharts");
 export class CallsMeetingReportComponent implements OnInit {
 	@Input()
   	filter: any;
+
+	@Input()
+  	selectedBdms: any;
 	
 	isLoading: Boolean = false;
-	bdms: any;
+	bdms: any = [];
 	fromDate: any;
 	toDate: any;
   	constructor(private reportService: ReportService) {	
   		
-		  this.bdms = [];
+		  
 		  // this is for one BDM, it will change
-		  var bdm = JSON.parse(localStorage.getItem('user')).email
-		  this.bdms.push(bdm);
+		//   var bdm = JSON.parse(localStorage.getItem('user')).email
+		//   this.bdms.push(bdm);
 		 
 	}
 
@@ -30,6 +33,12 @@ export class CallsMeetingReportComponent implements OnInit {
 		if(this.filter) {
 			this.fromDate = this.filter.fromDate;
 			this.toDate = this.filter.toDate;
+			if(this.selectedBdms) {
+				this.bdms = [];
+				console.log(this.selectedBdms);
+				this.bdms.push(this.selectedBdms.email);
+			}
+			
 			this.populateUsersCallsToMeeting();
 		}
 	}
