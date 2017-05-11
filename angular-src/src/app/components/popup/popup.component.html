@@ -5,7 +5,7 @@
 <div class="modal-content">
   <app-notification id="edit-popup-notification"></app-notification>
   <div class="modal-header">
-	<span type="button" class="close glyphicon glyphicon-remove-circle" data-dismiss="modal"></span>
+	<span type="button" class="close glyphicon glyphicon-remove-circle" (click)="onClose()" data-dismiss="modal"></span>
 	<h4 class="modal-title">Edit Client</h4>
   </div>
 
@@ -91,7 +91,7 @@
 			<div class="col-lg-4">
 			 <div class="form-group input-group-sm">
 			   <label class="control-label">BDM *</label>
-			     <app-bdm-filter cssClass="input-group-sm" [selectedBDM]="bdm" (changed)="bdmSelected($event)"></app-bdm-filter>
+			     <app-bdm-filter cssClass="input-group-sm" [selectedBDM]="selectedClient.bdm" (changed)="bdmSelected($event)"></app-bdm-filter>
 			 </div> 
 			 </div>
 
@@ -127,8 +127,8 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-		 	<input type="submit" class="btn btn-primary btn-sm" value="Update" [disabled]="!editForm.form.valid" > 
-	    	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+		 	<input type="submit" class="btn btn-primary btn-sm" value="Update"  > 
+	    	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal" (click)="onClose()">Close</button>
 		</div>
 		<client-comment [selectedClient]="selectedClient"></client-comment>
 		</div>
@@ -137,7 +137,6 @@
 </div>
  
 </div>
-
 
 <!-- End of PopUp -->
 
