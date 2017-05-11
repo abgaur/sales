@@ -53,4 +53,8 @@ export class CommentComponent implements OnInit, OnChanges {
     });
   }
 
+  clear(){
+      this.newComment.message = '';
+  }
+
 }

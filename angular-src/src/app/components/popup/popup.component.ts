@@ -19,7 +19,7 @@ export class PopupComponent implements OnInit, OnChanges {
   @Input() id;
   @Input() selectedClient;
   @Output() clientUpdated: EventEmitter<any> = new EventEmitter();
-  @ViewChild(CompleterCmp) bdmCompleterCtr: CompleterCmp;
+  @ViewChild(CommentComponent) comment: CommentComponent;
 
   private datetimepickerOptions = {
     //minDate: moment().startOf('day'),
@@ -31,8 +31,8 @@ export class PopupComponent implements OnInit, OnChanges {
   private newComment = '';
   private notificationType = NotificationEnumType.NotificationType;
   private dataService: CompleterData;
-  private bdmName: String;
-  private bdm: any;
+  //private bdmName: String;
+  //private bdm: any;
   private stages: any; 
 
   constructor(private clientService: ClientService,
@@ -56,8 +56,8 @@ export class PopupComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if(this.selectedClient){
-        this.bdmName = !!this.selectedClient.bdm ? this.selectedClient.bdm.name : '';
-        this.bdm = !!this.selectedClient.bdm ? this.selectedClient.bdm : {};
+        //this.bdmName = !!this.selectedClient.bdm ? this.selectedClient.bdm.name : '';
+        //this.bdm = !!this.selectedClient.bdm ? this.selectedClient.bdm : {};
         this.isReminderEnabled = !!this.selectedClient.reminder;
         if(this.isReminderEnabled){
           this.reminderDate = moment(this.selectedClient.reminder.date);
@@ -81,7 +81,7 @@ export class PopupComponent implements OnInit, OnChanges {
       this.selectedClient.reminder = null;
     }
 
-    this.selectedClient.bdm = this.bdmName? this.bdm : {};
+    // this.selectedClient.bdm = this.bdmName? this.bdm : {};
     this.clientService.updateClient(this.selectedClient).subscribe(
       (data) => this.updateClientSuccess(data),
       (err) => this.updateClientFailure(err),
@@ -119,36 +119,23 @@ export class PopupComponent implements OnInit, OnChanges {
   }
 
   public onBdmSelected(selected: CompleterItem) {
-    console.log(selected);
+    /*console.log(selected);
     console.log('Selected');
     if (selected) {
         this.bdm = { email: selected.description, name: selected.title };
     } else {
         this.bdm = {};
     }
-    this.selectedClient.bdm = this.bdm;
-}
-public bdmSelected(bdm) {
-      console.log(bdm);
-      
-  }
-  public onBdmBlur(selected: CompleterItem) {
-    console.log('Blur');
-    console.log(this.bdmCompleterCtr);
-    console.log(this.bdmName);
-    console.log(this.bdm);
-    if(!this.bdm.email) {
-      this.bdmCompleterCtr.searchStr = "";
-    }
-
-    
-    /*if()
-    if (selected) {
-        this.bdm = { email: selected.description, name: selected.title };
-    } else {
-        this.bdm = {};
-    }
     this.selectedClient.bdm = this.bdm;*/
+}
+  public bdmSelected(bdm) {
+      //console.log(bdm);
+      //console.log(this.bdm);
+      //this.bdm = bdm;
+      this.selectedClient.bdm = bdm;
+  }
+  public onClose() {
+    this.comment.clear();
   }
 
 }
