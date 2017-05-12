@@ -2,11 +2,18 @@
     <div class="filter-block">
         <input class="filter" placeholder="Filter..." type="text" (keyup)="onFilterChange($event)"/>
     </div>
-     <div class="assign">
+
+     <div class="assign" *ngIf="userRole==='bdm'">
         <!--<input type="text"  [(ngModel)]="isrName"/>   -->
         <ng2-completer class="filter" placeholder="Assign To"  [(ngModel)]="searchStr" (selected)="onAssignSelected($event)" [dataService]="dataService" [minSearchLength]="0" ></ng2-completer>         
         <button class="btn btn-primary btn-sm" (click)="assignTo()">Assign</button>
     </div>
+
+     <div class="assign" *ngIf="userRole==='isr'">
+        <button class="btn btn-primary btn-sm" (click)="assignToMe()">Assign to me</button>
+    </div>
+
+
     <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
                  [gridOptions]="gridOptions">
     </ag-grid-angular>
