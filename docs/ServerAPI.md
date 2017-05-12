@@ -1,6 +1,9 @@
 # Multiupdate BDM
+
 URI : http://localhost:3000/clients/bdm
+
 Method : POST
+
 data: {
         "bdm" : {
         "name" : "testbdm1",
