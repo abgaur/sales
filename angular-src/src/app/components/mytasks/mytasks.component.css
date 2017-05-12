@@ -10,3 +10,6 @@
 .filter-block {
     display: inline-block;
 }
+app-bdm-filter {
+    display: inline-block;
+ }

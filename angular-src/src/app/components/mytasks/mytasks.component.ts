@@ -24,6 +24,7 @@ export class MytasksComponent implements OnInit {
   private searchStr: string;
   private dataService: CompleterData;
   private selectedClient: any;
+  private bdmSelected: any;
 
     constructor(private dashboardService: DashboardService,
         private flashMessage: FlashMessagesService,
@@ -35,7 +36,7 @@ export class MytasksComponent implements OnInit {
         var self = this;
 
         this.userService.getUsers().subscribe( data => {
-            console.dir(data);
+            
             self.dataService =  completerService.local(data, "name", "name").descriptionField("email");
         });
     
@@ -80,8 +81,8 @@ export class MytasksComponent implements OnInit {
                 filter: 'text'
             },
             {
-                headerName: "Assigned To",
-                field: "assignedTo",
+                headerName: "BDM",
+                field: "bdm.name",
                 width: 120,
                 filter: 'text'
             },
@@ -144,7 +145,6 @@ export class MytasksComponent implements OnInit {
 
   getMyTasks() {
     this.myTasksService.getMyTasks().subscribe( data => {
-        // console.log('got data --- from my tasks service');
         this.gridOptions.api.setRowData(data);
     });
   }
@@ -156,9 +156,7 @@ export class MytasksComponent implements OnInit {
         assignTo: this.isrName
     };    
     assignToBody.ids = this.gridOptions.api.getSelectedNodes().map(function(rowNode) {return rowNode.data._id;});
-    console.log(assignToBody);
     
-
     this.dashboardService.setAssignedTo(assignToBody).subscribe( (data) => {
       if(data.success) {
         this.flashMessage.show('Tasks are assigned', {cssClass: 'alert-success', timeout: 3000});
@@ -171,7 +169,6 @@ export class MytasksComponent implements OnInit {
 
   // quick filter 
   onFilterChange(event) {
-    console.log('ggg'+event.target.value);
     // this.values +=  this.values += event.target.value + ' | '; + ' | ';
     this.gridOptions.api.setQuickFilter(event.target.value);
   }
@@ -179,17 +176,52 @@ export class MytasksComponent implements OnInit {
   // using for testing, or now please dont delete
   onPrintQuickFilterTexts() {
     // this.gridOptions.api.forEachNode((rowNode, index)=> {
-    //     console.log('Row ' + index + ' quick filter text is ' + rowNode.quickFilterAggregateText);
+    
     // });
-}
-
-public onAssignSelected(selected: CompleterItem) {
-    console.log(selected);
-    if (selected) {
-        this.isrName = selected.description;
-    } else {
-        this.isrName = "";
     }
-}
+
+    public onAssignSelected(selected: CompleterItem) {
+        
+        if (selected) {
+            this.isrName = selected.description;
+        } else {
+            this.isrName = "";
+        }
+    }
+ 
+    bdmSelection(bdm) {
+        this.bdmSelected = bdm;
+    }
+
+    assignToBdm() {
+        if(!this.bdmSelected) {
+            this.flashMessage.show('Please select BDM to Assign Clients', {cssClass: 'alert-danger', timeout: 4000});
+            return false;
+        }
+        var assignToBdmBody = {
+            ids: [],
+            bdm: this.bdmSelected
+        };    
+        assignToBdmBody.ids = this.gridOptions.api.getSelectedNodes().map(function(rowNode) {return rowNode.data._id;});
+        
+        if(assignToBdmBody.ids!==null && assignToBdmBody.ids.length>0) {
+            this.myTasksService.assignToBdm(assignToBdmBody).subscribe( (data) => {
+                if(data.success) {
+                    this.flashMessage.show('Tasks are assigned', {cssClass: 'alert-success', timeout: 3000});
+                    this.getMyTasks();
+                } else {
+                    this.flashMessage.show('Something happened, please try again', {cssClass: 'alert-danger', timeout: 3000});
+                }
+            })        
+        } else {
+            this.flashMessage.show('Please select atleast one Client', {cssClass: 'alert-danger', timeout: 4000});
+        }
+       
+
+    }
+
+
+
+
 
 }
