@@ -77,6 +77,14 @@ module.exports.updateAssignedTo = function(clientIds, assignTo, callback){
         callback);
 };
 
+module.exports.updateBdm = function(clientIds, bdm, callback){
+     Client.update(
+        { _id: { "$in": clientIds } },
+        {bdm : bdm},
+        {multi:true},
+        callback);
+};
+
 module.exports.getClientsByIds = function(clientIds, callback){
     Client.find({ _id: { "$in": clientIds }}, callback);
 };

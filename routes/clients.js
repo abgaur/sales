@@ -79,15 +79,12 @@ router.get('/data', (req, res, next) => {
     //let uploadedBy = req.params.uploadedBy;
     redisHelper.getCacheDatabyPattern('client', function (data) {
         if (data) {
-            console.log('picked up from cache');
             res.send(data);
         } else {
             Client.find({}, function (err, client) {
                 if (err) return console.error(err);
                 else {
-                    console.log('coming first time');
                     redisHelper.setCacheDatabyPattern('client', client, function () {
-                        console.log('set data in cache');
                     });
                     res.send(JSON.stringify(client));
                 }
@@ -101,7 +98,6 @@ router.get('/:id', (req, res, next) => {
     Client.getClientById(req.params.id, (err, client) => {
         if (err) res.json({ success: false, msg: 'Failed to retrieve client' });
         res.send(JSON.stringify(client));
-
     });
 });
 
@@ -119,11 +115,23 @@ router.post('/assignto', (req, res, next) => {
     let ids = req.body.ids;
     Client.updateAssignedTo(ids, assignTo, (err, docs) => {
         if (err) res.json({ success: false, msg: 'Failed to update assignee' });
-        console.log('updated records === ', docs.nModified);
         Client.getClientsByIds(ids, (err, docs) => {
             redisHelper.setCacheDatabyPattern('client', docs, function () {
-                console.log('set data in cache');
-                return res.json({ success: true, msg: docs.nModified + ' clients assigned' });
+                return res.json({ success: true, msg: 'Assigned to updated for '+ docs.length + ' clients' });
+            });
+        });
+    });
+});
+
+// multi-update bdm
+router.post('/bdm', (req, res, next) => {
+    let bdm = req.body.bdm;
+    let ids = req.body.ids;
+    Client.updateBdm(ids, bdm, (err, docs) => {
+        if (err) res.json({ success: false, msg: 'Failed to update BDM' });
+        Client.getClientsByIds(ids, (err, docs) => {
+            redisHelper.setCacheDatabyPattern('client', docs, function () {
+                return res.json({ success: true, msg: 'BDM updated for '+ docs.length + ' clients' });
             });
         });
     });
