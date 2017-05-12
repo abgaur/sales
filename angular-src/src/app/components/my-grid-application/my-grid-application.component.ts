@@ -23,6 +23,8 @@ export class MyGridApplicationComponent implements OnInit {
   private searchStr: string;
   private dataService: CompleterData;
   private selectedClient: any;
+  private userRole: String;
+  private user: any;
 
     constructor(private dashboardService: DashboardService,
         private flashMessage: FlashMessagesService,
@@ -31,6 +33,10 @@ export class MyGridApplicationComponent implements OnInit {
         private userService: UserService
     ) {
         var self = this;
+
+        // setting up current role for links and data
+        this.user = JSON.parse(localStorage.getItem('user'));
+        this.userRole = this.user.role;
 
         this.userService.getUsers().subscribe( data => {
             console.dir(data);
@@ -161,23 +167,36 @@ export class MyGridApplicationComponent implements OnInit {
 
   assignTo() {
 
+    if(!this.isrName) {
+        this.flashMessage.show('Please select user to Assign Clients', {cssClass: 'alert-danger', timeout: 4000});
+        return false;
+    }
     var assignToBody = {
         ids: [],
         assignTo: this.isrName
-    };    
-    assignToBody.ids = this.gridOptions.api.getSelectedNodes().map(function(rowNode) {return rowNode.data._id;});
-    console.log(assignToBody);
+    };
     
 
-    this.dashboardService.setAssignedTo(assignToBody).subscribe( (data) => {
+    assignToBody.ids = this.gridOptions.api.getSelectedNodes().map(function(rowNode) {return rowNode.data._id;});
+    if(assignToBody.ids!==null && assignToBody.ids.length>0) {
+      this.dashboardService.setAssignedTo(assignToBody).subscribe( (data) => {
       if(data.success) {
         this.flashMessage.show('Tasks are assigned', {cssClass: 'alert-success', timeout: 3000});
         this.getSalesData();
         
       } else {
-        this.flashMessage.show('Something happened, check logs', {cssClass: 'alert-danger', timeout: 3000});
+        this.flashMessage.show('Something happened, please try again', {cssClass: 'alert-danger', timeout: 3000});
       }
     })
+
+    } else {
+        this.flashMessage.show('Please select atleast one Client', {cssClass: 'alert-danger', timeout: 40000});
+    }
+  }
+
+  assignToMe() {
+      this.isrName = this.user.email;
+      this.assignTo();
   }
 
   // quick filter 
