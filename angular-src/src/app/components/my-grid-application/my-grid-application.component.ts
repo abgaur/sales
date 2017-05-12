@@ -190,7 +190,7 @@ export class MyGridApplicationComponent implements OnInit {
     })
 
     } else {
-        this.flashMessage.show('Please select atleast one Client', {cssClass: 'alert-danger', timeout: 40000});
+        this.flashMessage.show('Please select atleast one Client', {cssClass: 'alert-danger', timeout: 4000});
     }
   }
 

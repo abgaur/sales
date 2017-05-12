@@ -17,4 +17,15 @@ export class MyTasksService {
         .map(res => res.json());
     }
 
+
+    assignToBdm(assignToBdmBody) {
+        console.log(assignToBdmBody);
+        var url = 'http://localhost:3000/clients/bdm';
+        let headers =  new Headers();
+        headers.append('Content-type', 'application/json');
+        return this.http.post(url , assignToBdmBody, {headers: headers})
+            .map(res => res.json());
+        
+    }
+
 }
