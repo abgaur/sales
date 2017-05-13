@@ -74,24 +74,26 @@ router.post('/upload/:email', (req, res, next) => {
         });
 });*/
 
-// fetch cached data
-router.get('/data', (req, res, next) => {
-    //let uploadedBy = req.params.uploadedBy;
+// fetch cached data based on user role
+router.get('/data/:role', (req, res, next) => {
+    let role = req.params.role;
     redisHelper.getCacheDatabyPattern('client', function (data) {
         if (data) {
-            res.send(data);
+            res.send(JSON.stringify(clientHelper.showRoleBasedClients(role, data)));
         } else {
             Client.find({}, function (err, client) {
                 if (err) return console.error(err);
                 else {
                     redisHelper.setCacheDatabyPattern('client', client, function () {
                     });
-                    res.send(JSON.stringify(client));
+                    res.send(JSON.stringify(clientHelper.showRoleBasedClients(role, client)));
                 }
             });
         }
     });
 });
+
+
 
 // fetch data by id
 router.get('/:id', (req, res, next) => {
