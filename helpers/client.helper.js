@@ -35,3 +35,14 @@ module.exports.getUploader = function () {
     }).single('file');
     return upload;
 };
+
+module.exports.showRoleBasedClients = function (role, clientsList) {
+    if (role == "isr") {
+        let unassignedClients = clientsList.filter(function (element) {
+            return !element.assignedTo;
+        });
+        return unassignedClients;
+    } else {
+        return clientsList;
+    }
+};
