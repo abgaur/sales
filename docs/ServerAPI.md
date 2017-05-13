@@ -13,6 +13,8 @@ data: {
                 "5910b79fbc82a033cc2bfc27"]
 }
 
+# Get Role based Clients data
+
 URI: clients/data/isr or clients/data/bdm
 
 Method: GET
