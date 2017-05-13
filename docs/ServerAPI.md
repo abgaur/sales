@@ -1,5 +1,5 @@
 # Multiupdate BDM
-
+```sh
 URI: /clients/bdm
 
 Method: POST
@@ -12,9 +12,10 @@ data: {
         "ids": ["5910b79fbc82a033cc2bfbb4",
                 "5910b79fbc82a033cc2bfc27"]
 }
-
+```
 # Get Role based Clients data
-
+```sh
 URI: clients/data/isr or clients/data/bdm
 
 Method: GET
+```
