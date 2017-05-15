@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
 import { ClientService } from '../../services/client.service';
 import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 import { FlashMessagesService} from 'angular2-flash-messages';
 import { Router} from '@angular/router';
 
@@ -18,12 +19,11 @@ export class EditProfileComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private flashMessage: FlashMessagesService,
-              private clientService: ClientService,
-               private router: Router) { 
+              private router: Router,
+              private userService: UserService) {
 
    this.authService.getProfile().subscribe(profile => {
       this.user = profile.user;
-      console.log(profile.user);
     },
     err => {
       console.log(err);
@@ -39,9 +39,10 @@ export class EditProfileComponent implements OnInit {
   ]
 
  onEditSubmit() {
-    this.clientService.updateProfile(this.user).subscribe((data) => {
+    this.userService.updateProfile(this.user).subscribe((data) => {
       if(data.success) {
         this.flashMessage.show('Profile Updated', {cssClass: 'alert-success', timeout: 3000});
+        localStorage.setItem('user', JSON.stringify(data.user));
         this.router.navigate(['/profile']);
       } else {
          this.flashMessage.show('Something happened, check logs', {cssClass: 'alert-danger', timeout: 3000});

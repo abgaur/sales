@@ -51,7 +51,7 @@ router.post('/authenticate', (req, res, next) => {
           success: true,
           token: 'JWT '+token,
           user: {
-            id: user._id,
+            _id: user._id,
             name: user.name,
             email: user.email,
             role: user.role
@@ -66,7 +66,12 @@ router.post('/authenticate', (req, res, next) => {
 
 // Profile
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-  res.json({user: req.user});
+  res.json({user: {
+            _id: req.user._id,
+            name: req.user.name,
+            email: req.user.email,
+            role: req.user.role
+          }});
 });
 
 // Get All Users
@@ -117,7 +122,12 @@ router.post('/profile', (req, res, next) => {
 
     User.updateUser(userId, updateUser, (err, user) => {
       if (err) res.json({success: false, msg:'Failed to update profile'});
-      return res.json({success: true, msg:'Profile updted'});
+      return res.json({success: true, msg:'Profile updted', user: {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role
+          }});
     });
 });
 

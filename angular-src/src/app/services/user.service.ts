@@ -36,4 +36,10 @@ export class UserService {
 
   }
 
+  updateProfile(user: Object) {
+    const url = environment.baseUrl + 'users/profile';
+    const headers = new Headers();
+    headers.append('Content-type', 'application/json');
+    return this.http.post(url, user, { headers: headers }).map(res => res.json());
+  }
 }
