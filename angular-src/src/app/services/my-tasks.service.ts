@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { tokenNotExpired } from 'angular2-jwt';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class MyTasksService {
@@ -10,7 +11,7 @@ export class MyTasksService {
 
   getMyTasks() {
       var email = JSON.parse(localStorage.getItem('user')).email;
-      var salesDataUrl = 'http://localhost:3000/clients//assignto/'+email;
+      var salesDataUrl = environment.baseUrl+'clients//assignto/'+email;
       let headers =  new Headers();
       headers.append('Content-type', 'application/json');
       return this.http.get(salesDataUrl)
@@ -20,7 +21,7 @@ export class MyTasksService {
 
     assignToBdm(assignToBdmBody) {
         console.log(assignToBdmBody);
-        var url = 'http://localhost:3000/clients/bdm';
+        var url = environment.baseUrl+'clients/bdm';
         let headers =  new Headers();
         headers.append('Content-type', 'application/json');
         return this.http.post(url , assignToBdmBody, {headers: headers})

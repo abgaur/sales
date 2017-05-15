@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import * as ChartConfig from '../config/column-chart-config';
 import 'rxjs/add/operator/map';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ReportService {
@@ -11,7 +12,7 @@ export class ReportService {
   getCallsToMeeting(filter) {
      
      
-        var callsToMeetingUrl = 'http://localhost:3000/teamdata/calltomeeting';
+        var callsToMeetingUrl = environment.baseUrl+'teamdata/calltomeeting';
         let headers =  new Headers();
         headers.append('Content-type', 'application/json');
         return this.http.post(callsToMeetingUrl, filter, {headers: headers})

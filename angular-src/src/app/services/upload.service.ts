@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
+import { environment } from '../../environments/environment';
 
 
 @Injectable()
@@ -12,7 +13,7 @@ export class UploadService {
     let headers =  new Headers();
     headers.append('Content-Type', 'multipart/form-data');
 
-    return this.http.post('http://localhost:3000/clients/upload', file, {headers: headers})
+    return this.http.post(environment.baseUrl+'clients/upload', file, {headers: headers})
       .map(res => res.json());      
   }
   

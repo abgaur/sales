@@ -38,7 +38,7 @@ const comments = require('./routes/comments');
 const stages = require('./routes/stages');
 const teamdata = require('./routes/teamdata');
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // cors Middleware
 app.use(cors());
