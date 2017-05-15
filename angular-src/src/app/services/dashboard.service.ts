@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { tokenNotExpired } from 'angular2-jwt';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class DashboardService {
@@ -10,7 +11,7 @@ export class DashboardService {
 
    getSalesData() {
     var role = JSON.parse(localStorage.getItem('user')).role;
-    var salesDataUrl = 'http://localhost:3000/clients/data/'+role;
+    var salesDataUrl = environment.baseUrl+'clients/data/'+role;
     let headers =  new Headers();
     headers.append('Content-type', 'application/json');
     return this.http.get(salesDataUrl)
@@ -18,7 +19,7 @@ export class DashboardService {
   }
 
    setAssignedTo(assignToBody) {
-    var salesDataUrl = 'http://localhost:3000/clients/assignto';
+    var salesDataUrl = environment.baseUrl+'clients/assignto';
     let headers =  new Headers();
     headers.append('Content-type', 'application/json');
     return this.http.post(salesDataUrl, assignToBody, {headers: headers})
@@ -26,7 +27,7 @@ export class DashboardService {
   }
 
   getMeetingsCount(){
-    var url = 'http://localhost:3000/teamdata/meetingsscheduled';
+    var url = environment.baseUrl+'teamdata/meetingsscheduled';
     let headers =  new Headers();
     headers.append('Content-type', 'application/json');
     return this.http.get(url, { headers: headers })
@@ -39,7 +40,7 @@ export class DashboardService {
   }
 
   getTopUsers(){
-    var url = 'http://localhost:3000/teamdata/topusers';
+    var url = environment.baseUrl+'teamdata/topusers';
     let headers =  new Headers();
     headers.append('Content-type', 'application/json');
     return this.http.get(url, { headers: headers })
