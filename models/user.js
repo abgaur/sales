@@ -56,5 +56,5 @@ module.exports.getAllBdms = function(role, callback){
 };
 
 module.exports.updateUser = function(userId, updateUser, callback){
-    User.findByIdAndUpdate(userId, updateUser, callback);
+    User.findByIdAndUpdate(userId, updateUser, {'new': true}, callback);
 };

@@ -35,7 +35,6 @@ export class CallsMeetingReportComponent implements OnInit {
 			this.toDate = this.filter.toDate;
 			if(this.selectedBdms) {
 				this.bdms = [];
-				console.log(this.selectedBdms);
 				this.bdms.push(this.selectedBdms.email);
 			}
 			
@@ -65,7 +64,6 @@ export class CallsMeetingReportComponent implements OnInit {
 				result.calls
 			];			
   			var chart = Highcharts.chart('chart', config);
-			console.log(config);
 		},
 		err => {
 			this.isLoading = false;

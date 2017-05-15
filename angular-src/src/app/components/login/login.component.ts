@@ -24,13 +24,11 @@ export class LoginComponent implements OnInit {
 
   }
   onLoginSubmit() {
-    console.log(this.email);
     const user = {
       email: this.email,
       password: this.password
     }
     if(!this.validateService.validateEmail(user.email)) {
-      console.log('Please user valid email');
       this.flashMessage.show('Please user valid email', {cssClass: 'alert-danger', timeout: 3000});
       return false;
     }
