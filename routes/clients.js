@@ -181,4 +181,18 @@ router.get('/reminders/:assignedto/:startdate/:enddate', (req, res, next) => {
         });
 });
 
+//add new client
+router.post('/add', (req, res, next) => {
+    let newClient = new Client(req.body.newClient);
+    Client.addClient(newClient, (err, client) => {
+        if (err) {
+            res.json({ success: false, msg: 'Failed to add client' });
+        } else {
+            redisHelper.setCacheData('client', client, function () {
+                res.json({ success: true, msg: 'Client added', client: client });
+            });
+        }
+    });
+});
+
 module.exports = router;
