@@ -12,19 +12,24 @@ import { ClientService } from '../../services/client.service'
 export class RemindersComponent implements OnInit {
   clients: Array<any> = [];
   selectedClient: any;
+  isLoading: Boolean = false;
+
   constructor(private remindersService: RemindersService,
     private clientService: ClientService) { 
-    this.getReminders();
+    
   }
 
   getReminders() {
+      this.isLoading = true;
       this.remindersService.getReminders().subscribe(data => {
-          console.log(data);
+        console.log(data);
+        this.isLoading = false;
         this.clients = data;        
     });
   }
 
   ngOnInit() {
+      this.getReminders();
   }
 
   openReminder(evt, rem) {

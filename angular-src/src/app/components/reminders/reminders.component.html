@@ -1,29 +1,15 @@
-﻿<!--<h2>Reminders</h2>
-<div class="reminders">
-  <div class="list-group">
-     <a (click)='openReminder($event, client)' data-toggle="modal" data-target="#reminder-modal" *ngFor="let client of clients; let i = index" class="list-group-item list-group-item-action reminder" >
-       <div class="reminder-text">
-         <span class="badge badge-default">{{client.reminder.date | date:'hh:mm a'}}</span>
-         <span class="title">{{client.reminder.text}}</span>
-         
-      </div>
-       
-     </a>
-  </div>
-</div>-->
-
-<div id="reminder-modal" class="modal fade" role="dialog">
-<app-popup [selectedClient]="selectedClient" (clientUpdated)="getReminders()"></app-popup>
+﻿<div id="reminder-modal" class="modal fade" role="dialog">
+  <app-popup [selectedClient]="selectedClient" (clientUpdated)="getReminders()"></app-popup>
 </div>
 
-<div class="well meetings-scheduled-container">
+<div class="well reminders-container">
   <app-loading-spinner [hide]="!isLoading"></app-loading-spinner>
   <div class="panel panel-default">
     <div class="panel-heading">
       <span class="panel-title">Today's Reminders</span>
     </div>
     <div class="panel-body main-body">
-      <span *ngIf="clients && clients.length === 0">No reminders for today.</span>
+      <span *ngIf="!isLoading && clients && clients.length === 0">No reminders for today.</span>
       <div class="list-group reminders">
         <a (click)='openReminder($event, client)' data-toggle="modal" data-target="#reminder-modal" *ngFor="let client of clients; let i = index" class="list-group-item list-group-item-action reminder">
             <div class="reminder-item">
@@ -37,84 +23,9 @@
               </div>
             </div>
         </a>
-        <a (click)='openReminder($event, client)' data-toggle="modal" data-target="#reminder-modal" *ngFor="let client of clients; let i = index" class="list-group-item list-group-item-action reminder">
-          <div class="reminder-item">
-            <span class="badge badge-default reminder-time">{{client.reminder.date | date:'hh:mm a'}}</span>
-            <div class="pull-right reminder-contact">
-              <small>
-                <span class="title">{{ client.salutation+ " " + client.firstName + " " + client.lastName }}</span>
-                <span class="title" *ngIf="client.phone">({{ client.phone }})</span>
-              </small>
-            </div>
-            <div class="reminder-text">
-              <q><i><span>{{client.reminder.text}}</span></i></q>
-            </div>
-          </div>
-        </a>
-        <a (click)='openReminder($event, client)' data-toggle="modal" data-target="#reminder-modal" *ngFor="let client of clients; let i = index" class="list-group-item list-group-item-action reminder">
-          <div class="reminder-item">
-            <span class="badge badge-default reminder-time">{{client.reminder.date | date:'hh:mm a'}}</span>
-            <div class="pull-right reminder-contact">
-              <small>
-                <span class="title">{{ client.salutation+ " " + client.firstName + " " + client.lastName }}</span>
-                <span class="title" *ngIf="client.phone">({{ client.phone }})</span>
-              </small>
-            </div>
-            <div class="reminder-text">
-              <q><i><span>{{client.reminder.text}}</span></i></q>
-            </div>
-          </div>
-        </a>
-        <a (click)='openReminder($event, client)' data-toggle="modal" data-target="#reminder-modal" *ngFor="let client of clients; let i = index" class="list-group-item list-group-item-action reminder">
-          <div class="reminder-item">
-            <span class="badge badge-default reminder-time">{{client.reminder.date | date:'hh:mm a'}}</span>
-            <div class="pull-right reminder-contact">
-              <small>
-                <span class="title">{{ client.salutation+ " " + client.firstName + " " + client.lastName }}</span>
-                <span class="title" *ngIf="client.phone">({{ client.phone }})</span>
-              </small>
-            </div>
-            <div class="reminder-text">
-              <q><i><span>{{client.reminder.text}}</span></i></q>
-            </div>
-          </div>
-        </a>
-        <a (click)='openReminder($event, client)' data-toggle="modal" data-target="#reminder-modal" *ngFor="let client of clients; let i = index" class="list-group-item list-group-item-action reminder">
-          <div class="reminder-item">
-            <span class="badge badge-default reminder-time">{{client.reminder.date | date:'hh:mm a'}}</span>
-            <div class="pull-right reminder-contact">
-              <small>
-                <span class="title">{{ client.salutation+ " " + client.firstName + " " + client.lastName }}</span>
-                <span class="title" *ngIf="client.phone">({{ client.phone }})</span>
-              </small>
-            </div>
-            <div class="reminder-text">
-              <q><i><span>{{client.reminder.text}}</span></i></q>
-            </div>
-          </div>
-        </a>
-        <a (click)='openReminder($event, client)' data-toggle="modal" data-target="#reminder-modal" *ngFor="let client of clients; let i = index" class="list-group-item list-group-item-action reminder">
-          <div class="reminder-item">
-            <span class="badge badge-default reminder-time">{{client.reminder.date | date:'hh:mm a'}}</span>
-            <div class="pull-right reminder-contact">
-              <small>
-                <span class="title">{{ client.salutation+ " " + client.firstName + " " + client.lastName }}</span>
-                <span class="title" *ngIf="client.phone">({{ client.phone }})</span>
-              </small>
-            </div>
-            <div class="reminder-text">
-              <q><i><span>{{client.reminder.text}}</span></i></q>
-            </div>
-          </div>
-        </a>
-          <!--<div class="list-group-item" *ngFor="let client of clients; let i = index">
-            <span class="badge badge-default">{{client.reminder.date | date:'hh:mm a'}}</span>
-            <span class="title">{{client.reminder.text}}</span>
-            <label class="list-group-item-heading">{{ client.company }}</label>
-            <label class="list-group-item-heading pull-right">{{ client.isr }} {{ !!client.bdm ? "/" + client.bdm : '' }}</label>
-            <p class="list-group-item-text">{{ client.name }}</p>
-          </div>-->
       </div>
     </div>
-  </div>
+    <div class="panel-footer">
+      {{ clients.length }} reminder(s).
+    </div>
 </div>
