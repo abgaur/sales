@@ -1,24 +1,15 @@
-.reminders {
-   margin: 10px 30px;
-  
-}
-
-.reminders .list-group {
-  height: 300px;
+﻿.reminders.list-group {
+  min-height: 100px;
+  max-height: 300px;
   overflow-y: auto;
 }
 
 .reminders .reminder-text {
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
-.reminders .reminder-text .badge {
-  font-size: 1.2em;
+.reminders .reminder-item .badge {
+  font-size: 1.1em;
 }
-
-.reminders .reminder-text .title {
-  margin-left:10px;
-}
-
 
 .reminders .reminder {
     cursor: pointer;

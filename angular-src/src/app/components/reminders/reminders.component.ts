@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService} from 'angular2-flash-messages';
 import { RemindersService } from '../../services/reminders.service'
 import { Observable } from "rxjs/Rx";
@@ -10,7 +10,7 @@ import { ClientService } from '../../services/client.service'
   styleUrls: ['./reminders.component.css']
 })
 export class RemindersComponent implements OnInit {
-  clients: any;
+  clients: Array<any> = [];
   selectedClient: any;
   constructor(private remindersService: RemindersService,
     private clientService: ClientService) { 
@@ -18,9 +18,8 @@ export class RemindersComponent implements OnInit {
   }
 
   getReminders() {
-    this.remindersService.getReminders().subscribe( data => {
-        console.log('got data from service');
-        console.dir(data);
+      this.remindersService.getReminders().subscribe(data => {
+          console.log(data);
         this.clients = data;        
     });
   }
@@ -29,7 +28,6 @@ export class RemindersComponent implements OnInit {
   }
 
   openReminder(evt, rem) {
-    console.dir(rem);
      this.clientService.getDataById(rem._id).subscribe((data) => {
         this.selectedClient = data;
         this.selectedClient.comments = [];

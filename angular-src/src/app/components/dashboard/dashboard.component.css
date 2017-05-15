@@ -1,14 +1,3 @@
-.screen-header {
+﻿.screen-header {
 	margin-top: 0px;
-}
-
-app-reminders {
-	width:40%;
-    margin: 10px 30px;
-    float:left;
-}
-
-app-mytasks {
-	width: 50%;
-	float: left;
 }
