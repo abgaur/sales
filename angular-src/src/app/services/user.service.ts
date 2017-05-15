@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { tokenNotExpired } from 'angular2-jwt';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class UserService {
@@ -10,7 +11,7 @@ export class UserService {
 
   getUsers() {
     
-    var allUsersUrl = 'http://localhost:3000/users/all/';
+    var allUsersUrl = environment.baseUrl+'users/all/';
     let headers =  new Headers();
     headers.append('Content-type', 'application/json');
     return this.http.get(allUsersUrl)
@@ -18,7 +19,7 @@ export class UserService {
   }
 
   getBdms() {    
-    var bdmsUrl = 'http://localhost:3000/users/bdm/';
+    var bdmsUrl = environment.baseUrl+'users/bdm/';
     let headers =  new Headers();
     headers.append('Content-type', 'application/json');
     return this.http.get(bdmsUrl)
@@ -27,7 +28,7 @@ export class UserService {
   }
 
   getStages() {    
-    var stagesUrl = 'http://localhost:3000/stages/';
+    var stagesUrl =environment.baseUrl+'stages/';
     let headers =  new Headers();
     headers.append('Content-type', 'application/json');
     return this.http.get(stagesUrl)

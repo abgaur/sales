@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ClientService {
@@ -9,12 +10,12 @@ export class ClientService {
   	constructor(private http: Http) { }
 
 	getDataById(id: String){
-		const url = `http://localhost:3000/clients/${id}`;
+		const url = environment.baseUrl+`clients/${id}`;
   	return this.http.get(url).map((res) => res.json());
 	}
 	
 	updateClient(client){
-		const url = "http://localhost:3000/clients/";
+		const url = environment.baseUrl+'clients/';
 		const headers = new Headers();
 	  	headers.append('Content-type', 'application/json');
 
@@ -22,7 +23,7 @@ export class ClientService {
 	}
 
 	getComments(clientId){
-		const url = `http://localhost:3000/comments/${clientId}`;
+		const url = environment.baseUrl+`comments/${clientId}`;
   		return this.http.get(url).map((res) => {
   			return res.json();
   		})
@@ -30,14 +31,14 @@ export class ClientService {
 	}
 
 	addComment(comment){
-		const url = `http://localhost:3000/comments/add`;
+		const url = environment.baseUrl+`comments/add`;
 		comment.user = JSON.parse(localStorage.getItem('user'));
   		return this.http.post(url, comment).map(res => res.json());
 	}
 
     updateProfile(user:Object){
 		console.log(user);
-		const url = "http://localhost:3000/users/profile";
+		const url = environment.baseUrl+'users/profile';
 		const headers = new Headers();
 	  	headers.append('Content-type', 'application/json');
   		return this.http.post(url, user, { headers: headers }).map(res => res.json());	
