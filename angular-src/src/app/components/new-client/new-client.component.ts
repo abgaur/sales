@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ClientService } from '../../services/client.service';
+import { ValidateService } from '../../services/validate.service';
 import { NotificationComponent } from '../notification/notification.component';
 import { NotificationService } from '../notification/notification.service';
 import * as NotificationEnumType from '../notification/notification-types';
@@ -38,7 +39,8 @@ export class NewClientComponent implements OnInit {
 
 	  constructor( private clientService: ClientService,
 	  	private flashMessage: FlashMessagesService,
-	  	  private notificationService: NotificationService) { }
+	  	  private notificationService: NotificationService,
+	  	  private validateService: ValidateService) { }
 
 	  ngOnInit() {
 	  }
@@ -79,7 +81,18 @@ export class NewClientComponent implements OnInit {
 		    }	
 		  };
 
-    console.log("Data Check:", JSON.stringify(objClient));
+
+     if(!this.validateService.validateEmail(objClient.newClient.email)) {
+       this.notificationService.show(
+	          'edit-popup-notification', 
+	          'Please Type Valid Email', 
+	          null,
+	          5000, 
+	          this.notificationType.ERROR
+	        );
+      // this.flashMessage.show('Please user valid email', {cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
 
     this.clientService.addClient(objClient).subscribe((data) => {
 	      if(data.success) {
@@ -87,7 +100,7 @@ export class NewClientComponent implements OnInit {
 	     this.clientUpdated.emit(data);
 	        this.notificationService.show(
 	          'edit-popup-notification', 
-	          'New CLient Added.', 
+	          'New Client Added.', 
 	          null,
 	          5000, 
 	          this.notificationType.SUCCESS

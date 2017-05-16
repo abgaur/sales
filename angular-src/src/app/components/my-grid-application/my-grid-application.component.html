@@ -1,7 +1,7 @@
 <div>   
     <div class="filter-block">
         <input class="filter" placeholder="Filter..." type="text" (keyup)="onFilterChange($event)"/>
-         <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#new-client">New Client</button>
+        <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#new-client">New Client</button>
     </div>
 
      <div class="assign" *ngIf="userRole==='bdm'">
@@ -19,9 +19,6 @@
                  [gridOptions]="gridOptions">
     </ag-grid-angular>
 </div>
-
-
-<button class="btn btn-primary" (click)="onFilterChanged()">Get Sales Data</button>
 
 <div id="myModal" class="modal fade" role="dialog">
     <app-popup [selectedClient]="selectedClient" (clientUpdated)="getSalesData()"></app-popup>

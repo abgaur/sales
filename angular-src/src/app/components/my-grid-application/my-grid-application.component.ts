@@ -157,9 +157,7 @@ export class MyGridApplicationComponent implements OnInit {
 
 
   getSalesData() {
-      console.log("get sales data");
      this.dashboardService.getSalesData().subscribe( data => {
-        console.log('got data from service');
         this.gridOptions.api.setRowData(data);
     });
 
@@ -201,7 +199,6 @@ export class MyGridApplicationComponent implements OnInit {
 
   // quick filter 
   onFilterChange(event) {
-    console.log('ggg'+event.target.value);
     // this.values +=  this.values += event.target.value + ' | '; + ' | ';
     this.gridOptions.api.setQuickFilter(event.target.value);
   }
@@ -214,7 +211,6 @@ export class MyGridApplicationComponent implements OnInit {
 }
 
 public onAssignSelected(selected: CompleterItem) {
-    console.log(selected);
         if (selected) {
             this.isrName = selected.description;
         } else {
