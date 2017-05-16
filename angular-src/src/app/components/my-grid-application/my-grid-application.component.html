@@ -1,23 +1,33 @@
-<div>   
-    <div class="filter-block">
-        <input class="filter" placeholder="Filter..." type="text" (keyup)="onFilterChange($event)"/>
-        <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#new-client">New Client</button>
+<div class="well">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <span class="panel-title">Clients</span>
+
     </div>
+    <div class="panel-body main-body"> 
+        <div class="filter-block">
+            <input class="filter" placeholder="Filter..." type="text" (keyup)="onFilterChange($event)"/>
+            <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#new-client">New Client</button>
+        </div>
 
-     <div class="assign" *ngIf="userRole==='bdm'">
-        <!--<input type="text"  [(ngModel)]="isrName"/>   -->
-        <ng2-completer class="filter" placeholder="Assign To"  [(ngModel)]="searchStr" (selected)="onAssignSelected($event)" [dataService]="dataService" [minSearchLength]="0" ></ng2-completer>         
-        <button class="btn btn-primary btn-sm" (click)="assignTo()">Assign</button>
+        <div class="assign" *ngIf="userRole==='bdm'">
+            <!--<input type="text"  [(ngModel)]="isrName"/>   -->
+            <ng2-completer class="filter" placeholder="Assign To"  [(ngModel)]="searchStr" (selected)="onAssignSelected($event)" [dataService]="dataService" [minSearchLength]="0" ></ng2-completer>         
+            <button class="btn btn-primary btn-sm" (click)="assignTo()">Assign</button>
+        </div>
+
+        <div class="assign" *ngIf="userRole==='isr'">
+            <button class="btn btn-primary btn-sm" (click)="assignToMe()">Assign to me</button>
+        </div>
+
+
+        <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
+                    [gridOptions]="gridOptions">
+        </ag-grid-angular>
+
+
     </div>
-
-     <div class="assign" *ngIf="userRole==='isr'">
-        <button class="btn btn-primary btn-sm" (click)="assignToMe()">Assign to me</button>
-    </div>
-
-
-    <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
-                 [gridOptions]="gridOptions">
-    </ag-grid-angular>
+  </div>
 </div>
 
 <div id="myModal" class="modal fade" role="dialog">
