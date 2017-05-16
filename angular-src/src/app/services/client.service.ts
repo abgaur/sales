@@ -35,4 +35,21 @@ export class ClientService {
 		comment.user = JSON.parse(localStorage.getItem('user'));
   		return this.http.post(url, comment).map(res => res.json());
 	}
+
+    updateProfile(user:Object){
+		console.log(user);
+		const url = "http://localhost:3000/users/profile";
+		const headers = new Headers();
+	  	headers.append('Content-type', 'application/json');
+  		return this.http.post(url, user, { headers: headers }).map(res => res.json());	
+	}
+
+	addClient(objClient:Object){
+		const url = "http://localhost:3000/clients/add";
+		const headers = new Headers();
+	  	headers.append('Content-type', 'application/json');
+
+  		return this.http.post(url, objClient, { headers: headers }).map(res => res.json());
+	}
+
 }
