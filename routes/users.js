@@ -114,21 +114,27 @@ router.get('/bdm', (req, res, next) => {
 
 
 router.post('/profile', (req, res, next) => {
-    const userId =  req.body._id;
-    const updateUser= {
-        name: req.body.name,
-        role: req.body.role
-    };
+  const userId = req.body._id;
+  const updateUser = {
+    name: req.body.name,
+    role: req.body.role
+  };
 
-    User.updateUser(userId, updateUser, (err, user) => {
-      if (err) res.json({success: false, msg:'Failed to update profile'});
-      return res.json({success: true, msg:'Profile updted', user: {
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            role: user.role
-          }});
+  User.updateUser(userId, updateUser, (err, user) => {
+    if (err) res.json({ success: false, msg: 'Failed to update profile' });
+    let arrKeys = ['all_users', 'bdm_users'];
+    redisHelper.deleteCache(arrKeys, function (err, keysDeleted) {
+      if (err) throw err;
+      return res.json({
+        success: true, msg: 'Profile updted', user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role
+        }
+      });
     });
+  });
 });
 
 module.exports = router;
