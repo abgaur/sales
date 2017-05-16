@@ -50,5 +50,9 @@ module.exports = {
             });
         };
         cb();
+    },
+
+    deleteCache: function (keys, cb) {
+        redis.del(keys, cb);
     }
 };
