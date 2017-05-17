@@ -6,7 +6,6 @@
     <div class="panel-body main-body"> 
         <div class="filter-block">
             <input class="filter" placeholder="Filter..." type="text" (keyup)="onFilterChange($event)"/>
-            <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#new-client">New Client</button>
         </div>
 
         <div class="assign" *ngIf="userRole==='bdm'">
@@ -25,11 +24,15 @@
         </ag-grid-angular>
 
     </div>
+
+    <button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#new-client">New Client</button>
+
   </div>
 
 <div id="myModal" class="modal fade" role="dialog">
     <app-popup [selectedClient]="selectedClient" (clientUpdated)="getSalesData()"></app-popup>
 </div>
+
 
 <div id="new-client" class="modal fade" role="dialog">
 <app-new-client (clientUpdated)="getSalesData()"></app-new-client>
