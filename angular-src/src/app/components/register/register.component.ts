@@ -38,16 +38,12 @@ export class RegisterComponent implements OnInit {
       role: this.role
     };
 
-    // console.log("User:" + JSON.stringify({user}));
-
     if(!this.validateService.validateRegister(user)) {
-      console.log('Please fill all fields');
       this.flashMessage.show('Please fill all fields', {cssClass: 'alert-danger', timeout: 3000});
       return false;
     }
 
      if(!this.validateService.validateEmail(user.email)) {
-      console.log('Please user valid email');
       this.flashMessage.show('Please user valid email', {cssClass: 'alert-danger', timeout: 3000});
       return false;
     }

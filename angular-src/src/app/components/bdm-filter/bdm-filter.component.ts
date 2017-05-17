@@ -19,7 +19,6 @@ export class BdmFilterComponent implements OnInit {
   	this.userService.getBdms().subscribe((data) => {
   		this.bdms = data;
   		if(this.showAllOption) this.bdms.unshift({ name: "All", email: 'All' });
-  		console.log("init", this.selectedBDM);
   		this.ngOnChanges();
   	});
   }

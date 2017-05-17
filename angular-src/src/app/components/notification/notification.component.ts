@@ -33,7 +33,6 @@ export class NotificationComponent implements OnInit {
   }
 
   show(hide, title, details, autoCloseMillis, type, modal){
-  	console.log(arguments);
   	this.title = title;
   	this.details = details;
   	this.notificationType = type;
@@ -49,7 +48,6 @@ export class NotificationComponent implements OnInit {
   }
 
   showDialog(){
-  	console.log($(`#${this.id}_dialog`));
 	(<any>$(`#${this.id}_dialog`)).modal('show');
   }
 }

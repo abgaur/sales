@@ -20,7 +20,6 @@ export class MyTasksService {
 
 
     assignToBdm(assignToBdmBody) {
-        console.log(assignToBdmBody);
         var url = environment.baseUrl+'clients/bdm';
         let headers =  new Headers();
         headers.append('Content-type', 'application/json');
