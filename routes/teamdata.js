@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
 const teamData = require('../models/teamdata');
 
-router.post("/calltomeeting", (req, res, next) => {
+router.post("/calltomeeting", passport.authenticate('jwt', {session:false}), (req, res, next) => {
     let arrBDM = req.body.bdm;
     let fromDate = new Date(req.body.fromDate);
     let toDate = new Date(req.body.toDate);
@@ -15,7 +17,7 @@ router.post("/calltomeeting", (req, res, next) => {
     });
 });
 
-router.get("/topusers", (req, res, next) => {
+router.get("/topusers", passport.authenticate('jwt', {session:false}), (req, res, next) => {
     let currentMonth = new Date().getMonth()+1;
     let noOfUsers = 5;
     teamData.getTopUsersforMonth(currentMonth, noOfUsers, (err, data) => {
@@ -27,7 +29,7 @@ router.get("/topusers", (req, res, next) => {
     });
 });
 
-router.get("/meetingsscheduled", (req, res, next) => {
+router.get("/meetingsscheduled", passport.authenticate('jwt', {session:false}), (req, res, next) => {
     let noOfMonths = 4;
     teamData.getMeetingsScheduledforMonths(noOfMonths, (err, data) =>{
         if(err){

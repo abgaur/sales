@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
 const Comment = require('../models/comment');
 
 // add comment
-router.post('/add', (req, res, next) => {
+router.post('/add', passport.authenticate('jwt', {session:false}), (req, res, next) => {
   let newComment = new Comment({
     clientId: req.body.clientId,
     message: req.body.message,
@@ -23,7 +25,7 @@ router.post('/add', (req, res, next) => {
 });
 
 // Get Comments by client
-router.get('/:clientId', (req, res, next) => {
+router.get('/:clientId', passport.authenticate('jwt', {session:false}), (req, res, next) => {
   Comment.getCommentsbyClient(req.params.clientId, (err, comments) => {
     if (err) {
       console.error(err);
@@ -35,7 +37,7 @@ router.get('/:clientId', (req, res, next) => {
 });
 
 //update Comment
-router.post('/update', (req, res, next) => {
+router.post('/update', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     let commentId =  req.body._id;
     let updateComment= {
         message: req.body.message,
