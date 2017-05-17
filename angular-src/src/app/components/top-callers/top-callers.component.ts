@@ -15,7 +15,6 @@ export class TopCallersComponent implements OnInit {
   	this.isLoading = true;
 
   	this.dashboardService.getTopUsers().subscribe((data) => {
-        console.log(data);
 		this.isLoading = false;
 		this.callers = data;
   		});

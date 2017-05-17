@@ -30,7 +30,6 @@ export class CommentComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if(this.selectedClient){
-      console.log("Selected Client updated");
         this.clientService.getComments(this.selectedClient._id).subscribe((data) => {
           this.comments = data;
         });

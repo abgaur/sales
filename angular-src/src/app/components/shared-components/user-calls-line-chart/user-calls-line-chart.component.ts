@@ -43,7 +43,6 @@ export class UserCallsLineChartComponent implements OnInit {
 	}
 
   populateUserCalls() {
-    console.log(this.filter)
     var config = LineConfig.lineConfig;
     Highcharts.chart('chart', config);
   }
