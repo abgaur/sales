@@ -47,7 +47,7 @@ export class NewClientComponent implements OnInit {
 
   private updateClientFailure(err: any){
     this.notificationService.show(
-          'edit-popup-notification',
+          'new-client-notification',
           'Error occurred while updating the client.', 
           null,
           5000, 
@@ -84,7 +84,7 @@ export class NewClientComponent implements OnInit {
 
      if(!this.validateService.validateEmail(objClient.newClient.email)) {
        this.notificationService.show(
-	          'edit-popup-notification', 
+	          'new-client-notification', 
 	          'Please Type Valid Email', 
 	          null,
 	          5000, 
@@ -99,7 +99,7 @@ export class NewClientComponent implements OnInit {
 
 	     this.clientUpdated.emit(data);
 	        this.notificationService.show(
-	          'edit-popup-notification', 
+	          'new-client-notification', 
 	          'New Client Added.', 
 	          null,
 	          5000, 
