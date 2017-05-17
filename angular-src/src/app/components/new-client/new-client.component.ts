@@ -47,7 +47,7 @@ export class NewClientComponent implements OnInit {
 
   private updateClientFailure(err: any){
     this.notificationService.show(
-          'edit-popup-notification',
+          'new-client-notification',
           'Error occurred while updating the client.', 
           null,
           5000, 
