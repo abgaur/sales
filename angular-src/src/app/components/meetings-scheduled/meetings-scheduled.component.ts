@@ -17,7 +17,6 @@ export class MeetingsScheduledComponent implements OnInit {
   	this.isLoading = true;
 
   	this.dashboardService.getMeetingsCount().subscribe((data) => {
-        console.log(data);
     		this.isLoading = false;
         this.currentMonth = data.currentMonth;
         this.prevMonths = data.prevMonths;

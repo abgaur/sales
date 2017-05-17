@@ -22,7 +22,6 @@ export class RemindersComponent implements OnInit {
   getReminders() {
       this.isLoading = true;
       this.remindersService.getReminders().subscribe(data => {
-        console.log(data);
         this.isLoading = false;
         this.clients = data;        
     });

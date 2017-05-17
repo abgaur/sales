@@ -6,6 +6,7 @@ form.ng-touched .ng-invalid:not(form)  {
 .flash-messages {
     position: absolute;
     width: 100%;
+    z-index: 10;
 }
 
 .flash-messages .flash-message{

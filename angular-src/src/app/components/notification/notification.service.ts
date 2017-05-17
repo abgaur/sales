@@ -15,6 +15,6 @@ export class NotificationService {
 	}
 
 	showAllComponents(){
-		console.log(this.listeners);
+		// console.log(this.listeners);
 	}
 }
