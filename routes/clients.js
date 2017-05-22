@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const bodyParser = require('body-parser');
 const xlstojson = require("xls-to-json-lc");
@@ -9,7 +11,7 @@ const clientHelper = require('../helpers/client.helper');
 const redisHelper = require('../helpers/redis.helper');
 
 // Upload
-router.post('/upload/:email', (req, res, next) => {
+router.post('/upload/:email', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     let uploadedBy = req.params.email;
     let exceltojson;
     let upload = clientHelper.getUploader();
@@ -65,17 +67,9 @@ router.post('/upload/:email', (req, res, next) => {
     });
 });
 
-// fetch data by uploader name
-/*router.get('/data/:uploadedBy', (req, res, next) => {
-     Client.find({uploadedBy: req.params.uploadedBy}, function(err, client) {
-          if (err) return console.error(err);
-          //console.log(client);
-            res.send(JSON.stringify(client));
-        });
-});*/
 
 // fetch cached data based on user role
-router.get('/data/:role', (req, res, next) => {
+router.get('/data/:role', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     let role = req.params.role;
     redisHelper.getCacheDatabyPattern('client', function (data) {
         if (data) {
@@ -94,9 +88,8 @@ router.get('/data/:role', (req, res, next) => {
 });
 
 
-
 // fetch data by id
-router.get('/:id', (req, res, next) => {
+router.get('/:id', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     Client.getClientById(req.params.id, (err, client) => {
         if (err) res.json({ success: false, msg: 'Failed to retrieve client' });
         res.send(JSON.stringify(client));
@@ -104,7 +97,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 // fetch data by assignTo
-router.get('/assignto/:assignto', (req, res, next) => {
+router.get('/assignto/:assignto', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     Client.getClientByAssignTo(req.params.assignto, (err, client) => {
         if (err) res.json({ success: false, msg: 'Failed to retrieve client' });
         res.send(JSON.stringify(client));
@@ -112,7 +105,7 @@ router.get('/assignto/:assignto', (req, res, next) => {
 });
 
 // multi-update assingnto
-router.post('/assignto', (req, res, next) => {
+router.post('/assignto', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     let assignTo = req.body.assignTo;
     let ids = req.body.ids;
     Client.updateAssignedTo(ids, assignTo, (err, docs) => {
@@ -126,7 +119,7 @@ router.post('/assignto', (req, res, next) => {
 });
 
 // multi-update bdm
-router.post('/bdm', (req, res, next) => {
+router.post('/bdm', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     let bdm = req.body.bdm;
     let ids = req.body.ids;
     Client.updateBdm(ids, bdm, (err, docs) => {
@@ -140,7 +133,7 @@ router.post('/bdm', (req, res, next) => {
 });
 
 // update client
-router.post('/', (req, res, next) => {
+router.post('/', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     let clientId = req.body._id;
     let updateClient = {
         firstName: req.body.firstName,
@@ -170,7 +163,7 @@ router.post('/', (req, res, next) => {
 });
 
 //get reminders by assignee and daterange
-router.get('/reminders/:assignedto/:startdate/:enddate', (req, res, next) => {
+router.get('/reminders/:assignedto/:startdate/:enddate', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     Client.getClientByDateRange(
         req.params.assignedto,
         new Date(req.params.startdate).toISOString(),
@@ -182,7 +175,7 @@ router.get('/reminders/:assignedto/:startdate/:enddate', (req, res, next) => {
 });
 
 //add new client
-router.post('/add', (req, res, next) => {
+router.post('/add', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     let newClient = new Client(req.body.newClient);
     Client.addClient(newClient, (err, client) => {
         if (err) {

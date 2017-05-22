@@ -75,7 +75,7 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
 });
 
 // Get All Users
-router.get('/all', (req, res, next) => {
+router.get('/all', passport.authenticate('jwt', {session:false}), (req, res, next) => {
   redisHelper.getCacheData('all_users', function (data) {
     if (data) {
       res.send(data);
@@ -94,7 +94,7 @@ router.get('/all', (req, res, next) => {
 });
 
 // Get All BDMs
-router.get('/bdm', (req, res, next) => {
+router.get('/bdm', passport.authenticate('jwt', {session:false}), (req, res, next) => {
   redisHelper.getCacheData('bdm_users', function (data) {
     if (data) {
       res.send(data);
@@ -113,7 +113,7 @@ router.get('/bdm', (req, res, next) => {
 });
 
 
-router.post('/profile', (req, res, next) => {
+router.post('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
   const userId = req.body._id;
   const updateUser = {
     name: req.body.name,
