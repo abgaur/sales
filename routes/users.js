@@ -8,7 +8,7 @@ const User = require('../models/user');
 const redisHelper = require('../helpers/redis.helper');
 
 // Register
-router.post('/register', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+router.post('/register', (req, res, next) => {
   let newUser = new User({
     name: req.body.name,
     email: req.body.email,
@@ -30,7 +30,7 @@ router.post('/register', passport.authenticate('jwt', {session:false}), (req, re
 });
 
 // Authenticate
-router.post('/authenticate', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+router.post('/authenticate', (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
