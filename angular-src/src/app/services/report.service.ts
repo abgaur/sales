@@ -3,21 +3,24 @@ import {Http, Headers} from '@angular/http';
 import * as ChartConfig from '../config/column-chart-config';
 import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class ReportService {
 
-  constructor(private http: Http) { }
+  headers: any;
+  	constructor(private http: Http,
+	  private authService: AuthService) {
+		  this.authService.loadToken();
+		  this.headers = new Headers();
+		  this.headers.append('Content-type', 'application/json');
+		  this.headers.append('Authorization', this.authService.authToken);		 
+	  }
 
   getCallsToMeeting(filter) {
-     
-     
         var callsToMeetingUrl = environment.baseUrl+'teamdata/calltomeeting';
-        let headers =  new Headers();
-        headers.append('Content-type', 'application/json');
-        return this.http.post(callsToMeetingUrl, filter, {headers: headers})
-          .map(res => res.json());     
-    
+        return this.http.post(callsToMeetingUrl, filter, {headers: this.headers})
+          .map(res => res.json());
   }
 
   parseDataForStackedChart(data){

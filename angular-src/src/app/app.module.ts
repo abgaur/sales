@@ -61,6 +61,7 @@ import { TopCallersComponent } from './components/top-callers/top-callers.compon
 import { DateFilterComponent } from './components/date-filter/date-filter.component';
 import { UserDataComponent } from './components/user-data/user-data.component';
 import { UserCallsLineChartComponent } from './components/shared-components/user-calls-line-chart/user-calls-line-chart.component';
+import { NewClientComponent } from './components/new-client/new-client.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -110,7 +111,8 @@ const appRoutes: Routes = [
     TopCallersComponent,
     DateFilterComponent,
     UserDataComponent,
-    UserCallsLineChartComponent
+    UserCallsLineChartComponent,
+    NewClientComponent
   ],
   imports: [
     BrowserModule,
