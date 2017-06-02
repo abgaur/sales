@@ -32,7 +32,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/profile']">Profile</a></li>
-                <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/editprofile']">Edit Profile</a></li>
+              <!--   <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/editprofile']">Edit Profile</a></li> -->
                 <li role="separator" class="divider"></li>
                 <li *ngIf="authService.loggedIn()" ><a (click)="onLogoutClick()" href="#">Logout</a></li>
               </ul>
