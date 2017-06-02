@@ -24,7 +24,11 @@ router.post('/register', (req, res, next) => {
         res.json({success: false, msg:'Failed to register user'});
       }
     } else {
-      res.json({success: true, msg:'User registered'});
+      let arrKeys = ['all_users', 'bdm_users'];
+      redisHelper.deleteCache(arrKeys, function (err, keysDeleted) {
+      if (err) throw err;
+      return res.json({success: true, msg: 'User registered'});
+    });
     }
   });
 });
