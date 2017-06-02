@@ -2,10 +2,11 @@
 	<app-loading-spinner [hide]="!isLoading"></app-loading-spinner>
 	<div class="panel panel-default">
 	  <div class="panel-heading">
-	    <span class="panel-title">Meetings Scheduled</span><span class="pull-right panel-title">{{ currentMonth.month | date: 'MMM yyyy' }}</span>
+	    <span class="panel-title">Meetings Scheduled</span><span class="pull-right panel-title">{{ currentMonth && currentMonth.month | date: 'MMM yyyy' }}</span>
 	  </div>
 	  <div class="panel-body main-body">
-	    <div class="list-group">
+	  	<div *ngIf="!currentMonth || currentMonth.clients === 0">No meetings scheduled.</div>
+	    <div class="list-group" *ngIf="currentMonth && currentMonth.clients > 0">
 		  <div class="list-group-item active" *ngFor="let item of currentMonth.clients">
 		    <label class="list-group-item-heading">{{ item.company }}</label>
 		    <label class="list-group-item-heading pull-right">{{ item.isr }} {{ !!item.bdm ? "/" + item.bdm : '' }}</label>
