@@ -27,7 +27,7 @@ export class ReportService {
       var resultSeries = { meeting: { name: 'Meeting', data: []}, calls: { name: 'Calls', data: []} };
       data.forEach((item) => {
         resultSeries.meeting.data.push({ name: item.name, y: item.meeting});
-        resultSeries.calls.data.push({ name: item.name, y: item.totalCount});
+        resultSeries.calls.data.push({ name: item.name, y: item.calls});
       });
       return resultSeries;
     }
