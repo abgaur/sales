@@ -6,7 +6,7 @@
 	  </div>
 	  <div class="panel-body main-body">
 	  	<div *ngIf="!currentMonth || currentMonth.clients === 0">No meetings scheduled.</div>
-	    <div class="list-group" *ngIf="currentMonth && currentMonth.clients > 0">
+	    <div class="list-group" *ngIf="currentMonth && currentMonth.clients && currentMonth.clients.length > 0">
 		  <div class="list-group-item active" *ngFor="let item of currentMonth.clients">
 		    <label class="list-group-item-heading">{{ item.company }}</label>
 		    <label class="list-group-item-heading pull-right">{{ item.isr }} {{ !!item.bdm ? "/" + item.bdm : '' }}</label>
