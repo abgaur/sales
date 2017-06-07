@@ -91,7 +91,7 @@ export class MyGridApplicationComponent implements OnInit {
                 field: "linkedInUrl",
                 width: 200,
                 filter: 'text',
-                cellRenderer: (val) => `<a href="${val.value}" target="_blank">${val.value}</a>`
+                cellRenderer: (val) => `<a href="${val.value}" style="color: #1e568e" target="_blank">${val.value}</a>`
             },
             {
                 headerName: "Email",

@@ -11,5 +11,9 @@
     display: inline-block;
 }
 app-bdm-filter {
-    display: inline-block;
- }
+   	display: inline-block;
+}
+
+.ag-cell a {
+	color: #1e568e;
+}

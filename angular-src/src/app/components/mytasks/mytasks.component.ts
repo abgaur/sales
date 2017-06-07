@@ -81,10 +81,11 @@ export class MytasksComponent implements OnInit {
                 filter: 'text'
             },
             {
-                headerName: "BDM",
-                field: "bdm.name",
-                width: 120,
-                filter: 'text'
+                headerName: "LinkedIn Url",
+                field: "linkedInUrl",
+                width: 200,
+                filter: 'text',
+                cellRenderer: (val) => `<a href="${val.value}" style="color: #1e568e" target="_blank">${val.value}</a>`
             },
             {
                 headerName: "Email",
@@ -101,6 +102,12 @@ export class MytasksComponent implements OnInit {
                 headerName: "company",
                 field: "company",               
                 width: 200
+            },
+            {
+                headerName: "BDM",
+                field: "bdm.name",
+                width: 120,
+                filter: 'text'
             },
             {
                 headerName: "Supervisor Name",
