@@ -16,6 +16,11 @@ export class CommentComponent implements OnInit, OnChanges {
     { type: 'Meeting', cssClass: 'glyphicon-calendar' },
     { type: 'Note', cssClass: 'glyphicon-pushpin' }
   ];
+
+  private shortcuts = {
+    voicemail: 'Voicemail'
+  };
+
   private comments: Array<any> = [];
   private newComment: any = {
     message: '',
@@ -37,7 +42,10 @@ export class CommentComponent implements OnInit, OnChanges {
     }
   }
 
-  addComment() {
+  addComment(shortcut) {
+    if(shortcut){
+      this.newComment.message = this.shortcuts[shortcut];
+    }
     this.newComment.isr = this.selectedClient.assignedTo;
     this.newComment.bdm = this.selectedClient.bdm;
     this.clientService.addComment(this.newComment).subscribe((data) => {

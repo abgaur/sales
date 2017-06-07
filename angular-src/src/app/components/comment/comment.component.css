@@ -14,3 +14,22 @@
 	color: red;
 	visibility: visible;
 }
+
+.call-sub-menu {
+	margin-top: 6px;
+	font-size: 12px;
+}
+
+.call-sub-menu li {
+	cursor: pointer;
+	font-size: 14px;
+}
+
+.call-sub-menu li .label {
+	padding: 5px;
+}
+
+.shortcut-button {
+	background-color: #5f9ea0;
+    color: white;
+}
