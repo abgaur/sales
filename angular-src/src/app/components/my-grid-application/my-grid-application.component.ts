@@ -52,7 +52,7 @@ export class MyGridApplicationComponent implements OnInit {
         this.gridOptions.columnDefs = [
             {
                 headerName: "Actions",
-                width: 150,
+                width: 100,
                 field: "_id",
                 cellRendererFramework: EditTaskComponent,
                 headerCheckboxSelection: true,
@@ -87,21 +87,28 @@ export class MyGridApplicationComponent implements OnInit {
                 filter: 'text'
             },
             {
-                headerName: "Assigned To",
-                field: "assignedTo",
-                width: 120,
-                filter: 'text'
+                headerName: "LinkedIn Url",
+                field: "linkedInUrl",
+                width: 200,
+                filter: 'text',
+                cellRenderer: (val) => `<a href="${val.value}" target="_blank">${val.value}</a>`
             },
             {
                 headerName: "Email",
                 field: "email",
                 width: 200
             },
-             {
+            {
                 headerName: "phone",
                 field: "phone",
                 width: 200,
 
+            },
+            {
+                headerName: "Assigned To",
+                field: "assignedTo",
+                width: 120,
+                filter: 'text'
             },
             {
                 headerName: "company",
