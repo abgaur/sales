@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 // create a schema
 var clientSchema = new Schema({
   'rainKingContactId': String,
-  'salutation': String,
+  'salutation': { type: String, default: "" },
   'firstName': String,
   'lastName': String,
   'nickname': String,
