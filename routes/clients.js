@@ -47,17 +47,19 @@ router.post('/upload/:email', passport.authenticate('jwt', {session:false}), (re
                 // extra code
 
                 for (let i = 0; i < result.length; i++) {
-                    result[i].uploadedBy = uploadedBy;
-                    let newClient = Client(clientHelper.createDBObjFromExcel(result[i]));
-                    Client.addClient(newClient, (err, client) => {
-                        if (err) {
-                            res.json({ success: false, msg: 'Failed to add client' });
-                        } else {
-                            redisHelper.setCacheData('client', newClient, function () {
-                                return false;
-                            });
-                        }
-                    });
+                    if (result[i]['first name'] != '' && result[i]['last name'] != '') {
+                        result[i].uploadedBy = uploadedBy;
+                        let newClient = Client(clientHelper.createDBObjFromExcel(result[i]));
+                        Client.addClient(newClient, (err, client) => {
+                            if (err) {
+                                res.json({ success: false, msg: 'Failed to add client' });
+                            } else {
+                                redisHelper.setCacheData('client', newClient, function () {
+                                    return false;
+                                });
+                            }
+                        });
+                    }
                 }
                 return res.json({ success: true, msg: 'Records Added' });
             });
