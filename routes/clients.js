@@ -149,7 +149,8 @@ router.post('/', passport.authenticate('jwt', {session:false}), (req, res, next)
         etouchSl: req.body.etouchSl,
         reminder: req.body.reminder,
         bdm: req.body.bdm,
-        status: req.body.status
+        status: req.body.status,
+        linkedInUrl: req.body.linkedInUrl
     };
 
     if (updateClient.reminder) updateClient.reminder.date = new Date(updateClient.reminder.date).toISOString();
