@@ -40,3 +40,15 @@ data: {
     "linkedInUrl": "http://www.intuit.com"
   }
 }
+```
+# User call records for chart
+```sh
+URI: /userdata/callreport
+Method: POST
+data: {
+    "bdm" : ["testbdm1@etouch.net"],
+    "isr" : ["testisr1@etouch.net"],
+    "fromDate": "Thu Jun 1 2017 00:00:00 GMT-0700 (Pacific Daylight Time)",
+    "toDate": "Fri Jun 30 2017 23:59:59 GMT-0700 (Pacific Daylight Time)",
+    "groupBy": "day"
+}

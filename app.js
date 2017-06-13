@@ -37,6 +37,7 @@ const clients = require('./routes/clients');
 const comments = require('./routes/comments');
 const stages = require('./routes/stages');
 const teamdata = require('./routes/teamdata');
+const userdata = require('./routes/userdata');
 
 const port = process.env.PORT || 3000;
 
@@ -60,6 +61,7 @@ app.use('/clients', clients);
 app.use('/comments', comments);
 app.use('/stages', stages);
 app.use('/teamdata', teamdata);
+app.use('/userdata', userdata);
 
 
 
