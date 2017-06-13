@@ -9,6 +9,7 @@ import { PopupComponent } from '../popup/popup.component';
 import { Observable } from "rxjs/Rx";
 import { ClientService } from '../../services/client.service';
 import { UserService } from '../../services/user.service';
+declare var moment;
 
 @Component({
   selector: 'app-my-grid-application',
@@ -99,7 +100,7 @@ export class MyGridApplicationComponent implements OnInit {
                 width: 200
             },
             {
-                headerName: "phone",
+                headerName: "Phone",
                 field: "phone",
                 width: 200,
 
@@ -111,7 +112,7 @@ export class MyGridApplicationComponent implements OnInit {
                 filter: 'text'
             },
             {
-                headerName: "company",
+                headerName: "Company",
                 field: "company",               
                 width: 200
             },
@@ -126,10 +127,16 @@ export class MyGridApplicationComponent implements OnInit {
                 field: "managementLevel",
                 width: 200
             },
-             {
+            {
                 headerName: "Etouch SL",
                 field: "etouchSl",
                 width: 100
+            },
+            {
+                headerName: "Last Updated",
+                field: "updatedAt",
+                cellFormatter: (data) => moment(data.value).format('MM/DD/YYYY HH:mm:ss'),
+                width: 150
             }
         ];
         // setting up features for grid

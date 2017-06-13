@@ -10,7 +10,7 @@ import { CompleterService, CompleterData, CompleterItem} from 'ng2-completer';
 import { Observable } from "rxjs/Rx";
 import { ClientService } from '../../services/client.service';
 import { UserService } from '../../services/user.service';
-
+declare var moment;
 
 @Component({
   selector: 'app-mytasks',
@@ -93,13 +93,13 @@ export class MytasksComponent implements OnInit {
                 width: 200
             },
              {
-                headerName: "phone",
+                headerName: "Phone",
                 field: "phone",
                 width: 200,
 
             },
             {
-                headerName: "company",
+                headerName: "Company",
                 field: "company",               
                 width: 200
             },
@@ -120,10 +120,16 @@ export class MytasksComponent implements OnInit {
                 field: "managementLevel",
                 width: 200
             },
-             {
+            {
                 headerName: "Etouch SL",
                 field: "etouchSl",
                 width: 100
+            },
+            {
+                headerName: "Last Updated",
+                field: "updatedAt",
+                cellFormatter: (data) => moment(data.value).format('MM/DD/YYYY HH:mm:ss'),
+                width: 150
             }
         ];
         // setting up features for grid
