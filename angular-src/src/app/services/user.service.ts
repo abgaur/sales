@@ -31,6 +31,12 @@ export class UserService {
 
   }
 
+  getIsrs() {
+    let url = environment.baseUrl + 'users/isr';
+    return this.http.get(url,  { headers: this.headers })
+      .map(res => res.json());
+
+  }
   getStages() {    
     var stagesUrl =environment.baseUrl+'stages/';
     return this.http.get(stagesUrl,  {headers: this.headers})

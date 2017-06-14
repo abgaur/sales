@@ -25,9 +25,12 @@ export class ReportService {
   }
 
   getCallsReportForISR(filter){
-      /*var callsToMeetingUrl = environment.baseUrl+'userdata/callReport';
-        return this.http.post(callsToMeetingUrl, filter, {headers: this.headers})
-          .map(res => res.json());*/
+      var callsToMeetingUrl = environment.baseUrl+'userdata/callreport';
+      return this.http
+                .post(callsToMeetingUrl, filter, {headers: this.headers})
+                .map(res => res.json());
+
+         /*
 
       let sub = new Subject<any>();
       setTimeout(() => sub.next(
@@ -68,8 +71,8 @@ export class ReportService {
               "calls": 12,
               "meeting": 1
           }]
-      ));
-      return sub;
+      ));*/
+      // return sub;
   }
 
   parseDataForStackedChart(data){

@@ -14,15 +14,14 @@ export class DateFilterComponent implements OnInit {
   // filterDates: EventEmitter<string> = new EventEmitter<number>();
 
   private dateTypes = [
-    { type: 'Weekly' },
-    { type: 'Monthly'},
-    { type: 'Quarterly'},
-    { type: 'Custom'}
+    { type: 'Weekly', groupBy: 'day' },
+    { type: 'Monthly', groupBy: 'day' },
+    { type: 'Quarterly', groupBy: 'week' },
+    { type: 'Custom', groupBy: 'day' }
   ];
 
-  private selectedDateType: any  = {
-    type: 'Weekly'
-  }
+  private selectedDateType: any  = this.dateTypes[0];
+
   private customFromDate = moment();
   private customToDate = moment();
   private fromDateOptions = {    
@@ -66,7 +65,11 @@ export class DateFilterComponent implements OnInit {
       this.dateText = 'Q'+requiredDate.quarter() + ' '+ requiredDate.year();;
     }
 
-    this.filterDates.emit({'fromDate': this.fromDate.set({'hour':0, 'minute': 0, 'second': 0}), 'toDate': this.toDate.set({'hour':23, 'minute': 59, 'second': 59})});
+    this.filterDates.emit({
+      'fromDate': this.fromDate.set({'hour':0, 'minute': 0, 'second': 0}), 
+      'toDate': this.toDate.set({'hour':23, 'minute': 59, 'second': 59}),
+       type: this.selectedDateType
+    });
   }
 
   getPreviousData() {    
@@ -136,7 +139,7 @@ export class DateFilterComponent implements OnInit {
   getCustomDateData(){
      this.fromDate = this.customFromDate.set({'hour':0, 'minute': 0, 'second': 0});
      this.toDate = this.customToDate.set({'hour':23, 'minute': 59, 'second': 59});
-     this.filterDates.emit({'fromDate': this.fromDate, 'toDate': this.toDate});
+     this.filterDates.emit({'fromDate': this.fromDate, 'toDate': this.toDate, type: this.selectedDateType});
 
   }
 

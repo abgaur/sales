@@ -97,26 +97,6 @@ router.get('/all', passport.authenticate('jwt', {session:false}), (req, res, nex
   });
 });
 
-// Get All BDMs
-router.get('/bdm', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-  redisHelper.getCacheData('bdm_users', function (data) {
-    if (data) {
-      res.send(data);
-    } else {
-      User.getAllBdms('bdm', (err, users) => {
-        if (err) res.json({ success: false, msg: 'Failed to get BDMs' });
-        else {
-          users._id = 'users';
-          redisHelper.setCacheData('bdm', users, function () {
-          });
-          res.send(JSON.stringify(users));
-        }
-      });
-    }
-  });
-});
-
-
 router.post('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
   const userId = req.body._id;
   const updateUser = {
@@ -140,5 +120,27 @@ router.post('/profile', passport.authenticate('jwt', {session:false}), (req, res
     });
   });
 });
+
+// Get All BDMs
+router.get('/:role', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+  let role = req.params.role;
+
+  redisHelper.getCacheData(role + '_users', function (data) {
+    if (data) {
+      res.send(data);
+    } else {
+      User.getByRole(role, (err, users) => {
+        if (err) res.json({ success: false, msg: 'Failed to get user for role: ' + role });
+        else {
+          users._id = 'users';
+          redisHelper.setCacheData(role, users, function () {
+          });
+          res.send(JSON.stringify(users));
+        }
+      });
+    }
+  });
+});
+
 
 module.exports = router;

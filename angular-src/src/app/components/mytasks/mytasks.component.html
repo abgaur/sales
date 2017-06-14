@@ -8,7 +8,7 @@
         <input class="filter" placeholder="Filter..." type="text" (keyup)="onFilterChange($event)" />
       </div>
       <div class="assign">
-        Select BDM: <app-bdm-filter [showAllOption]="false" [selectedBDM]="bdmSelected" (changed)="bdmSelection($event)" cssClass="input-group-sm"></app-bdm-filter>
+        Select BDM: <app-bdm-filter [showAllOption]="false" [items]="bdms" [selectedItem]="bdmSelected" (changed)="bdmSelection($event)" cssClass="input-group-sm"></app-bdm-filter>
         <button class="btn btn-primary btn-sm" (click)="assignToBdm()">Assign BDM</button>
       </div>
       <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh" [gridOptions]="gridOptions">

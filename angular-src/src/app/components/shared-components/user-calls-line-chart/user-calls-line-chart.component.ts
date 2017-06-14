@@ -10,27 +10,18 @@ const Highcharts = require("highcharts");
 })
 export class UserCallsLineChartComponent implements OnInit {
 
-  @Input()
-  	filter: any;
-	@Input()
-    selectedBdms: any;
+  @Input() filter: any;
+	@Input() selectedBdms: any;
+  @Input() selectedIsrs: any;
+  @Input() groupBy: any;
 
 	isLoading: Boolean = false;
-  users: any;
-	bdms: any;
+	bdms: Array<any> = [];
+  isrs: Array<any> = [];
 	fromDate: any;
 	toDate: any;
 
-  constructor(private reportService: ReportService) { 
-
-    
-      this.users = [];
-		  // this is for one BDM, it will change
-		  var user = JSON.parse(localStorage.getItem('user')).email
-		  this.users.push(user);
-
-
-  }
+  constructor(private reportService: ReportService) { }
 
   ngOnInit() {
     
@@ -38,6 +29,7 @@ export class UserCallsLineChartComponent implements OnInit {
 
   ngOnChanges() {
     if(this.filter) {
+      console.log(this.filter);
       this.fromDate = this.filter.fromDate;
       this.toDate = this.filter.toDate;
     }
@@ -45,7 +37,13 @@ export class UserCallsLineChartComponent implements OnInit {
       this.bdms = [];
       this.bdms.push(this.selectedBdms.email);
     }
-    this.populateUserCalls();
+    if(this.selectedIsrs) {
+      this.isrs = [];
+      this.isrs.push(this.selectedIsrs.email);
+    }
+    if(this.fromDate &&  this.toDate && this.bdms.length > 0 && this.isrs.length > 0 && this.filter.type.groupBy){
+      this.populateUserCalls();
+    }
 	}
 
   populateUserCalls() {
@@ -54,8 +52,10 @@ export class UserCallsLineChartComponent implements OnInit {
 
     var filter = {
       bdm: this.bdms,
+      isr: this.isrs,
       fromDate: this.fromDate,
-      toDate: this.toDate
+      toDate: this.toDate,
+      groupBy: this.filter.type.groupBy
     }
 
     // this.isLoading = true;
@@ -64,11 +64,15 @@ export class UserCallsLineChartComponent implements OnInit {
       data => {
         this.isLoading = false;
         let config = LineConfig.lineConfig;
+        console.log(Date.UTC(this.fromDate.year(), this.fromDate.month(), this.fromDate.date()));
+        console.log(Date.UTC(this.toDate.year(), this.toDate.month(), this.toDate.date()));
         config.xAxis = {
             type: "datetime",
             dateTimeLabelFormats: {
-                day: '%e %b'
+                day: '%b %e'
             },
+            tickInterval: 24 * 3600 * 1000,
+            minTickInterval: 24 * 3600 * 1000,
             min: Date.UTC(this.fromDate.year(), this.fromDate.month(), this.fromDate.date()),
             max: Date.UTC(this.toDate.year(), this.toDate.month(), this.toDate.date())
         };

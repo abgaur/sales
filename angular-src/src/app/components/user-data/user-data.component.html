@@ -4,7 +4,10 @@
     <div class="row">
 		<div class="col-xs-4">
 			<div class="bdm-filter-container">
-				Select BDM: <app-bdm-filter showAllOption="true" [selectedBDM]="bdmSelected" (changed)="bdmSelection($event)"></app-bdm-filter>
+				BDM: <app-bdm-filter cssClass="input-group-sm" [showAllOption]="false" [items]="bdms" [selectedItem]="bdmSelected" (changed)="bdmSelection($event)"></app-bdm-filter>
+			</div>
+			<div class="isr-filter-container">
+				ISR: <app-bdm-filter cssClass="input-group-sm" [showAllOption]="false" [items]="isrs" [selectedItem]="isrSelected" (changed)="isrSelection($event)"></app-bdm-filter>
 			</div>
 		</div>
 		<!-- this will go into its own component -->
@@ -17,7 +20,7 @@
 <div class="row">
 	<div class="col-xs-8">
 		<!--<app-calls-meeting-report [filter]= 'filterDates'></app-calls-meeting-report>-->
-   		<app-user-calls-line-chart [filter]= 'filterDates' [selectedBdms]= 'bdmSelected'></app-user-calls-line-chart>
+   		<app-user-calls-line-chart [filter]= 'filterDates' [selectedIsrs]="isrSelected" [selectedBdms]= 'bdmSelected'></app-user-calls-line-chart>
 	</div>
 	<div class="col-xs-4">
 		

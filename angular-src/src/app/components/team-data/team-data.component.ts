@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-team-data',
@@ -10,10 +11,16 @@ export class TeamDataComponent implements OnInit {
   private filterDates: any;
   private selectedBdm: any;
   private bdmSelected: any;  
-  constructor() { }
+  private bdms: Array<any> = [];
+
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.bdmSelected = JSON.parse(localStorage.getItem('user'));
+    this.userService.getBdms().subscribe((data) => {
+      this.bdms = data;
+      this.bdmSelected = JSON.parse(localStorage.getItem('user'));
+    });
+    
   }
 
   bdmSelection(event){

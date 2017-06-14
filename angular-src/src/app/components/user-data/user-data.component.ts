@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user-data',
@@ -10,13 +11,40 @@ export class UserDataComponent implements OnInit {
   private filterDates: any;
   private selectedBdm: any;
   private bdmSelected: any;  
+  private bdms: Array<any> = [];
+  private isrs: Array<any> = [];
+  private isrSelected: any;  
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    let currentUser = JSON.parse(localStorage.getItem('user'));
+
+    this.userService.getBdms().subscribe((data) => {
+      this.bdms = data;
+      if(currentUser.role === 'isr'){
+        this.bdmSelected = this.bdms[0];
+      }else{
+        this.bdmSelected = currentUser;
+      }
+    });
+    this.userService.getIsrs().subscribe((data) => {
+      this.isrs = data;
+      if(currentUser.role === 'isr'){
+        this.isrSelected = currentUser;
+      }else{
+        this.isrSelected = this.isrs[0];
+      }
+    });
+  }
 
   bdmSelection(event){
     this.bdmSelected = event;
+    console.log(event);
+  }
+
+  isrSelection(event){
+    this.isrSelected = event;
     console.log(event);
   }
 
@@ -25,8 +53,8 @@ export class UserDataComponent implements OnInit {
   }
 
   sendDates(event) {
-    console.log(event);
-     this.filterDates = event;
+    console.log("Event", event);
+    this.filterDates = event;
   }
 
 }

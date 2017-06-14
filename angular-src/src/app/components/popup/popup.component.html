@@ -91,7 +91,7 @@
 			<div class="col-lg-4">
 			 <div class="form-group input-group-sm">
 			   <label class="control-label">BDM *</label>
-			     <app-bdm-filter cssClass="input-group-sm" [selectedBDM]="selectedClient.bdm" (changed)="bdmSelected($event)"></app-bdm-filter>
+			     <app-bdm-filter cssClass="input-group-sm" [items]="bdms" [selectedItem]="selectedClient.bdm" (changed)="bdmSelected($event)"></app-bdm-filter>
 			 </div> 
 			 </div>
 

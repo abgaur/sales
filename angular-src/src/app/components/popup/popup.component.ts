@@ -31,7 +31,7 @@ export class PopupComponent implements OnInit, OnChanges {
   private newComment = '';
   private notificationType = NotificationEnumType.NotificationType;
   private dataService: CompleterData;
-  //private bdmName: String;
+  private bdms: Array<any> = [];
   //private bdm: any;
   private stages: any; 
 
@@ -50,6 +50,9 @@ export class PopupComponent implements OnInit, OnChanges {
       this.userService.getStages().subscribe( data => {
         console.dir(data);
         self.stages = data;
+      });
+      this.userService.getBdms().subscribe((data) => {
+        this.bdms = data;
       });
     
   } 

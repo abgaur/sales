@@ -20,7 +20,7 @@ declare var moment;
 export class MytasksComponent implements OnInit {
   private gridOptions: GridOptions;
   private isrName: string;
- 
+  private bdms: Array<any> = [];
   private searchStr: string;
   private dataService: CompleterData;
   private selectedClient: any;
@@ -38,6 +38,10 @@ export class MytasksComponent implements OnInit {
         this.userService.getUsers().subscribe( data => {
             
             self.dataService =  completerService.local(data, "name", "name").descriptionField("email");
+        });
+
+        this.userService.getBdms().subscribe((data) => {
+            this.bdms = data;
         });
     
         this.gridOptions = {};
