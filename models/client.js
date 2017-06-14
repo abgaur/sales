@@ -102,3 +102,7 @@ module.exports.getClientByDateRange = function(assignedTo, startDate, endDate, c
                         }
         }, callback).sort({"reminder.date" : 'asc'});
 };
+
+module.exports.deleteClient = function(clientIds, callback){
+    Client.remove({ _id: { "$in": clientIds }}, callback);
+};
