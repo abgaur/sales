@@ -3,18 +3,15 @@ export const lineConfig = {
         type: 'line'
     },
     title: {
-        text: 'Weekly Calls'
+        text: ''
     },
-    subtitle: {
-        text: 'Source: eTouch'
-    },
-    xAxis: {
-        categories: ['Monday','Tuesday','Wednesday','thursday', 'Friday', 'Saturday']
-    },
+    xAxis: {},
     yAxis: {
+        allowDecimals: false,
         title: {
-            text: 'Number of Calls'
-        }
+            text: 'Count'
+        },
+        min: 0
     },
     plotOptions: {
         line: {
@@ -24,8 +21,5 @@ export const lineConfig = {
             enableMouseTracking: false
         }
     },
-    series: [{
-        name: 'Calls',
-        data: [5,4,5,3,4,6]
-    }]
+    series: []
 }

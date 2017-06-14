@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-user-data',
@@ -8,17 +8,20 @@ import { Component, OnInit } from '@angular/core';
 export class UserDataComponent implements OnInit {
 
   private filterDates: any;
-  constructor() { 
+  private selectedBdm: any;
+  private bdmSelected: any;  
 
+  constructor() { }
 
-    
-  }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  bdmSelected(event){
+  bdmSelection(event){
+    this.bdmSelected = event;
     console.log(event);
+  }
+
+  ngOnChanges(){
+    //console.log(this.filter)
   }
 
   sendDates(event) {

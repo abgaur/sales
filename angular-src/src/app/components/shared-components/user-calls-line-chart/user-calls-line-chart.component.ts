@@ -12,7 +12,9 @@ export class UserCallsLineChartComponent implements OnInit {
 
   @Input()
   	filter: any;
-	
+	@Input()
+    selectedBdms: any;
+
 	isLoading: Boolean = false;
   users: any;
 	bdms: any;
@@ -35,16 +37,52 @@ export class UserCallsLineChartComponent implements OnInit {
   }
 
   ngOnChanges() {
-		if(this.filter) {
-			this.fromDate = this.filter.fromDate;
-			this.toDate = this.filter.toDate;
-			this.populateUserCalls();
-		}
+    if(this.filter) {
+      this.fromDate = this.filter.fromDate;
+      this.toDate = this.filter.toDate;
+    }
+    if(this.selectedBdms) {
+      this.bdms = [];
+      this.bdms.push(this.selectedBdms.email);
+    }
+    this.populateUserCalls();
 	}
 
   populateUserCalls() {
     var config = LineConfig.lineConfig;
-    Highcharts.chart('chart', config);
-  }
+    // Highcharts.chart('chart', config);
 
+    var filter = {
+      bdm: this.bdms,
+      fromDate: this.fromDate,
+      toDate: this.toDate
+    }
+
+    // this.isLoading = true;
+  console.log(this.fromDate, this.toDate);
+    this.reportService.getCallsReportForISR(filter).subscribe(
+      data => {
+        this.isLoading = false;
+        let config = LineConfig.lineConfig;
+        config.xAxis = {
+            type: "datetime",
+            dateTimeLabelFormats: {
+                day: '%e %b'
+            },
+            min: Date.UTC(this.fromDate.year(), this.fromDate.month(), this.fromDate.date()),
+            max: Date.UTC(this.toDate.year(), this.toDate.month(), this.toDate.date())
+        };
+        
+        let result = this.reportService.parseDataForDateTimeChart(data);
+        config.series = [
+          result.calls
+        ];      
+          var chart = Highcharts.chart('chart', config);
+      },
+      err => {
+        this.isLoading = false;
+           console.log(err);
+    });
+  }
+  
 }
