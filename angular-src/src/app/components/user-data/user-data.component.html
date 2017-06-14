@@ -6,7 +6,7 @@
 			<div class="bdm-filter-container">
 				BDM: <app-bdm-filter cssClass="input-group-sm" [showAllOption]="false" [items]="bdms" [selectedItem]="bdmSelected" (changed)="bdmSelection($event)"></app-bdm-filter>
 			</div>
-			<div class="isr-filter-container">
+			<div class="isr-filter-container" *ngIf="authService.bdmRole()">
 				ISR: <app-bdm-filter cssClass="input-group-sm" [showAllOption]="false" [items]="isrs" [selectedItem]="isrSelected" (changed)="isrSelection($event)"></app-bdm-filter>
 			</div>
 		</div>
@@ -20,9 +20,9 @@
 <div class="row">
 	<div class="col-xs-8">
 		<!--<app-calls-meeting-report [filter]= 'filterDates'></app-calls-meeting-report>-->
-   		<app-user-calls-line-chart [filter]= 'filterDates' [selectedIsrs]="isrSelected" [selectedBdms]= 'bdmSelected'></app-user-calls-line-chart>
+   		<app-user-calls-line-chart type="line" [filter]= 'filterDates' [selectedIsrs]="isrSelected" [selectedBdms]= 'bdmSelected'></app-user-calls-line-chart>
 	</div>
 	<div class="col-xs-4">
-		
+		<app-user-calls-line-chart type="pie" [filter]= 'filterDates' [selectedIsrs]="isrSelected" [selectedBdms]= 'bdmSelected'></app-user-calls-line-chart>
 	</div>
 </div>

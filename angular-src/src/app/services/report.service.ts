@@ -84,13 +84,30 @@ export class ReportService {
       return resultSeries;
     }
 
-  parseDataForDateTimeChart(data){
-      var resultSeries = { calls: { name: 'Calls', data: []} };
+  parseDataForChart(data, type){
+    var resultSeries: any = {};
+    if(type === 'pie'){
+      resultSeries = { total: { name: "Total", data: [] }};
+      let callCount = data.reduce((prev, curr) => prev + curr.calls, 0);
+      let meetingsCount = data.reduce((prev, curr) => prev + curr.meeting, 0);
+
+      if(callCount === 0 && meetingsCount === 0) { 
+        resultSeries = null; 
+      }else{
+        resultSeries.total.data.push({ name: "Calls", y: callCount});
+        resultSeries.total.data.push({ name: "Meetings", y: meetingsCount});
+      }
+    }else if(type === 'line'){
+      resultSeries = { calls: { name: 'Calls', data: []}, meeting: { name: 'Meetings', data: [ ]} };
+
+      if(data.length === 0){
+        resultSeries = null;
+      }
       data.forEach((item) => {
-        // resultSeries.meeting.data.push({ x: new Date(item._id + " 00:00:00Z").getTime(), y: item.meeting});
+        // resultSeries.meeting.data.push({ x: new Date(item._id + " 00:00:00Z").getTime(), y: item.meeting });
         resultSeries.calls.data.push({ x: new Date(item._id + " 00:00:00Z").getTime(), y: item.calls});
       });
-      return resultSeries;
+    }
+    return resultSeries;
   }
-
 }

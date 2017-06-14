@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,  OnChanges, SimpleChanges} from '@angular/core';
+import { Component, OnInit, Input, ElementRef, OnChanges, SimpleChanges} from '@angular/core';
 import * as LineConfig from '../../../config/line-chart-config';
 import { ReportService} from '../../../services/report.service';
 
@@ -15,13 +15,15 @@ export class UserCallsLineChartComponent implements OnInit {
   @Input() selectedIsrs: any;
   @Input() groupBy: any;
 
+  empty: Boolean = false;
 	isLoading: Boolean = false;
 	bdms: Array<any> = [];
   isrs: Array<any> = [];
 	fromDate: any;
 	toDate: any;
+  chart = null;
 
-  constructor(private reportService: ReportService) { }
+  constructor(private element:ElementRef, private reportService: ReportService) { }
 
   ngOnInit() {
     
@@ -59,13 +61,15 @@ export class UserCallsLineChartComponent implements OnInit {
     }
 
     // this.isLoading = true;
-  console.log(this.fromDate, this.toDate);
+    let type = this.element.nativeElement.getAttribute("type");
+    let container = this.element.nativeElement.querySelector('.chart');
     this.reportService.getCallsReportForISR(filter).subscribe(
       data => {
         this.isLoading = false;
         let config = LineConfig.lineConfig;
-        console.log(Date.UTC(this.fromDate.year(), this.fromDate.month(), this.fromDate.date()));
-        console.log(Date.UTC(this.toDate.year(), this.toDate.month(), this.toDate.date()));
+        //console.log(Date.UTC(this.fromDate.year(), this.fromDate.month(), this.fromDate.date()));
+        // console.log(Date.UTC(this.toDate.year(), this.toDate.month(), this.toDate.date()));
+        config.chart.type = type;
         config.xAxis = {
             type: "datetime",
             dateTimeLabelFormats: {
@@ -77,11 +81,21 @@ export class UserCallsLineChartComponent implements OnInit {
             max: Date.UTC(this.toDate.year(), this.toDate.month(), this.toDate.date())
         };
         
-        let result = this.reportService.parseDataForDateTimeChart(data);
-        config.series = [
-          result.calls
-        ];      
-          var chart = Highcharts.chart('chart', config);
+        let result = this.reportService.parseDataForChart(data, type);
+        config.series = [];  
+        if(result){
+          for(let prop in result){
+            if(result.hasOwnProperty(prop)){
+              config.series.push(result[prop]);
+            }
+          }  
+          this.chart = Highcharts.chart(container, config);
+        }else{
+          this.empty = true;
+          if(this.chart) this.chart.destroy();
+        }
+
+
       },
       err => {
         this.isLoading = false;

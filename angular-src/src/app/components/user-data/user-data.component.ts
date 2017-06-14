@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service'
 
 @Component({
   selector: 'app-user-data',
@@ -15,7 +16,7 @@ export class UserDataComponent implements OnInit {
   private isrs: Array<any> = [];
   private isrSelected: any;  
 
-  constructor(private userService: UserService) { }
+  constructor(private authService: AuthService, private userService: UserService) { }
 
   ngOnInit() {
     let currentUser = JSON.parse(localStorage.getItem('user'));

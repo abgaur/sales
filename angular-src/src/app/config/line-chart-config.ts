@@ -19,6 +19,14 @@ export const lineConfig = {
                 enabled: true
             },
             enableMouseTracking: false
+        },
+        pie: {
+            // allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                format: '<b>{point.name}</b>: {point.y}'
+            }
+             
         }
     },
     series: []
