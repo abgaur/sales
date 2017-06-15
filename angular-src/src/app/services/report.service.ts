@@ -98,14 +98,14 @@ export class ReportService {
         resultSeries.total.data.push({ name: "Meetings", y: meetingsCount});
       }
     }else if(type === 'line'){
-      resultSeries = { calls: { name: 'Calls', data: []}, meeting: { name: 'Meetings', data: [ ]} };
+      resultSeries = { calls: { name: 'Total Calls', data: []} };
 
       if(data.length === 0){
         resultSeries = null;
       }
       data.forEach((item) => {
         // resultSeries.meeting.data.push({ x: new Date(item._id + " 00:00:00Z").getTime(), y: item.meeting });
-        resultSeries.calls.data.push({ x: new Date(item._id + " 00:00:00Z").getTime(), y: item.calls});
+        resultSeries.calls.data.push({ x: new Date(item._id + " 00:00:00Z").getTime(), y: item.totalCount});
       });
     }
     return resultSeries;

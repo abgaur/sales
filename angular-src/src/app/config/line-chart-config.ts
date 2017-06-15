@@ -13,15 +13,11 @@ export const lineConfig = {
         },
         min: 0
     },
-    legend: {
-        enabled: true
-    },
     plotOptions: {
         line: {
             dataLabels: {
                 enabled: true
-            },
-            enableMouseTracking: false
+            }
         },
         pie: {
             // allowPointSelect: true,
