@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ElementRef, OnChanges, SimpleChanges} from '@angular/core';
 import * as LineConfig from '../../../config/line-chart-config';
 import { ReportService} from '../../../services/report.service';
+declare var moment;
 
 const Highcharts = require("highcharts");
 @Component({
@@ -34,17 +35,34 @@ export class UserCallsLineChartComponent implements OnInit {
     console.log("render()", type, this.data);
     let config = LineConfig.lineConfig;
     let container = this.element.nativeElement.querySelector('.chart');
-
+    let interval = 24 * ((filter.type.groupBy === 'week') ? 7 : 1);
     config.chart.type = type;
       config.xAxis = {
           type: "datetime",
           dateTimeLabelFormats: {
-              day: '%b %e'
+              day: '%b %e',
+              week: '%b %e'
           },
-          tickInterval: 24 * 3600 * 1000,
+          tickInterval: interval * 3600 * 1000,
           minTickInterval: 24 * 3600 * 1000,
           min: Date.UTC(filter.fromDate.year(), filter.fromDate.month(), filter.fromDate.date()),
-          max: Date.UTC(filter.toDate.year(), filter.toDate.month(), filter.toDate.date())
+          max: Date.UTC(filter.toDate.year(), filter.toDate.month(), filter.toDate.date()),
+          labels: {
+            rotation: -45,
+            formatter: function () {
+              let label = "";
+              if(filter.type.groupBy === 'week'){
+                let startDate = moment(this.value);
+                let endDate = moment(startDate).add(6, "day");
+                label = startDate.format("DD MMM") + '-' + endDate.format("DD MMM");
+              }else{
+                label = this.axis.defaultLabelFormatter.call(this);
+              }
+                
+              return label;
+            }
+          }
+          
       };
 
     config.series = [];

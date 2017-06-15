@@ -2,6 +2,9 @@ export const lineConfig = {
     chart: {
         type: 'line'
     },
+    credits: {
+        enabled: false
+    },
     title: {
         text: ''
     },
@@ -20,7 +23,6 @@ export const lineConfig = {
             }
         },
         pie: {
-            // allowPointSelect: true,
             cursor: 'pointer',
             dataLabels: {
                 format: '<b>{point.name}</b>: {point.y}'

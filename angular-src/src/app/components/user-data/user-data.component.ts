@@ -25,21 +25,12 @@ export class UserDataComponent implements OnInit {
 
     this.userService.getBdms().subscribe((data) => {
       this.bdms = data;
-      if(currentUser.role === 'isr'){
-        this.bdmSelected = this.bdms[0];
-      }else{
-        this.bdmSelected = currentUser;
-      }
-      this.fetchData();
+      (currentUser.role === 'isr') ? this.bdmSelection(this.bdms[0]) : this.bdmSelection(currentUser);
+
     });
     this.userService.getIsrs().subscribe((data) => {
       this.isrs = data;
-      if(currentUser.role === 'isr'){
-        this.isrSelected = currentUser;
-      }else{
-        this.isrSelected = this.isrs[0];
-      }
-      this.fetchData();
+      (currentUser.role === 'isr') ? this.isrSelection(currentUser) : this.isrSelection(this.isrs[0]);
     });
   }
 
