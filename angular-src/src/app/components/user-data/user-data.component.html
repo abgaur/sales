@@ -20,9 +20,9 @@
 <div class="row">
 	<div class="col-xs-8">
 		<!--<app-calls-meeting-report [filter]= 'filterDates'></app-calls-meeting-report>-->
-   		<app-user-calls-line-chart type="line" [filter]= 'filterDates' [selectedIsrs]="isrSelected" [selectedBdms]= 'bdmSelected'></app-user-calls-line-chart>
+   		<app-user-calls-line-chart type="line" [data]="data"></app-user-calls-line-chart>
 	</div>
 	<div class="col-xs-4">
-		<app-user-calls-line-chart type="pie" [filter]= 'filterDates' [selectedIsrs]="isrSelected" [selectedBdms]= 'bdmSelected'></app-user-calls-line-chart>
+		<app-user-calls-line-chart type="pie" [data]="data"></app-user-calls-line-chart>
 	</div>
 </div>

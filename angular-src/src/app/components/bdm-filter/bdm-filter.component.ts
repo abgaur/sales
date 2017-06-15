@@ -28,7 +28,7 @@ export class BdmFilterComponent implements OnInit {
   	if(this.selectedItem && this.items.length > 0){
 		    this.selectedItem = this.items.filter(item => item.email === this.selectedItem.email)[0];
     }
-    console.log(this.showAllOption)
+    
     if(this.showAllOption && this.items[0] && this.items[0].name !== "All"){
         this.items.unshift({ name: "All" });
     }

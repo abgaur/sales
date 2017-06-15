@@ -10,46 +10,63 @@ const Highcharts = require("highcharts");
 })
 export class UserCallsLineChartComponent implements OnInit {
 
-  @Input() filter: any;
-	@Input() selectedBdms: any;
-  @Input() selectedIsrs: any;
+  @Input() data: any;
   @Input() groupBy: any;
 
   empty: Boolean = false;
 	isLoading: Boolean = false;
-	bdms: Array<any> = [];
-  isrs: Array<any> = [];
-	fromDate: any;
-	toDate: any;
   chart = null;
 
   constructor(private element:ElementRef, private reportService: ReportService) { }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 
   ngOnChanges() {
-    if(this.filter) {
-      console.log(this.filter);
-      this.fromDate = this.filter.fromDate;
-      this.toDate = this.filter.toDate;
-    }
-    if(this.selectedBdms) {
-      this.bdms = [];
-      this.bdms.push(this.selectedBdms.email);
-    }
-    if(this.selectedIsrs) {
-      this.isrs = [];
-      this.isrs.push(this.selectedIsrs.email);
-    }
-    if(this.fromDate &&  this.toDate && this.bdms.length > 0 && this.isrs.length > 0 && this.filter.type.groupBy){
-      this.populateUserCalls();
+    if(this.data && this.data.items && this.data.filter){
+      let type = this.element.nativeElement.getAttribute("type");
+      let items = this.data.items;
+      let filter = this.data.filter;
+      this.render(items, type, filter);
     }
 	}
 
-  populateUserCalls() {
-    var config = LineConfig.lineConfig;
+  render(items, type, filter) {
+    console.log("render()", type, this.data);
+    let config = LineConfig.lineConfig;
+    let container = this.element.nativeElement.querySelector('.chart');
+
+    config.chart.type = type;
+      config.xAxis = {
+          type: "datetime",
+          dateTimeLabelFormats: {
+              day: '%b %e'
+          },
+          tickInterval: 24 * 3600 * 1000,
+          minTickInterval: 24 * 3600 * 1000,
+          min: Date.UTC(filter.fromDate.year(), filter.fromDate.month(), filter.fromDate.date()),
+          max: Date.UTC(filter.toDate.year(), filter.toDate.month(), filter.toDate.date())
+      };
+
+    config.series = [];
+    let result = this.reportService.parseDataForChart(items, type);
+
+    if(result){
+      this.empty = false;
+      for(let prop in result){
+        if(result.hasOwnProperty(prop)){
+          config.series.push(result[prop]);
+        }
+      }  
+      this.chart = Highcharts.chart(container, config);
+    }else{
+      this.empty = true;
+      if(this.chart) {
+        this.chart.destroy();
+        this.chart = null;
+      }
+    }
+
+    /*var config = LineConfig.lineConfig;
     // Highcharts.chart('chart', config);
 
     var filter = {
@@ -100,7 +117,7 @@ export class UserCallsLineChartComponent implements OnInit {
       err => {
         this.isLoading = false;
            console.log(err);
-    });
+    });*/
   }
   
 }
