@@ -24,55 +24,53 @@ export class ReportService {
           .map(res => res.json());
   }
 
+  getCallDetailsForISR(filter){
+    var callsToMeetingUrl = environment.baseUrl+'userdata/callDetails';
+    /*return this.http
+                .post(callsToMeetingUrl, filter, {headers: this.headers})
+                .map(res => res.json());*/
+
+    let sub = new Subject<any>();
+    setTimeout(() => sub.next(
+        [
+          {
+              "client": {
+                company: "Symantec",
+                firstName: "FirstName",
+                lastName: "LastName",
+              },
+              "totalCount": 1,
+              "calls": 10,
+              "meetings": 0
+          },
+          {
+              "client": {
+                company: "Symantec",
+                firstName: "FirstName",
+                lastName: "LastName",
+              },
+              "totalCount": 1,
+              "calls": 3,
+              "meetings": 0
+          },
+          {
+              "client": {
+                company: "Symantec",
+                firstName: "FirstName",
+                lastName: "LastName",
+              },
+              "totalCount": 1,
+              "calls": 2,
+              "meetings": 0
+          }]
+      ));
+      return sub;
+  }
   getCallsReportForISR(filter){
       var callsToMeetingUrl = environment.baseUrl+'userdata/callreport';
       return this.http
                 .post(callsToMeetingUrl, filter, {headers: this.headers})
                 .map(res => res.json());
-
-         /*
-
-      let sub = new Subject<any>();
-      setTimeout(() => sub.next(
-        [
-          {
-              "_id": "2017-06-02",
-              "totalCount": 1,
-              "calls": 1,
-              "meeting": 0
-          },
-          {
-              "_id": "2017-06-04",
-              "totalCount": 1,
-              "calls": 1,
-              "meeting": 0
-          },
-          {
-              "_id": "2017-06-10",
-              "totalCount": 1,
-              "calls": 9,
-              "meeting": 1
-          },
-          {
-              "_id": "2017-06-11",
-              "totalCount": 2,
-              "calls": 10,
-              "meeting": 0
-          },
-          {
-              "_id": "2017-06-12",
-              "totalCount": 15,
-              "calls": 11,
-              "meeting": 0
-          },
-          {
-              "_id": "2017-06-13",
-              "totalCount": 3,
-              "calls": 12,
-              "meeting": 1
-          }]
-      ));*/
-      // return sub;
   }
 
   parseDataForStackedChart(data){

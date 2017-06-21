@@ -79,8 +79,9 @@ export class UserCallsLineChartComponent implements OnInit {
     }else{
       this.empty = true;
       if(this.chart) {
-        this.chart.destroy();
-        this.chart = null;
+        config.series = [];
+        this.chart.update(config);
+        //this.chart = null;
       }
     }
 

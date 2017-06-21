@@ -17,6 +17,7 @@ export class UserDataComponent implements OnInit {
   private bdms: Array<any> = [];
   private isrs: Array<any> = [];
   private data = null;
+  private details = null;
 
   constructor(private authService: AuthService, private reportService: ReportService, private userService: UserService) { }
 
@@ -68,6 +69,15 @@ export class UserDataComponent implements OnInit {
             items: data,
             filter: this.filterDates
           };
+        },
+        err => {
+          console.log(err);
+        }
+      );
+
+      this.reportService.getCallDetailsForISR(filter).subscribe(
+        data => {
+          this.details = data;
         },
         err => {
           console.log(err);

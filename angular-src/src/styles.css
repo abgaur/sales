@@ -14,3 +14,38 @@ form.ng-touched .ng-invalid:not(form)  {
   text-align: center;
   margin-bottom:5px;
 }
+
+/*
+.form-control,
+.pager li>a,
+.nav-pills li.active>a, 
+.nav-pills li>a:hover {
+	border-color: rgba(94, 172, 235, 0.3) !important;
+}
+
+.pager li>a {
+	background-color: rgba(17, 133, 226, 0.68) !important;
+	color: #fff !important; 
+}
+
+.nav-pills>li.active>a, 
+.nav-pills>li.active>a:hover, 
+.nav-pills>li.active>a:focus {
+	color: #fff !important;
+	background-color: rgba(17, 133, 226, 0.68) !important;
+}
+
+.nav-pills li.active>a, 
+.nav-pills li>a:hover {
+    border-color: rgb(94, 172, 235)  !important;
+}
+
+.pager li>a:hover, 
+.pager li>a:focus {
+    background-color: rgba(94, 172, 235, 0.5)  !important;
+}
+
+.nav>li>a:hover, 
+.nav>li>a:focus {
+    background-color: rgba(94, 172, 235, 0.5)  !important;
+}*/
