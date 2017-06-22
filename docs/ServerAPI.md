@@ -52,3 +52,22 @@ data: {
     "toDate": "Fri Jun 30 2017 23:59:59 GMT-0700 (Pacific Daylight Time)",
     "groupBy": "day"
 }
+```
+# Delete Clients
+```sh
+URI: /clients
+Method: DELETE
+data: {
+	  "ids": ["593ed85a022df823e80f5f7d", "593ed85a022df823e80f5f7e"]
+}
+```
+# Clientwise User call records for chart
+```sh
+URI: /userdata/clientreport
+Method: POST
+data: {
+    "bdm" : ["testbdm1@etouch.net"],
+    "isr" : ["testisr1@etouch.net"],
+    "fromDate": "Thu Jun 1 2017 00:00:00 GMT-0700 (Pacific Daylight Time)",
+    "toDate": "Fri Jun 30 2017 23:59:59 GMT-0700 (Pacific Daylight Time)"
+}

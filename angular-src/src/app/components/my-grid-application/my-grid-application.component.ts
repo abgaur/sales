@@ -232,5 +232,28 @@ public onAssignSelected(selected: CompleterItem) {
         }
     }
 
+deleteClients() {
+
+    var deleteBody = {
+        ids: []
+    };
+    
+
+    deleteBody.ids = this.gridOptions.api.getSelectedNodes().map(function(rowNode) {return rowNode.data._id;});
+    if(deleteBody.ids!==null && deleteBody.ids.length>0) {
+      this.dashboardService.removeClients(deleteBody).subscribe( (data) => {
+      if(data.success) {
+        this.flashMessage.show(data.message, {cssClass: 'alert-success', timeout: 3000});
+        this.getSalesData();
+        
+      } else {
+        this.flashMessage.show('Something happened, please try again', {cssClass: 'alert-danger', timeout: 3000});
+      }
+    })
+
+    } else {
+        this.flashMessage.show('Please select atleast one Client', {cssClass: 'alert-danger', timeout: 4000});
+    }
+  }
 
 }

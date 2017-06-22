@@ -108,4 +108,10 @@ export class DashboardService {
     return this.http.get(salesDataUrl)
       .map(res => res.json());*/
   }
+
+  removeClients(deleteBody) {
+    var salesDataUrl = environment.baseUrl+'clients/';
+    return this.http.delete(salesDataUrl, {body: deleteBody, headers: this.headers})
+      .map(res => res.json());
+  }
 }

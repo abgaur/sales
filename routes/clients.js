@@ -191,4 +191,18 @@ router.post('/add', passport.authenticate('jwt', {session:false}), (req, res, ne
     });
 });
 
+//delete clients
+router.delete('/', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    let ids = req.body.ids;
+
+    Client.deleteClient(ids, (err, docs) => {
+        if (err) res.json({ success: false, msg: 'Failed to Delete Client' });
+        ids = ids.map(i => 'client_'+i);
+        redisHelper.deleteCache(ids, function () {
+            let message = ids.length > 1 ? ' clients' : ' client';
+            return res.json({ success: true, msg: ids.length + message +' deleted successfully' });
+        });
+    });
+});
+
 module.exports = router;
