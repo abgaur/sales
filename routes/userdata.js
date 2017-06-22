@@ -19,4 +19,18 @@ router.post("/callreport", passport.authenticate('jwt', { session: false }), (re
     });
 });
 
+router.post("/clientreport", passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    let arrBDM = req.body.bdm;
+    let arrISR = req.body.isr;
+    let fromDate = new Date(req.body.fromDate);
+    let toDate = new Date(req.body.toDate);
+    userData.getClientWiseCallReport(fromDate, toDate, arrBDM, arrISR, (err, data) => {
+        if (err) {
+            res.json({ success: false, msg: err });
+        } else {
+            res.send(JSON.stringify(data));
+        }
+    });
+});
+
 module.exports = router;
