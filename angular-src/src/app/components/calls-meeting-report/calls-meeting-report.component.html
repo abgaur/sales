@@ -1,5 +1,13 @@
-<div class="well chart-container">	
-	<app-loading-spinner [hide]="!isLoading"></app-loading-spinner>
-	<h4>{{ 'Calls - Meeting (Count)' }}</h4>
-	<div id="chart"></div>
+<div class="chart-container">	
+	<div class="panel panel-default">
+    <div class="panel-heading">
+      <span class="panel-title">Calls-Meeting (Count)</span>
+    </div>
+    <div class="panel-body main-body">
+    	<app-loading-spinner [hide]="!isLoading"></app-loading-spinner>
+    	<div id="chart"></div>
+    </div>
+	
+	
+	
 </div>
