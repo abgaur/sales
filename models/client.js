@@ -47,7 +47,8 @@ var clientSchema = new Schema({
   'assignedTo': String,
   'reminder': {date :Date, text: String},
   'bdm': {name: String, email: String },
-  'status': String
+  'status': String,
+  'switchboard': String
 },{timestamps: true});
 
 // the schema is useless so far
