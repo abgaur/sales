@@ -75,7 +75,7 @@ export class ReportService {
   }
 
   parseDataForStackedChart(data){
-      var resultSeries = { meeting: { name: 'Meeting', data: []}, calls: { name: 'Calls', data: []} };
+      var resultSeries = { calls: { name: 'Calls', data: []}, meeting: { name: 'Meeting', data: []}};
       data.forEach((item) => {
         resultSeries.meeting.data.push({ name: item.name, y: item.meeting});
         resultSeries.calls.data.push({ name: item.name, y: item.calls});
