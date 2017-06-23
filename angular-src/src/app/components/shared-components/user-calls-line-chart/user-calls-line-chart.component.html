@@ -1,8 +1,12 @@
-<h2>
-  User Data
-</h2>
-<div class="well chart-container">	
-	<app-loading-spinner [hide]="!isLoading"></app-loading-spinner>
-	<!--<h4>Number of Calls </h4>-->
-	<div id="chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div class="panel panel-default chart-container">	
+	<div class="panel-heading">
+      <h3 class="panel-title"> Total Calls Report </h3>
+    </div>
+    <div class="panel-body" style="position: relative;">
+    	<app-loading-spinner [hide]="!isLoading"></app-loading-spinner>
+		<!--<h4>Number of Calls </h4>-->
+		<div class="no-data" *ngIf="empty">No data found.</div>
+		<div class="chart" style=""></div>
+    </div>
+	
 </div>

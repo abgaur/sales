@@ -14,3 +14,80 @@ form.ng-touched .ng-invalid:not(form)  {
   text-align: center;
   margin-bottom:5px;
 }
+
+.panel.panel-default,
+.pager li>a, 
+.pager li>span,
+.nav-pills li.active>a, 
+.nav-pills li>a:hover,
+.form-control
+ {
+	border-color: rgba(28, 67, 125, 0.23) !important;
+}
+
+.pager li>a {
+	background-color: #337ab7 !important;
+	color: #ffffff  !important;
+	cursor: pointer;
+}
+
+.pager li>a:hover, 
+.pager li>a:focus {
+    background-color: rgba(51, 122, 183, 0.8) !important;
+}
+
+.panel-heading{
+	background-color: #2d6fa9 !important;	
+}
+
+.panel-heading .panel-title{
+	font-size: 1.3em !important;
+	color: #ffffff !important;	
+}
+
+.nav-pills>li {
+    cursor: pointer !important;
+}
+
+.nav-pills>li.active>a, 
+.nav-pills>li.active>a:hover, 
+.nav-pills>li.active>a:focus {
+    color: #ffffff !important;
+    cursor: default;
+    background-color: #337ab7 !important;;
+}
+
+/*
+.form-control,
+.pager li>a,
+.nav-pills li.active>a, 
+.nav-pills li>a:hover {
+	border-color: rgba(94, 172, 235, 0.3) !important;
+}
+
+.pager li>a {
+	background-color: rgba(17, 133, 226, 0.68) !important;
+	color: #fff !important; 
+}
+
+.nav-pills>li.active>a, 
+.nav-pills>li.active>a:hover, 
+.nav-pills>li.active>a:focus {
+	color: #fff !important;
+	background-color: rgba(17, 133, 226, 0.68) !important;
+}
+
+.nav-pills li.active>a, 
+.nav-pills li>a:hover {
+    border-color: rgb(94, 172, 235)  !important;
+}
+
+.pager li>a:hover, 
+.pager li>a:focus {
+    background-color: rgba(94, 172, 235, 0.5)  !important;
+}
+
+.nav>li>a:hover, 
+.nav>li>a:focus {
+    background-color: rgba(94, 172, 235, 0.5)  !important;
+}*/

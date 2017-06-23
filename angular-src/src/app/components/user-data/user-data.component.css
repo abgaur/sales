@@ -1,0 +1,10 @@
+.bdm-filter-container, .isr-filter-container {
+	display: 	inline-block;	
+	margin-right: 10px;
+	margin-top: 7px;
+}
+
+.panel-body {
+	padding: 5px;
+}
+

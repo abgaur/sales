@@ -1,6 +1,11 @@
 .selected-item {
 	min-width: 159px;
 }
+
+div[data-inline]{
+	display: inline-block;
+}
+
 .form-control {
 	display: block !important;
 	width: 100% !important;

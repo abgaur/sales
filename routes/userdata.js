@@ -4,7 +4,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const userData = require('../models/userdata');
 
-router.post("/callreport", passport.authenticate('jwt', { session: false }), (req, res, next) => {
+router.post("/callReport", passport.authenticate('jwt', { session: false }), (req, res, next) => {
     let arrBDM = req.body.bdm;
     let arrISR = req.body.isr;
     let fromDate = new Date(req.body.fromDate);
@@ -19,7 +19,7 @@ router.post("/callreport", passport.authenticate('jwt', { session: false }), (re
     });
 });
 
-router.post("/clientreport", passport.authenticate('jwt', { session: false }), (req, res, next) => {
+router.post("/callDetails", passport.authenticate('jwt', { session: false }), (req, res, next) => {
     let arrBDM = req.body.bdm;
     let arrISR = req.body.isr;
     let fromDate = new Date(req.body.fromDate);

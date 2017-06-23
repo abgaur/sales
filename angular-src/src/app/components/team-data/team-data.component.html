@@ -1,12 +1,9 @@
-<h2>
-  Team Data
-</h2>
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="row">
 		<div class="col-xs-4">
 			<div class="bdm-filter-container">
-				Select BDM: <app-bdm-filter [showAllOption]="false" [selectedBDM]="bdmSelected" (changed)="bdmSelection($event)"></app-bdm-filter>
+				BDM: <app-bdm-filter cssClass="input-group-sm" [showAllOption]="false" [items]="bdms" [selectedItem]="bdmSelected" (changed)="bdmSelection($event)"></app-bdm-filter>
 			</div>
 		</div>
 		<!-- this will go into its own component -->

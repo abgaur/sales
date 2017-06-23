@@ -51,7 +51,11 @@ module.exports.getAllUsers = function(role, callback){
     User.find({}, 'name email', callback);
 };
 
-module.exports.getAllBdms = function(role, callback){
+/*module.exports.getAllBdms = function(role, callback){
+    User.find({role},  'name email', callback);
+};*/
+
+module.exports.getByRole = function(role, callback){
     User.find({role},  'name email', callback);
 };
 

@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router, private authService: AuthService) { 
   	if(this.authService.loggedIn()){
-  		this.router.navigate(['/dashboard']);
+  		this.router.navigate(['/userdata']);
   	}
   }
 

@@ -2,30 +2,33 @@ export const lineConfig = {
     chart: {
         type: 'line'
     },
+    credits: {
+        enabled: false
+    },
     title: {
-        text: 'Weekly Calls'
+        text: ''
     },
-    subtitle: {
-        text: 'Source: eTouch'
-    },
-    xAxis: {
-        categories: ['Monday','Tuesday','Wednesday','thursday', 'Friday', 'Saturday']
-    },
+    xAxis: {},
     yAxis: {
+        allowDecimals: false,
         title: {
-            text: 'Number of Calls'
-        }
+            text: 'Count'
+        },
+        min: 0
     },
     plotOptions: {
         line: {
             dataLabels: {
                 enabled: true
-            },
-            enableMouseTracking: false
+            }
+        },
+        pie: {
+            cursor: 'pointer',
+            dataLabels: {
+                format: '<b>{point.name}</b>: {point.y}'
+            }
+             
         }
     },
-    series: [{
-        name: 'Calls',
-        data: [5,4,5,3,4,6]
-    }]
+    series: []
 }

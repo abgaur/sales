@@ -4,13 +4,15 @@
     <div class="row">
 		<div class="col-xs-4">
 			<div class="bdm-filter-container">
-				Select BDM: <app-bdm-filter showAllOption="true" (changed)="bdmSelected($event)"></app-bdm-filter>
+				BDM: <app-bdm-filter cssClass="input-group-sm" [showAllOption]="false" [items]="bdms" [selectedItem]="bdmSelected" (changed)="bdmSelection($event)"></app-bdm-filter>
+			</div>
+			<div class="isr-filter-container" *ngIf="authService.bdmRole()">
+				ISR: <app-bdm-filter cssClass="input-group-sm" [showAllOption]="false" [items]="isrs" [selectedItem]="isrSelected" (changed)="isrSelection($event)"></app-bdm-filter>
 			</div>
 		</div>
 		<!-- this will go into its own component -->
 		<div class="col-xs-8">
 			<app-date-filter  (filterDates)="sendDates($event)"></app-date-filter>
-		
 		</div>
 	</div>
   </div>
@@ -18,9 +20,29 @@
 <div class="row">
 	<div class="col-xs-8">
 		<!--<app-calls-meeting-report [filter]= 'filterDates'></app-calls-meeting-report>-->
-   <app-user-calls-line-chart [filter]= 'filterDates'></app-user-calls-line-chart>
+   		<app-user-calls-line-chart type="line" [data]="data"></app-user-calls-line-chart>
 	</div>
 	<div class="col-xs-4">
-		
+		<app-user-calls-line-chart type="pie" [data]="data"></app-user-calls-line-chart>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-6">
+		<app-user-call-details [details]="details"></app-user-call-details>
+		<!--<div class="well details-section">
+			<h4>Details</h4>
+			<div class="table">
+				<div class="row header">
+					<div class="col-xs-4">Client</div>
+					<div class="col-xs-4">Calls</div>
+					<div class="col-xs-4">Meetings</div>
+				</div>
+				<div class="row details" *ngFor="let detail of details">
+					<div class="col-xs-4"><div>{{ detail.client.company }}</div><div>{{ detail.client.firstName }} {{ detail.client.lastName }}</div></div>
+					<div class="col-xs-4">{{ detail.calls }}</div>
+					<div class="col-xs-4">{{ detail.meeting }}</div>
+				</div>
+			</div>
+		</div>-->
 	</div>
 </div>
