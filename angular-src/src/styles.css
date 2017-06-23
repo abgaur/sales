@@ -28,6 +28,7 @@ form.ng-touched .ng-invalid:not(form)  {
 .pager li>a {
 	background-color: #337ab7 !important;
 	color: #ffffff  !important;
+	cursor: pointer;
 }
 
 .pager li>a:hover, 
@@ -40,13 +41,19 @@ form.ng-touched .ng-invalid:not(form)  {
 }
 
 .panel-heading .panel-title{
+	font-size: 1.3em !important;
 	color: #ffffff !important;	
+}
+
+.nav-pills>li {
+    cursor: pointer !important;
 }
 
 .nav-pills>li.active>a, 
 .nav-pills>li.active>a:hover, 
 .nav-pills>li.active>a:focus {
     color: #ffffff !important;
+    cursor: default;
     background-color: #337ab7 !important;;
 }
 

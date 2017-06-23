@@ -21,22 +21,16 @@ export class UserCallDetailsComponent implements OnInit {
         };
         this.gridOptions.columnDefs = [
             {
-                headerName: "Client",
+                headerName: "Company",
                 field: "client.company",
                 width: 150,
                 filter: 'text'
             },
             {
-                headerName: "First Name",
-                field: "client.firstName",
+                headerName: "Client Name",
                 width: 150,
-                filter: 'text'
-            },
-            {
-                headerName: "Last Name",
-                field: "client.lastName",
-                width: 150,
-                filter: 'text'
+                filter: 'text',
+                valueGetter: (params) => params.data.client.firstName + " " + params.data.client.lastName
             },
             {
                 headerName: "Calls",
@@ -47,12 +41,6 @@ export class UserCallDetailsComponent implements OnInit {
             {
                 headerName: "Meetings",
                 field: "meeting",
-                width: 100,
-                filter: 'text'
-            },
-            {
-                headerName: "Total Calls",
-                field: "totalCalls",
                 width: 100,
                 filter: 'text'
             }

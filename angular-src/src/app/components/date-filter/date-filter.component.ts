@@ -119,14 +119,16 @@ export class DateFilterComponent implements OnInit {
     }
   }
 
-  changeDateType(obj) {
-    this.currentDate = moment();
-    this.enableNextButton();
-    if(this.selectedDateType.type!=='Custom') {
-      this.populateDateText(this.currentDate);
+  changeDateType(type) {
+    if(this.selectedDateType !== type){
+      this.selectedDateType = type; 
+      type.active = true; 
+      this.currentDate = moment();
+      this.enableNextButton();
+      if(this.selectedDateType.type!=='Custom') {
+        this.populateDateText(this.currentDate);
+      }
     }
-    
-    
   }
 
   fromDateChanged(evt) {

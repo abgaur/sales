@@ -1,0 +1,15 @@
+.panel-body{
+	position: relative;
+    height: 450px;
+}
+
+.no-data {
+	position: relative;
+    top: 25%;
+    font-size: 1.2em;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    color: #9c9898;
+}
+

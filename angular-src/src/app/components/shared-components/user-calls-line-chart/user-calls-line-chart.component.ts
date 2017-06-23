@@ -96,11 +96,13 @@ export class UserCallsLineChartComponent implements OnInit {
       }  
       this.chart = Highcharts.chart(container, config);
     }else{
+      console.log("Chart Empty", type);
       this.empty = true;
       if(this.chart) {
         config.series = [];
-        this.chart.update(config);
-        //this.chart = null;
+        this.chart.destroy();
+        //this.chart.update(config);
+        this.chart = null;
       }
     }
 
