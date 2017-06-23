@@ -40,7 +40,8 @@ var obj ={
 'tags':'tags',
 'status':'status',
 'linkedin url':'linkedInUrl',
-'twitter url':'twitterUrl'
+'twitter url':'twitterUrl',
+'switchboard':'switchboard'
 };
 
 module.exports = obj;
