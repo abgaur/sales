@@ -1,0 +1,35 @@
+.well.details-section {
+	padding: 10px;
+	border: 1px Solid rgba(94, 172, 235, 0.3);
+	/*background-color: rgba(94, 172, 235, 0.3) !important;*/
+}
+
+.panel {
+	border-color: rgba(28, 67, 125, 0.23);
+}
+
+.panel-heading{
+	background-color: #2d6fa9 !important;	
+}
+
+.panel-heading .panel-title{
+	color: #ffffff !important;	
+}
+
+.row{
+	padding: 10px;
+}
+
+.table {
+	padding: 0px;
+	background-color: #ffffff;
+}
+
+.table .row{
+	margin: 0px;
+	border-bottom: 1px Solid #dcdcdc;
+}
+
+.table .row.header {
+	font-weight: bold;
+}

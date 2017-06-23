@@ -1,4 +1,4 @@
-<div [class]="cssClass">  
+<div data-inline [class]="cssClass">  
   <select [required]="true" [(ngModel)]="selectedItem" (change)="itemSelected()" name="bdm" class="form-control">
     <option *ngFor="let item of items" [ngValue]="item" >{{ item.name }}</option>
   </select>

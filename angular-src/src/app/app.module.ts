@@ -62,6 +62,7 @@ import { DateFilterComponent } from './components/date-filter/date-filter.compon
 import { UserDataComponent } from './components/user-data/user-data.component';
 import { UserCallsLineChartComponent } from './components/shared-components/user-calls-line-chart/user-calls-line-chart.component';
 import { NewClientComponent } from './components/new-client/new-client.component';
+import { UserCallDetailsComponent } from './components/shared-components/user-call-details/user-call-details.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -112,7 +113,8 @@ const appRoutes: Routes = [
     DateFilterComponent,
     UserDataComponent,
     UserCallsLineChartComponent,
-    NewClientComponent
+    NewClientComponent,
+    UserCallDetailsComponent
   ],
   imports: [
     BrowserModule,

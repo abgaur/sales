@@ -28,7 +28,8 @@
 </div>
 <div class="row">
 	<div class="col-xs-6">
-		<div class="well details-section">
+		<app-user-call-details [details]="details"></app-user-call-details>
+		<!--<div class="well details-section">
 			<h4>Details</h4>
 			<div class="table">
 				<div class="row header">
@@ -39,9 +40,9 @@
 				<div class="row details" *ngFor="let detail of details">
 					<div class="col-xs-4"><div>{{ detail.client.company }}</div><div>{{ detail.client.firstName }} {{ detail.client.lastName }}</div></div>
 					<div class="col-xs-4">{{ detail.calls }}</div>
-					<div class="col-xs-4">{{ detail.meetings }}</div>
+					<div class="col-xs-4">{{ detail.meeting }}</div>
 				</div>
 			</div>
-		</div>
+		</div>-->
 	</div>
 </div>

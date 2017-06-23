@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 import { Subject } from 'rxjs/Subject';
-
+declare var moment ;
 @Injectable()
 export class ReportService {
 
@@ -26,11 +26,11 @@ export class ReportService {
 
   getCallDetailsForISR(filter){
     var callsToMeetingUrl = environment.baseUrl+'userdata/callDetails';
-    /*return this.http
+    return this.http
                 .post(callsToMeetingUrl, filter, {headers: this.headers})
-                .map(res => res.json());*/
+                .map(res => res.json());
 
-    let sub = new Subject<any>();
+    /*let sub = new Subject<any>();
     setTimeout(() => sub.next(
         [
           {
@@ -64,10 +64,11 @@ export class ReportService {
               "meetings": 0
           }]
       ));
-      return sub;
+      return sub;*/
   }
+
   getCallsReportForISR(filter){
-      var callsToMeetingUrl = environment.baseUrl+'userdata/callreport';
+      var callsToMeetingUrl = environment.baseUrl+'userdata/callReport';
       return this.http
                 .post(callsToMeetingUrl, filter, {headers: this.headers})
                 .map(res => res.json());
@@ -82,7 +83,7 @@ export class ReportService {
       return resultSeries;
     }
 
-  parseDataForChart(data, type){
+  parseDataForChart(data, type, groupBy){
     var resultSeries: any = {};
     if(type === 'pie'){
       resultSeries = { total: { name: "Total", data: [] }};
@@ -103,7 +104,12 @@ export class ReportService {
       }
       data.forEach((item) => {
         // resultSeries.meeting.data.push({ x: new Date(item._id + " 00:00:00Z").getTime(), y: item.meeting });
-        resultSeries.calls.data.push({ x: new Date(item._id + " 00:00:00Z").getTime(), y: item.totalCount});
+        if(groupBy === 'week'){
+          resultSeries.calls.data.push({ x: moment().day("Monday").week(item._id), y: item.totalCount, _id: item._id });
+        }else{
+          resultSeries.calls.data.push({ x: new Date(item._id + " 00:00:00Z").getTime(), y: item.totalCount, _id: item._id});
+        }
+        
       });
     }
     return resultSeries;

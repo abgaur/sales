@@ -33,40 +33,59 @@ export class UserCallsLineChartComponent implements OnInit {
 
   render(items, type, filter) {
     console.log("render()", type, this.data);
-    let config = LineConfig.lineConfig;
+    let config: any = LineConfig.lineConfig;
     let container = this.element.nativeElement.querySelector('.chart');
     let interval = 24 * ((filter.type.groupBy === 'week') ? 7 : 1);
-    config.chart.type = type;
-      config.xAxis = {
-          type: "datetime",
-          dateTimeLabelFormats: {
-              day: '%b %e',
-              week: '%b %e'
-          },
-          tickInterval: interval * 3600 * 1000,
-          minTickInterval: 24 * 3600 * 1000,
-          min: Date.UTC(filter.fromDate.year(), filter.fromDate.month(), filter.fromDate.date()),
-          max: Date.UTC(filter.toDate.year(), filter.toDate.month(), filter.toDate.date()),
-          labels: {
-            rotation: -45,
-            formatter: function () {
-              let label = "";
-              if(filter.type.groupBy === 'week'){
-                let startDate = moment(this.value);
-                let endDate = moment(startDate).add(6, "day");
-                label = startDate.format("DD MMM") + '-' + endDate.format("DD MMM");
-              }else{
-                label = this.axis.defaultLabelFormatter.call(this);
-              }
-                
-              return label;
+    
+    config.tooltip = {
+        formatter: function () {
+            if(filter.type.groupBy === 'week'){
+              return "Week " + this.point._id + "<br/><b>" + this.series.name + ": " + this.y + "</b>";
             }
+            else{
+              return moment(this.point._id).format("MMM DD, YYYY") + "<br/><b>" + this.series.name + ": " + this.y + "</b>";
+            }
+        }
+    }
+
+    config.chart.type = type;
+    config.xAxis = {
+        type: "datetime",
+        dateTimeLabelFormats: {
+            day: '%b %e',
+            week: '%b %e'
+        },
+        //tickInterval: interval * 3600 * 1000,
+        //minTickInterval: 24 * 3600 * 1000,
+        min: Date.UTC(filter.fromDate.year(), filter.fromDate.month(), filter.fromDate.date()),
+        max: Date.UTC(filter.toDate.year(), filter.toDate.month(), filter.toDate.date()),
+        labels: {
+          rotation: -45,
+          formatter: function () {
+            let label = "";
+            if(filter.type.groupBy === 'week'){
+              let startDate = moment(this.value);
+              let endDate = moment(startDate).add(6, "day");
+              label = startDate.format("DD MMM") + '-' + endDate.format("DD MMM");
+            }else{
+              label = this.axis.defaultLabelFormatter.call(this);
+            }
+              
+            return label;
           }
-          
+        }
       };
 
+    if(filter.type.type === 'Custom'){
+      config.xAxis.tickInterval = null;
+      config.xAxis.minTickInterval = null;
+    }else{
+      config.xAxis.tickInterval = interval * 3600 * 1000;
+      config.xAxis.minTickInterval = 24 * 3600 * 1000;
+    }
+
     config.series = [];
-    let result = this.reportService.parseDataForChart(items, type);
+    let result = this.reportService.parseDataForChart(items, type, filter.type.groupBy);
 
     if(result){
       this.empty = false;
