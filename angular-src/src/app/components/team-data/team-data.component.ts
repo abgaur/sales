@@ -28,7 +28,6 @@ export class TeamDataComponent implements OnInit {
   }
 
   sendDates(event) {
-    console.log(event);
      this.filterDates = event;
   }
 

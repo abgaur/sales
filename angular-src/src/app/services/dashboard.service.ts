@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import { tokenNotExpired } from 'angular2-jwt';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
+declare var moment;
 
 @Injectable()
 export class DashboardService {
@@ -33,12 +34,28 @@ export class DashboardService {
 
   getMeetingsCount(){
     var url = environment.baseUrl+'teamdata/meetingsscheduled';
+    let today = moment();
+    let lastFourMonths: any = [
+      { date: today, clientCount: 0, clients: [] },
+      { date: moment(today).subtract(1, "month"), clientCount: 0, clients: [] },
+      { date: moment(today).subtract(2, "month"), clientCount: 0, clients: [] },
+      { date: moment(today).subtract(3, "month"), clientCount: 0, clients: [] }
+    ];
+
     return this.http.get(url, { headers: this.headers })
       .map(res => {
         let counts = res.json();
-        let currentMonth = counts.shift();
-        let prevMonths = counts;
-        return { currentMonth, prevMonths };
+        let currentMonth = today.month();
+
+        for(let i = 0; i < counts.length; i++){
+          let index = currentMonth - moment(counts[i].month + "-01").month();
+          if(index >= 0 && index < lastFourMonths.length) {
+            lastFourMonths[index].clients = counts[i].clients;
+            lastFourMonths[index].clientCount = counts[i].clientCount;
+          }
+        }
+
+        return { currentMonth: lastFourMonths.shift(), prevMonths: lastFourMonths };
       });
   }
 

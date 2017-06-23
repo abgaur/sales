@@ -23,26 +23,24 @@ export class UserCallDetailsComponent implements OnInit {
             {
                 headerName: "Company",
                 field: "client.company",
-                width: 150,
                 filter: 'text'
             },
             {
                 headerName: "Client Name",
-                width: 150,
                 filter: 'text',
                 valueGetter: (params) => params.data.client.firstName + " " + params.data.client.lastName
             },
             {
                 headerName: "Calls",
                 field: "calls",
-                width: 100,
-                filter: 'text'
+                filter: 'text',
+                cellStyle: {'text-align': 'center'}
             },
             {
                 headerName: "Meetings",
                 field: "meeting",
-                width: 100,
-                filter: 'text'
+                filter: 'text',
+                cellStyle: {'text-align': 'center'}
             }
         ];
         // setting up features for grid

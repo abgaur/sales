@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
+declare var moment;
 
 @Component({
   selector: 'app-meetings-scheduled',
@@ -15,7 +16,7 @@ export class MeetingsScheduledComponent implements OnInit {
 
   ngOnInit() {
   	this.isLoading = true;
-
+    
   	this.dashboardService.getMeetingsCount().subscribe((data) => {
     		this.isLoading = false;
         this.currentMonth = data.currentMonth;

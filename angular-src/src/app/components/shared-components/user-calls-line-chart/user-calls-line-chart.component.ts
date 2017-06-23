@@ -32,7 +32,6 @@ export class UserCallsLineChartComponent implements OnInit {
 	}
 
   render(items, type, filter) {
-    console.log("render()", type, this.data);
     let config: any = LineConfig.lineConfig;
     let container = this.element.nativeElement.querySelector('.chart');
     let interval = 24 * ((filter.type.groupBy === 'week') ? 7 : 1);
@@ -55,8 +54,6 @@ export class UserCallsLineChartComponent implements OnInit {
             day: '%b %e',
             week: '%b %e'
         },
-        //tickInterval: interval * 3600 * 1000,
-        //minTickInterval: 24 * 3600 * 1000,
         min: Date.UTC(filter.fromDate.year(), filter.fromDate.month(), filter.fromDate.date()),
         max: Date.UTC(filter.toDate.year(), filter.toDate.month(), filter.toDate.date()),
         labels: {

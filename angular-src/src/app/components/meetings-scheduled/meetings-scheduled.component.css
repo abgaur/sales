@@ -1,3 +1,10 @@
+.no-data {
+    font-size: 1.2em;
+    text-align: center;
+    color: #9c9898;
+    padding: 10px;
+}
+
 .meetings-scheduled-container {
 	min-height: 200px;
 }
@@ -15,7 +22,8 @@
 	font-size: 1.3em;
 }
 
-.meetings-scheduled-container .panel-title.month{
+.meetings-scheduled-container .panel-footer .month,
+.meetings-scheduled-container .panel-body .count{
 	height: 100%; 
 	width:33.33%;
 	display: inline-block; 
@@ -23,13 +31,12 @@
 	padding: 7px;
 }
 
-.meetings-scheduled-container .panel-title.count{
+.meetings-scheduled-container .panel-footer .month {
+	font-size: 1.2em;
+}
+
+.meetings-scheduled-container .panel-body .count{
 	font-size: 1.7em;
-	height: 100%; 
-	width:33.33%; 
-	display: inline-block; 
-	text-align: center; 
-	padding: 10px;
 }
 
 .loading-spinner{

@@ -2,10 +2,10 @@
 	<app-loading-spinner [hide]="!isLoading"></app-loading-spinner>
 	<div class="panel panel-default">
 	  <div class="panel-heading">
-	    <span class="panel-title">Meetings Scheduled</span><span class="pull-right panel-title">{{ currentMonth && currentMonth.month | date: 'MMM yyyy' }}</span>
+	    <span class="panel-title">Meetings Scheduled</span><span class="pull-right panel-title">{{ currentMonth && currentMonth.date | date: 'MMM yyyy' }}</span>
 	  </div>
 	  <div class="panel-body main-body">
-	  	<div *ngIf="!currentMonth || currentMonth.clients === 0">No meetings scheduled.</div>
+	  	<div class="no-data" *ngIf="!currentMonth || !currentMonth.clients || currentMonth.clients.length === 0">No meetings scheduled.</div>
 	    <div class="list-group" *ngIf="currentMonth && currentMonth.clients && currentMonth.clients.length > 0">
 		  <div class="list-group-item active" *ngFor="let item of currentMonth.clients">
 		    <label class="list-group-item-heading">{{ item.company }}</label>
@@ -15,10 +15,10 @@
 		</div>
 	  </div>
 	  <div class="panel-footer" style="width: 100%; height: 3.5em; padding: 0px">
-	    <div class="panel-title month" *ngFor="let data of prevMonths">{{ data.month | date: 'MMM yyyy' }}</div>
+	    <div class="month" *ngFor="let data of prevMonths">{{ data.date | date: 'MMM yyyy' }}</div>
 	  </div>
 	  <div class="panel-body secondary-body" style="width: 100%; height: 4em; padding: 0px">
-	    <div class="panel-title count" *ngFor="let data of prevMonths" style="">{{ data.clientCount }}</div>
+	    <div class="count" *ngFor="let data of prevMonths" style="">{{ data.clientCount }}</div>
 	  </div>
 	</div>
 </div>
