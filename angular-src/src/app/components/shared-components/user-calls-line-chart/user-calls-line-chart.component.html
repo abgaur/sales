@@ -1,6 +1,12 @@
-<div class="well chart-container">	
-	<app-loading-spinner [hide]="!isLoading"></app-loading-spinner>
-	<!--<h4>Number of Calls </h4>-->
-	<div *ngIf="empty">No data found.</div>
-	<div class="chart" style=""></div>
+<div class="panel panel-default chart-container">	
+	<div class="panel-heading">
+      <h3 class="panel-title"> Total Calls Report </h3>
+    </div>
+    <div class="panel-body">
+    	<app-loading-spinner [hide]="!isLoading"></app-loading-spinner>
+		<!--<h4>Number of Calls </h4>-->
+		<div *ngIf="empty">No data found.</div>
+		<div class="chart" style=""></div>
+    </div>
+	
 </div>
