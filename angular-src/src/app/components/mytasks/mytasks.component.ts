@@ -58,16 +58,26 @@ export class MytasksComponent implements OnInit {
                 cellRendererFramework: EditTaskComponent,
                 headerCheckboxSelection: true,
                 headerCheckboxSelectionFilteredOnly: true,
-                checkboxSelection: true
+                checkboxSelection: true,
+                pinned: 'left'
                 
             },
-
+            {
+                headerName: "Status",
+                width: 50,
+                field: "status",
+                filter: "text",
+                cellStyle: {"text-align": "center"},
+                cellRenderer: (params) => `<span class="client-status ${params.value}"></span>`,
+                pinned: 'left'
+            },
             {
                 headerName: "First Name",
                 field: "firstName",
                 width: 100,
                 sort: 'asc',
-                filter: 'text'                
+                filter: 'text',
+                pinned: 'left'                
             },
              {
                 headerName: "Last Name",
@@ -76,9 +86,10 @@ export class MytasksComponent implements OnInit {
                 filter: 'text',
                 getQuickFilterText: function(params) {
                     return params.value.name;
-                }
+                },
+                pinned: 'left'
             },
-             {
+            {
                 headerName: "Title",
                 field: "title",
                 width: 200,
@@ -96,10 +107,15 @@ export class MytasksComponent implements OnInit {
                 field: "email",
                 width: 200
             },
-             {
+            {
+                headerName: "Switchboard",
+                field: "switchboard",
+                width: 200
+            },
+            {
                 headerName: "Phone",
                 field: "phone",
-                width: 200,
+                width: 200
 
             },
             {
@@ -118,8 +134,7 @@ export class MytasksComponent implements OnInit {
                 field: "supervisor",
                 width: 200
             },
-            
-             {
+            {
                 headerName: "ManagementLevel",
                 field: "managementLevel",
                 width: 200
