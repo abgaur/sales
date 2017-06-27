@@ -22,6 +22,11 @@ export const lineConfig = {
                 enabled: true
             }
         },
+        column: {
+            dataLabels: {
+                enabled: true
+            }
+        },
         pie: {
             cursor: 'pointer',
             dataLabels: {

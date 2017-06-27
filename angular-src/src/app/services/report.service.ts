@@ -5,18 +5,26 @@ import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 import { Subject } from 'rxjs/Subject';
-declare var moment ;
+declare var moment;
+
 @Injectable()
 export class ReportService {
 
   headers: any;
-  	constructor(private http: Http,
-	  private authService: AuthService) {
+  seriesNameMapping = {
+    totalCount: "Total Count",
+    calls: "Calls",
+    meeting: "Meetings"
+  };
+
+  constructor(private http: Http,
+	            private authService: AuthService
+  ) {
 		  this.authService.loadToken();
 		  this.headers = new Headers();
 		  this.headers.append('Content-type', 'application/json');
 		  this.headers.append('Authorization', this.authService.authToken);		 
-	  }
+  }
 
   getCallsToMeeting(filter) {
         var callsToMeetingUrl = environment.baseUrl+'teamdata/calltomeeting';
@@ -83,10 +91,11 @@ export class ReportService {
       return resultSeries;
     }
 
-  parseDataForChart(data, type, groupBy){
+  /*parseDataForCharts(data, type, groupBy){
     var resultSeries: any = {};
     if(type === 'pie'){
       resultSeries = { total: { name: "Total", data: [] }};
+      
       let callCount = data.reduce((prev, curr) => prev + curr.calls, 0);
       let meetingsCount = data.reduce((prev, curr) => prev + curr.meeting, 0);
 
@@ -112,6 +121,42 @@ export class ReportService {
         
       });
     }
+    return resultSeries;
+  }*/
+
+  parseDataForChart(data, type, seriesType, seriesNames, groupBy){
+    var resultSeries: any = {};
+
+    if(data.length === 0){
+      resultSeries = null;
+    }else{
+      if(seriesType === 'aggregate'){
+        resultSeries = { };
+        seriesNames.forEach((seriesName) => {
+          if(!resultSeries[seriesName]){
+            resultSeries[seriesName] = { name: this.seriesNameMapping[seriesName], data: [] };
+          }
+          let series = data.reduce((prev, curr) => prev + curr[seriesName], 0);
+          resultSeries[seriesName].data.push({ name: this.seriesNameMapping[seriesName], y: series});
+        });
+      }else if(seriesType === 'single'){
+        resultSeries = {};
+
+        data.forEach((item) => {
+          seriesNames.forEach((seriesName) => {
+            if(!resultSeries[seriesName]){
+              resultSeries[seriesName] = { name: this.seriesNameMapping[seriesName], data: [] };
+            }
+            if(groupBy === 'week'){
+              resultSeries[seriesName].data.push({ x: moment().day("Monday").week(item._id), y: item[seriesName], _id: item._id });
+            }else{
+              resultSeries[seriesName].data.push({ x: new Date(item._id + " 00:00:00Z").getTime(), y: item[seriesName], _id: item._id});
+            }
+          });
+        });
+      }
+    }
+    
     return resultSeries;
   }
 }

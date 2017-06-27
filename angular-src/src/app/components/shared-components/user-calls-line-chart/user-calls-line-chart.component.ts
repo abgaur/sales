@@ -24,31 +24,38 @@ export class UserCallsLineChartComponent implements OnInit {
 
   ngOnChanges() {
     if(this.data && this.data.items && this.data.filter){
-      let type = this.element.nativeElement.getAttribute("type");
+      let chartType = this.element.nativeElement.getAttribute("chartType");
+      let seriesType = this.element.nativeElement.getAttribute("seriesType");
+      let seriesNames = this.element.nativeElement.getAttribute("series");
+      seriesNames = (seriesNames && seriesNames.length > 0) ? seriesNames.split(',') : [];
       let items = this.data.items;
       let filter = this.data.filter;
-      this.render(items, type, filter);
+      if(chartType && seriesType && seriesNames && filter){
+        this.render(items, chartType, seriesType, seriesNames, filter);
+      }
     }
 	}
 
-  render(items, type, filter) {
+  render(items, chartType, seriesType, seriesNames, filter) {
+    console.log("render()", chartType, this.data);
     let config: any = LineConfig.lineConfig;
     let container = this.element.nativeElement.querySelector('.chart');
     let interval = 24 * ((filter.type.groupBy === 'week') ? 7 : 1);
     
-    config.tooltip = {
-        formatter: function () {
-            if(filter.type.groupBy === 'week'){
-              return "Week " + this.point._id + "<br/><b>" + this.series.name + ": " + this.y + "</b>";
-            }
-            else{
-              return moment(this.point._id).format("MMM DD, YYYY") + "<br/><b>" + this.series.name + ": " + this.y + "</b>";
-            }
-        }
-    }
+    config.chart.type = chartType;
+    if(seriesType === "single"){
+      config.tooltip = {
+          formatter: function () {
+              if(filter.type.groupBy === 'week'){
+                return "Week " + this.point._id + "<br/><b>" + this.series.name + ": " + this.y + "</b>";
+              }
+              else{
+                return moment(this.point._id).format("MMM DD, YYYY") + "<br/><b>" + this.series.name + ": " + this.y + "</b>";
+              }
+          }
+      }
 
-    config.chart.type = type;
-    config.xAxis = {
+      config.xAxis = {
         type: "datetime",
         dateTimeLabelFormats: {
             day: '%b %e',
@@ -73,16 +80,23 @@ export class UserCallsLineChartComponent implements OnInit {
         }
       };
 
-    if(filter.type.type === 'Custom'){
-      config.xAxis.tickInterval = null;
-      config.xAxis.minTickInterval = null;
+      if(filter.type.type === 'Custom'){
+        config.xAxis.tickInterval = null;
+        config.xAxis.minTickInterval = null;
+      }else{
+        config.xAxis.tickInterval = interval * 3600 * 1000;
+        config.xAxis.minTickInterval = 24 * 3600 * 1000;
+      }
     }else{
-      config.xAxis.tickInterval = interval * 3600 * 1000;
-      config.xAxis.minTickInterval = 24 * 3600 * 1000;
+      config.xAxis = {
+        labels: {
+          enabled: false
+        }
+      };
     }
-
+    
     config.series = [];
-    let result = this.reportService.parseDataForChart(items, type, filter.type.groupBy);
+    let result = this.reportService.parseDataForChart(items, chartType, seriesType, seriesNames, filter.type.groupBy);
 
     if(result){
       this.empty = false;
@@ -93,7 +107,6 @@ export class UserCallsLineChartComponent implements OnInit {
       }  
       this.chart = Highcharts.chart(container, config);
     }else{
-      console.log("Chart Empty", type);
       this.empty = true;
       if(this.chart) {
         config.series = [];
