@@ -36,11 +36,18 @@ form.ng-touched .ng-invalid:not(form)  {
     background-color: rgba(51, 122, 183, 0.8) !important;
 }
 
-.panel-heading{
+.panel-default .panel-heading{
 	background-color: #2d6fa9 !important;	
 }
 
-.panel-heading .panel-title{
+.panel-default .panel-footer {
+  color: #6e6c53 !important;
+  background-color: #bccbde !important;
+  border-top: 1px solid #90b6cc!important;
+}
+
+
+.panel-default .panel-heading .panel-title{
 	font-size: 1.3em !important;
 	color: #ffffff !important;	
 }

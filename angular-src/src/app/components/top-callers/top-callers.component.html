@@ -2,7 +2,7 @@
 	<app-loading-spinner [hide]="!isLoading"></app-loading-spinner>
 	<div class="panel panel-default">
 	  <div class="panel-heading">
-	    <span class="panel-title">Top Callers</span>
+	  	<span class="panel-title">Top Callers</span><span class="pull-right panel-title">{{ today | date: 'MMM yyyy' }}</span>
 	  </div>
 	  
 	  	<ul class="panel-body list-group">
@@ -11,6 +11,5 @@
 		    {{ caller.name }}
 		  </li>
 		</ul>
-	  
 	</div>
 </div>

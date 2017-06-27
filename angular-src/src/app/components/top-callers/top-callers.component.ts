@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
+declare var moment;
 
 @Component({
   selector: 'app-top-callers',
@@ -9,6 +10,8 @@ import { DashboardService } from '../../services/dashboard.service';
 export class TopCallersComponent implements OnInit {
   isLoading: Boolean = false;
   callers: Array<any> = [];
+  today = moment();
+
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
