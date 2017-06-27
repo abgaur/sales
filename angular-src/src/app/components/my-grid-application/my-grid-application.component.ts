@@ -48,7 +48,8 @@ export class MyGridApplicationComponent implements OnInit {
         this.gridOptions = <GridOptions>{
             context: {
                 componentParent: this
-            }
+            },
+            getRowClass: (params) => "client-status " + params.data.status
         };
         this.gridOptions.columnDefs = [
             {
@@ -58,19 +59,25 @@ export class MyGridApplicationComponent implements OnInit {
                 cellRendererFramework: EditTaskComponent,
                 headerCheckboxSelection: true,
                 headerCheckboxSelectionFilteredOnly: true,
-                checkboxSelection: true
-                //cellRenderer: this.createEditButton;
+                checkboxSelection: true, 
+                pinned: 'left'
             },
-
+            {
+                headerName: "Status",
+                width: 50,
+                field: "status",
+                filter: "text",
+                cellStyle: {"text-align": "center"},
+                cellRenderer: (params) => `<span class="client-status ${params.value}"></span>`,
+                pinned: 'left'
+            },
             {
                 headerName: "First Name",
                 field: "firstName",
                 width: 100,
                 sort: 'asc',
                 filter: 'text',
-                // headerCheckboxSelection: true,
-                // headerCheckboxSelectionFilteredOnly: true,
-                // checkboxSelection: true
+                pinned: 'left'
             },
              {
                 headerName: "Last Name",
@@ -79,7 +86,8 @@ export class MyGridApplicationComponent implements OnInit {
                 filter: 'text',
                 getQuickFilterText: function(params) {
                     return params.value.name;
-                }
+                },
+                pinned: 'left'
             },
              {
                 headerName: "Title",
@@ -100,9 +108,15 @@ export class MyGridApplicationComponent implements OnInit {
                 width: 200
             },
             {
+                headerName: "Switchboard",
+                field: "switchboard",
+                width: 200
+
+            },
+            {
                 headerName: "Phone",
                 field: "phone",
-                width: 200,
+                width: 200
 
             },
             {

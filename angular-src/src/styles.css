@@ -64,6 +64,33 @@ form.ng-touched .ng-invalid:not(form)  {
     background-color: #337ab7 !important;;
 }
 
+.client-status{
+  border-radius: 20px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+.client-status.meetingFixed{
+  background-color: #2da206;
+}
+
+.client-status.callBack{
+  background-color: #ffeb3b;
+}
+
+.client-status.notInterested{
+  background-color: #d3171f;
+}
+
+.client-status.followUp{
+  background-color: #2196f3;
+}
+
+.client-status.emailSent{
+  background-color: #cc00ff;
+}
+
 /*
 .form-control,
 .pager li>a,
