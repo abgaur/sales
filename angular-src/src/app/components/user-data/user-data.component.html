@@ -20,10 +20,10 @@
 <div class="row">
 	<div class="col-xs-8">
 		<!--<app-calls-meeting-report [filter]= 'filterDates'></app-calls-meeting-report>-->
-   		<app-user-calls-line-chart type="line" [data]="data"></app-user-calls-line-chart>
+   		<app-user-calls-line-chart chartType="line" seriesType="single" series="totalCount" [data]="data"></app-user-calls-line-chart>
 	</div>
 	<div class="col-xs-4">
-		<app-user-calls-line-chart type="pie" [data]="data"></app-user-calls-line-chart>
+		<app-user-calls-line-chart chartType="column" seriesType="aggregate" series="calls,meeting" [data]="data"></app-user-calls-line-chart>
 	</div>
 </div>
 <div class="row">

@@ -10,7 +10,9 @@ export const columnConfig = {
     },
 	plotOptions: {
         column: {
-            stacking: 'normal'
+            dataLabels: {
+                enabled: true
+            }
         }
     },
     series: [],

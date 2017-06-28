@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
   	let currentDate = moment();
-	let fromDate = currentDate.clone().startOf('isoWeek');
+	  let fromDate = currentDate.clone().startOf('isoWeek');
     let toDate = currentDate.clone().endOf('isoWeek');
     let dateText = fromDate.format('DD-MMM-YYYY') + ' to '+ toDate.format('DD-MMM-YYYY');
 

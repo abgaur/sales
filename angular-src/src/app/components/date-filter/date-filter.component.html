@@ -37,7 +37,7 @@
 
   <ul class="nav nav-pills pull-right">
 		  <li role="presentation date-type" [ngClass]="{'active': selectedDateType.type === type.type}"  (click)="changeDateType(type)" *ngFor="let type of dateTypes">
-        <a><span class="glyphicon"> {{ type.type }}</span></a>
+        <a><span> {{ type.type }}</span></a>
       </li>
 		</ul>
 </div>
