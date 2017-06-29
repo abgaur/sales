@@ -1,5 +1,32 @@
-<div class="comment-item" style="border-top: 1px Solid #cccccc;  padding: 10px 0px">
-	<span class="comment-date"><small>{{ comment.createdAt | date:'mediumDate' }} - {{comment.user.name}}</small></span><span [ngClass]="{'comment-type pull-right': true, badge: comment.commentType && comment.commentType.toUpperCase() !== 'NOTE'}"><span [ngClass]="{ 'glyphicon': true, 'glyphicon-earphone': comment.commentType.toUpperCase() === 'CALL', 'glyphicon-calendar': comment.commentType.toUpperCase() === 'MEETING' }"></span></span><br/>
-	
-	<div class="list-group-item-heading comment-message">{{ comment.message }}</div>
+<!-- todo: separate component for edit comment -->
+
+<div class="comment-item" [ngClass]="{ editable: currentUser.email === comment.user.email}" style="border-top: 1px Solid #cccccc;  padding: 10px 0px">
+	<span class="comment-date">
+		<small>{{ comment.createdAt | date:'mediumDate' }} - {{comment.user.name}}</small>
+	</span>
+	<span *ngIf="!editing" [ngClass]="{'comment-type pull-right': true, badge: comment.commentType && comment.commentType.toUpperCase() !== 'NOTE'}">
+		<span [ngClass]="{ 'glyphicon': true, 'glyphicon-earphone': comment.commentType.toUpperCase() === 'CALL', 'glyphicon-calendar': comment.commentType.toUpperCase() === 'MEETING' }">
+		</span>
+	</span>
+	<div *ngIf="editing" class="comment-types pull-right" (click)="selectCommentType($event)">
+		<span class="badge" data-comment-type="meeting" title="Meeting" [ngClass]="{ selected: editComment.commentType.toUpperCase() === 'MEETING' }">
+			<span data-comment-type="meeting" class="glyphicon glyphicon-calendar"></span>
+		</span>
+		<span class="badge" data-comment-type="call" title="Call" [ngClass]="{ selected: editComment.commentType.toUpperCase() === 'CALL' }">
+			<span data-comment-type="call" class="glyphicon glyphicon-earphone"></span>
+		</span>
+		<span class="badge" data-comment-type="note" title="Note" [ngClass]="{ selected: editComment.commentType.toUpperCase() === 'NOTE' }">
+			<span data-comment-type="note" class="glyphicon glyphicon-pushpin"></span>
+		</span>
+	</div>
+	<br/>
+	<div class="list-group-item-heading comment-message" data-click-handler="startEditing" (click)="handleClick($event)">
+		<span *ngIf="!editing">{{ comment.message }}</span>
+		<div *ngIf="editing" >
+			<textarea class="form-control edit-comment-input" rows="3" #commentEl [(ngModel)]="editComment.message" name="comment"></textarea>
+			<input type="button" class="btn btn-xs post-button" data-click-handler="edit" value="Edit" [disabled]="commentEl.value.length === 0" />
+			<input type="button" class="btn btn-xs cancel-button" value="Cancel" data-click-handler="cancelEditing" />
+			<span class="edit-error"><span class="glyphicon glyphicon-warning"></span>{{ editError }}</span>
+		</div>
+	</div>
 </div>
