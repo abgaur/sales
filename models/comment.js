@@ -23,5 +23,5 @@ module.exports.getCommentsbyClient = function(clientId, callback){
 };
 
 module.exports.updateComment = function(commentId, updateComment, callback){
-    Comment.findByIdAndUpdate(commentId, updateComment, callback);
+    Comment.findByIdAndUpdate(commentId, updateComment, {new: true}, callback);
 };

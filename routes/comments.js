@@ -37,17 +37,28 @@ router.get('/:clientId', passport.authenticate('jwt', {session:false}), (req, re
 });
 
 //update Comment
-router.post('/update', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-    let commentId =  req.body._id;
-    let updateComment= {
-        message: req.body.message,
-        user: req.body.user
-    };
+router.post('/update', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  let commentId = req.body._id;
+  let updateComment = {
+    message: req.body.message,
+    commentType: req.body.commentType,
+    user: req.body.user
+  };
 
-    Comment.updateComment(commentId, updateComment, (err, comment) => {
-      if (err) res.json({success: false, msg:'Failed to update comment'});
-      return res.json({success: true, msg:'Updated comment data', comment: comment});
-    });
+  Comment.updateComment(commentId, updateComment, (err, comment) => {
+    if (err) res.json({ success: false, msg: 'Failed to update comment' });
+    return res.json({ success: true, msg: 'Updated comment data', comment: comment });
+  });
+});
+
+//delete Comment
+router.delete('/', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  let id = req.body.id;
+
+  Comment.deleteComment(commentId, (err, comment) => {
+    if (err) res.json({ success: false, msg: 'Failed to delete comment' });
+    return res.json({ success: true, msg: 'Comment deleted' });
+  });
 });
 
 module.exports = router;
