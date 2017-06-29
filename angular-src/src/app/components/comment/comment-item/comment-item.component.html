@@ -1,6 +1,6 @@
 <!-- todo: separate component for edit comment -->
 
-<div class="comment-item" style="border-top: 1px Solid #cccccc;  padding: 10px 0px">
+<div class="comment-item" [ngClass]="{ editable: currentUser.email === comment.user.email}" style="border-top: 1px Solid #cccccc;  padding: 10px 0px">
 	<span class="comment-date">
 		<small>{{ comment.createdAt | date:'mediumDate' }} - {{comment.user.name}}</small>
 	</span>

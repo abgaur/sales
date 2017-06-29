@@ -12,6 +12,8 @@ export class CommentItemComponent implements OnInit {
   private editComment: any = {};
   private editing: Boolean = false;
   private editError = "";
+  private currentUser = JSON.parse(localStorage.getItem('user'));
+
   constructor(private clientService: ClientService) { }
 
   ngOnInit() {
@@ -46,10 +48,12 @@ export class CommentItemComponent implements OnInit {
   }
 
   startEditing(){
-    this.editComment.message = this.comment.message;
-    this.editComment.commentType = this.comment.commentType;
-    this.editError = "";
-    this.editing = true; 
+    if(this.currentUser.email === this.comment.user.email){
+      this.editComment.message = this.comment.message;
+      this.editComment.commentType = this.comment.commentType;
+      this.editError = "";
+      this.editing = true; 
+    }
   }
 
   cancelEditing(){

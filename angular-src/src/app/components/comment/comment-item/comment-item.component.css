@@ -3,6 +3,10 @@
 	height: 45px;
 }
 
+.comment-item.editable:hover {
+	background-color: #e4e7ec;
+}
+
 .comment-types span{
 	cursor: pointer;
 }
