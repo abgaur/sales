@@ -42,6 +42,12 @@ export class ClientService {
   		return this.http.post(url, comment, {headers: this.headers}).map(res => res.json());
 	}
 
+	updateComment(comment){
+		const url = environment.baseUrl+`comments/update`;
+		comment.user = JSON.parse(localStorage.getItem('user'));
+  		return this.http.post(url, comment, {headers: this.headers}).map(res => res.json());
+	}
+
 	addClient(objClient:Object){
 		const url = environment.baseUrl+'clients/add';
 		return this.http.post(url, objClient, { headers: this.headers }).map(res => res.json());

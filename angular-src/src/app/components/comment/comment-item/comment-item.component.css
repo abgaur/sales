@@ -1,0 +1,16 @@
+.edit-comment-input {
+	width: 100% !important;
+	height: 45px;
+}
+
+.comment-types span{
+	cursor: pointer;
+}
+
+.comment-types .badge.selected {
+	background-color: #337ab7;
+}
+
+.edit-error {
+	color: red;
+}
