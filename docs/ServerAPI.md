@@ -71,3 +71,23 @@ data: {
     "fromDate": "Thu Jun 1 2017 00:00:00 GMT-0700 (Pacific Daylight Time)",
     "toDate": "Fri Jun 30 2017 23:59:59 GMT-0700 (Pacific Daylight Time)"
 }
+```
+# Delete Comment
+```sh
+URI: /comments
+Method: DELETE
+data: {
+	  "ids": ["593ed85a022df823e80f5f7d", "593ed85a022df823e80f5f7e"]
+}
+```
+# Update Comment
+```sh
+URI: /comments
+Method: POST
+data: {
+       "_id": "5953306892f9ee20ec00bede",
+        "message": "this is updated meeting using new",
+        "commentType": "Meeting",
+        "user":{"name":"testisr1","email":"testisr1@etouch.net"}
+}
+```

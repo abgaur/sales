@@ -53,9 +53,9 @@ router.post('/update', passport.authenticate('jwt', { session: false }), (req, r
 
 //delete Comment
 router.delete('/', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-  let id = req.body.id;
+  let ids = req.body.ids;
 
-  Comment.deleteComment(commentId, (err, comment) => {
+  Comment.deleteComment(ids, (err, comment) => {
     if (err) res.json({ success: false, msg: 'Failed to delete comment' });
     return res.json({ success: true, msg: 'Comment deleted' });
   });

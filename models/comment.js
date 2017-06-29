@@ -25,3 +25,7 @@ module.exports.getCommentsbyClient = function(clientId, callback){
 module.exports.updateComment = function(commentId, updateComment, callback){
     Comment.findByIdAndUpdate(commentId, updateComment, {new: true}, callback);
 };
+
+module.exports.deleteComment = function(commentIds, callback){
+    Comment.remove({ _id: { "$in": commentIds }}, callback);
+};
