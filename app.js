@@ -9,7 +9,7 @@ const config = require('./config/database');
 
 // Connect to Database
 mongoose.Promise = global.Promise;// To remove Deprecation Warning
-mongoose.connect(config.database, { useMongoClient: true });
+mongoose.connect(config.database);
 
 // On Connection
 mongoose.connection.on('connected', () => {
