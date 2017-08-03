@@ -71,6 +71,13 @@ form.ng-touched .ng-invalid:not(form)  {
   display: inline-block;
 }
 
+.client-status.legends{
+  margin-left: 10px;
+  width: 8px;
+  height: 8px;
+}
+
+
 .client-status.meetingFixed{
   background-color: #2da206;
 }

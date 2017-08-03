@@ -68,7 +68,7 @@ export class MyGridApplicationComponent implements OnInit {
                 field: "status",
                 filter: "text",
                 cellStyle: {"text-align": "center"},
-                cellRenderer: (params) => `<span class="client-status ${params.value}"></span>`,
+                cellRenderer: (params) => `<span class="client-status ${params.value}" title="${params.value}"></span>`,
                 pinned: 'left'
             },
             {
